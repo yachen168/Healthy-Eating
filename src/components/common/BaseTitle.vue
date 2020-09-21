@@ -19,6 +19,7 @@ export default {
 .page-title {
   margin-bottom: 60px;
   font-size: 24px;
-  color: rgb(79, 123, 98);
+  text-align: center;
+  color: #407d60;
 }
 </style>

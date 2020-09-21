@@ -1,11 +1,19 @@
 <template>
   <div class="login-page">
-    登入頁
+    <Navbar> </Navbar>
+    <BaseTitle title="登入"></BaseTitle>
   </div>
 </template>
 
 <script>
-export default {};
+import Navbar from "@/components/common/Navbar";
+import BaseTitle from "@/components/common/BaseTitle";
+export default {
+  components: {
+    Navbar,
+    BaseTitle
+  }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,10 @@
 <template>
   <div class="header">
     <div>
-      <slot name="left"></slot>
+      <h4 v-if="$route.name !== 'Home'" class="logo" slot="left">甲呼健康</h4>
     </div>
     <div>
-      <slot name="right"></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {};
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background-color: rgb(79, 123, 98);
+  background-color: #407d60;
   .logo {
     font-size: 24px;
     letter-spacing: 1px;

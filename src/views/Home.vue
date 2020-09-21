@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Navbar>
-      <div class="buttons-wrapper" slot="right">
+      <div class="buttons-wrapper">
         <Button
           class="button-login"
           buttonText="登入"
@@ -69,6 +69,7 @@ export default {
   },
   mounted() {
     this.targetOffset = window.innerHeight / 4; // 自定義錨點滾到視窗正中央
+    console.log(this.$route.name);
   }
 };
 </script>

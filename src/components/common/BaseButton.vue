@@ -33,12 +33,12 @@ export default {
 /* primary: 白字綠底 */
 .button.primary {
   color: #fff;
-  background-color: rgb(79, 123, 98);
+  background-color: #407d60;
 }
 
 /* default: 綠字白底 */
 .button.default {
-  color: rgb(79, 123, 98);
+  color: #407d60;
   background-color: #fff;
 }
 
