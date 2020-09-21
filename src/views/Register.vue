@@ -1,6 +1,6 @@
 <template>
   <div>
-    yachen 負責的部分 登入後的首頁
+    註冊頁
   </div>
 </template>
 
