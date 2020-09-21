@@ -18,7 +18,7 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 12px 16px;
   background-color: rgb(79, 123, 98);
   .logo {
     font-size: 24px;
@@ -30,10 +30,6 @@ export default {};
     display: inline-block;
     font-weight: 400;
     cursor: pointer;
-  }
-  .button-login {
-    color: #fff;
-    margin-right: 10px;
   }
 }
 </style>

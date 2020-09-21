@@ -2,15 +2,15 @@
   <div class="home">
     <Navbar>
       <div class="buttons-wrapper" slot="right">
-        <h4
-          class="button button-login"
-          @click="$router.push({ name: 'Login' })"
-        >
-          登入
-        </h4>
+        <Button
+          class="button-login"
+          buttonText="登入"
+          buttonClass="transparent"
+          @clickHandler="$router.push({ name: 'Login' })"
+        ></Button>
         <Button
           buttonText="開始註冊"
-          style="padding: 5px 10px"
+          style="width: 100px;fontSize: 18px"
           buttonClass="default"
           @clickHandler="$router.push({ name: 'Register' })"
         ></Button>
@@ -42,6 +42,7 @@
       </div>
       <Button
         buttonText="開始註冊使用"
+        style="width: 160px;fontSize: 18px"
         buttonClass="primary"
         @clickHandler="$router.push({ name: 'Login' })"
       ></Button>
@@ -100,8 +101,8 @@ export default {
       justify-content: center;
       align-items: center;
       position: absolute;
-      width: 85px;
-      height: 85px;
+      width: 76px;
+      height: 76px;
       right: 0;
       left: 0;
       margin: 0 auto;
@@ -111,7 +112,8 @@ export default {
       cursor: pointer;
     }
     i {
-      font-size: 50px;
+      font-size: 55px;
+      line-height: 0;
     }
   }
 }
@@ -119,7 +121,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0 80px;
+  padding: 40px 0 60px;
   &-content {
     margin-bottom: 50px;
   }
@@ -142,12 +144,18 @@ export default {
   opacity: 0;
   .ant-anchor-link-title {
     display: block;
-    height: 85px;
-    width: 85px;
+    height: 76px;
+    width: 76px;
   }
   .ant-anchor-link {
     padding: 0;
     border-radius: 50%;
   }
+}
+
+.button-login {
+  width: fit-content;
+  font-size: 18px;
+  margin-right: 16px;
 }
 </style>
