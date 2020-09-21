@@ -8,13 +8,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home // 登入後首頁
-  },
-  {
-    path: "/visitor",
-    name: "Visitor",
-    component: () =>
-      import(/* webpackChunkName: "visitor" */ "@/views/Visitor.vue")
+    component: Home
   },
   {
     path: "/login",
