@@ -69,7 +69,6 @@ export default {
   },
   mounted() {
     this.targetOffset = window.innerHeight / 4; // 自定義錨點滾到視窗正中央
-    console.log(this.$route.name);
   }
 };
 </script>
@@ -123,6 +122,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 40px 0 60px;
+  background-color: #fff;
   &-content {
     margin-bottom: 50px;
   }
