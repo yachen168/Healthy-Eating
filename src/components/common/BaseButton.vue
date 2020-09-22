@@ -48,6 +48,12 @@ export default {
   background-color: #4b7cc7;
 }
 
+/* disabled: 白字灰底 */
+.button.disabled {
+  color: #fff;
+  background-color: #a8a8a8;
+}
+
 /* danger: 白字紅底 */
 .button.danger {
   color: #fff;

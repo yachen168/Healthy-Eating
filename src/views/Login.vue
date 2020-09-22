@@ -2,16 +2,20 @@
   <div class="login-page">
     <Navbar> </Navbar>
     <BaseTitle title="登入"></BaseTitle>
+    <BaseButton buttonText="登入" buttonClass="disabled"></BaseButton>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
+import BaseButton from "@/components/common/BaseButton";
+
 export default {
   components: {
     Navbar,
-    BaseTitle
+    BaseTitle,
+    BaseButton
   }
 };
 </script>
