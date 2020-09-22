@@ -20,6 +20,14 @@ const routes = [
     name: "Register",
     component: () =>
       import(/* webpackChunkName: "register" */ "@/views/Register.vue")
+  },
+  {
+    path: "/recording/eating-edit",
+    name: "EatingEdit",
+    component: () =>
+      import(
+        /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
+      )
   }
 ];
 
