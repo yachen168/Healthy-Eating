@@ -44,7 +44,7 @@
         buttonText="開始註冊使用"
         style="width: 160px;fontSize: 18px"
         buttonClass="primary"
-        @clickHandler="$router.push({ name: 'Login' })"
+        @clickHandler="$router.push({ name: 'Register' })"
       ></Button>
     </section>
     <div class="anchor" id="bottom"></div>
