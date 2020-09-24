@@ -28,6 +28,14 @@ const routes = [
       import(
         /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
       )
+  },
+  {
+    path: "/recording/calendar",
+    name: "Calendar",
+    component: () =>
+      import(
+        /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
+      )
   }
 ];
 
