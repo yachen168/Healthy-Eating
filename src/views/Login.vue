@@ -6,6 +6,7 @@
       <commonInput
         inputId="account"
         title="帳號(電子信箱)"
+        type="email"
         placeholder="posttaro1234@gmail.com"
         @update:input="login = { ...login, email: $event }"
       ></commonInput>
@@ -13,6 +14,8 @@
         inputId="password"
         title="密碼"
         placeholder="**********"
+        type="password"
+        :isShowEye="true"
         @update:input="login = { ...login, password: $event }"
       ></commonInput>
       <commonButton
