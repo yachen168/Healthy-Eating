@@ -2,23 +2,23 @@
   <div>
     <Title title="早餐的營養攝取記錄"></Title>
     <form action="">
-      <RecordingRow
+      <RecordingTable
         :fields="fields"
         :items="items"
         @update:quantity="updateQuantity"
-      ></RecordingRow>
+      ></RecordingTable>
     </form>
   </div>
 </template>
 
 <script>
 import Title from "@/components/common/BaseTitle";
-import RecordingRow from "@/components/common/RecordingRow";
+import RecordingTable from "@/components/common/RecordingTable";
 
 export default {
   components: {
     Title,
-    RecordingRow
+    RecordingTable
   },
   data() {
     return {

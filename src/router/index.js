@@ -40,11 +40,11 @@ const routes = [
           )
       },
       {
-        path: "eating-edit",
-        name: "EatingEdit",
+        path: "eating-record",
+        name: "EatingRecord",
         component: () =>
           import(
-            /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
+            /* webpackChunkName: "eating-record" */ "@/views/recording/EatingRecord.vue"
           )
       },
       {
