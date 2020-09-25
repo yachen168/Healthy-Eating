@@ -22,19 +22,27 @@ const routes = [
       import(/* webpackChunkName: "register" */ "@/views/Register.vue")
   },
   {
-    path: "/recording/eating-edit",
-    name: "EatingEdit",
+    path: "/logged-in",
+    name: "logged-in_Home",
     component: () =>
       import(
-        /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
+        /* webpackChunkName: "logged-in-home" */ "@/views/logged-in/Home.vue"
       )
   },
   {
-    path: "/recording/calendar",
+    path: "/eating-edit",
+    name: "EatingEdit",
+    component: () =>
+      import(
+        /* webpackChunkName: "eating-edit" */ "@/views/logged-in/EatingEdit.vue"
+      )
+  },
+  {
+    path: "/calendar",
     name: "Calendar",
     component: () =>
       import(
-        /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
+        /* webpackChunkName: "calender" */ "@/views/logged-in/Calendar.vue"
       )
   }
 ];
