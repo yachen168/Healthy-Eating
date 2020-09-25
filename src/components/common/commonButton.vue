@@ -1,5 +1,5 @@
 <template>
-  <div class="commcoButton">
+  <div class="commonButton">
     <b-button
       block
       class="base-button"
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "commcoButton",
+  name: "commonButton",
   props: {
     title: {
       type: String,
@@ -39,8 +39,7 @@ export default {
 }
 
 .base-button {
-  // width: 296px;
-  height: 40px;
+  line-height: 1.9;
   font-size: 14px;
   font-family: Roboto;
   font-weight: 700;

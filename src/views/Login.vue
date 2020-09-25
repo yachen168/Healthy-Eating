@@ -2,48 +2,48 @@
   <div class="login-page">
     <Navbar></Navbar>
     <section class="main">
-      <label :for="test"
-        >Type <code>{{ type }}</code
-        >:</label
-      >
-      <b-form-input :id="test" :type="type"></b-form-input>
-      <commcoButton title="登入" :disabledState="state"></commcoButton>
+      <BaseTitle title="登入"></BaseTitle>
+      <commonInput
+        inputId="account"
+        title="帳號(電子信箱)"
+        placeholder="posttaro1234@gmail.com"
+        @update:input="login = { ...login, email: $event }"
+      ></commonInput>
+      <commonInput
+        inputId="password"
+        title="密碼"
+        placeholder="**********"
+        @update:input="login = { ...login, password: $event }"
+      ></commonInput>
+      <commonButton title="登入" :disabledState="disabledState"></commonButton>
     </section>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/common/Navbar";
-import commcoButton from "@/components/common/commcoButton";
+import BaseTitle from "@/components/common/BaseTitle";
+import commonButton from "@/components/common/commonButton";
+import commonInput from "@//components/common/commonInput";
 export default {
   data() {
     return {
-      state: true
+      disabledState: true,
+      login: {}
     };
   },
   methods: {},
   components: {
     Navbar,
-    commcoButton
+    commonButton,
+    commonInput,
+    BaseTitle
   }
 };
 </script>
 
 <style lang="scss" scoped>
-::v-deep .main {
+.main {
   padding: 0 32px;
 }
-// ::v-deep .ant-form-item-label {
-//   padding: 0;
-//   line-height: 1.5;
-//   label {
-//     font-size: 16px;
-//     font-weight: 500;
-//     color: #4f7b62;
-//   }
-// }
-
-// ::v-deep .ant-input {
-//   border-color: #4f7b62;
-// }
 </style>
