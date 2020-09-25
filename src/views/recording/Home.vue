@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar></Navbar>
     <main>
       <section class="meals">
         <RecordingRectangle title="飲水量"></RecordingRectangle>
@@ -15,12 +14,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
 import RecordingRectangle from "@/components/common/RecordingRectangle";
 export default {
   components: {
-    RecordingRectangle,
-    Navbar
+    RecordingRectangle
   },
   data() {}
 };

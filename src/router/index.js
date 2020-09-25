@@ -21,29 +21,41 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "@/views/Register.vue")
   },
+  /* ============================ recording ============================= */
   {
-    path: "/logged-in",
-    name: "logged-in_Home",
+    path: "/recording",
+    name: "Entry",
+    redirect: "/recording/home",
     component: () =>
       import(
-        /* webpackChunkName: "logged-in-home" */ "@/views/logged-in/Home.vue"
-      )
-  },
-  {
-    path: "/eating-edit",
-    name: "EatingEdit",
-    component: () =>
-      import(
-        /* webpackChunkName: "eating-edit" */ "@/views/logged-in/EatingEdit.vue"
-      )
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    component: () =>
-      import(
-        /* webpackChunkName: "calender" */ "@/views/logged-in/Calendar.vue"
-      )
+        /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
+      ),
+    children: [
+      {
+        path: "home",
+        name: "Recording_Home",
+        component: () =>
+          import(
+            /* webpackChunkName: "recording-home" */ "@/views/recording/Home.vue"
+          )
+      },
+      {
+        path: "eating-edit",
+        name: "EatingEdit",
+        component: () =>
+          import(
+            /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
+          )
+      },
+      {
+        path: "calendar",
+        name: "Calendar",
+        component: () =>
+          import(
+            /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
+          )
+      }
+    ]
   }
 ];
 
