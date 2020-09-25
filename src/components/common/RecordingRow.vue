@@ -1,114 +1,89 @@
 <template>
-  <div class="recording-container">
-    <div class="recording-row">
-      <div class="recording-col">
-        <Dot size="sm"></Dot>
-        <div class="title-wrapper">
-          <h2>{{ recording.type }}</h2>
-          <div class="info">
-            <a-icon type="info-circle" /> <span>份量說明</span>
-          </div>
+  <div>
+    <b-table stacked small :fields="fields" :items="items" responsive="sm">
+      <template v-slot:cell()="data">
+        <div class="record recording-col">
+          <b-icon
+            @click="$emit('update:quantity', data, -0.5)"
+            icon="patch-minus"
+          />
+          <span class="unit">{{ data.value }}</span>
+          <b-icon
+            @click="$emit('update:quantity', data, 0.5)"
+            icon="file-plus"
+          />
         </div>
-      </div>
-      <div class="record recording-col">
-        <a-icon @click="$emit('minus:quantity')" type="minus-circle" />
-        <span class="total">{{
-          recording.quantity
-            ? recording.quantity.toFixed(1)
-            : recording.quantity
-        }}</span>
-        <a-icon @click="$emit('add:quantity')" type="plus-circle" />
-        <span class="unit">{{ recording.unit }}</span>
-      </div>
-    </div>
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
-import Dot from "@/components/common/Dot";
 export default {
-  components: {
-    Dot
-  },
   props: {
-    recording: {
-      type: Object,
+    fields: {
+      type: Array,
+      required: true
+    },
+    items: {
+      type: Array,
       required: true
     }
   }
 };
 </script>
-
 <style lang="scss" scoped>
-.recording-container {
-  padding: 0 12px;
-  background-color: #fff;
+::v-deep .table td {
+  border-top: 1px dashed #9cc2b0;
+  padding: 20px;
 }
-.recording-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 0;
-  .recording-col {
-    display: flex;
-    align-items: center;
-  }
-  .title-wrapper {
-    margin-left: 8px;
-    h2 {
-      font-size: 14px;
-      color: #383838;
-    }
-    i,
-    span {
-      font-size: 14px;
-      color: #407d60;
-    }
-    .info {
-      cursor: pointer;
-    }
-  }
-  i,
-  span {
-    vertical-align: middle;
-  }
-  i {
-    line-height: 0;
-  }
-  .record {
-    user-select: none;
-    i {
-      font-weight: 700;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .total {
-      min-width: 32px;
-      margin: 0 4px;
-      font-size: 13px;
-      text-align: center;
-      height: 30px;
-      line-height: 30px;
-      font-weight: 700;
-      background-color: #f5f5f5;
-      border-radius: 2px;
-    }
-    .unit {
-      margin-left: 10px;
-    }
-  }
+::v-deep .table.b-table.b-table-stacked > tbody > tr > :first-child {
+  border-top: none;
 }
 
-.recording-container + .recording-container {
-  .recording-row {
-    border-top: 1px dashed #9cc2b0;
-  }
+::v-deep .table.b-table.b-table-stacked > tbody > tr {
+  padding: 10px;
 }
-.recording-container:first-of-type {
-  border-radius: 6px 6px 0 0;
+::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
+  text-align: left;
+  padding-left: 30px;
+  background-size: 25px;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    #407d60 10px,
+    transparent 11px
+  );
+  background-repeat: no-repeat;
+}
+::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
+  width: 50%;
 }
 
-.recording-container:last-of-type {
-  border-radius: 0 0 6px 6px;
+::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label] > div {
+  width: 50%;
+}
+.record {
+  user-select: none;
+  text-align: right;
+  svg {
+    cursor: pointer;
+  }
+  .total {
+    min-width: 32px;
+    margin: 0 4px;
+    font-size: 13px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+  }
+  .unit {
+    display: inline-block;
+    text-align: center;
+    margin: 0 10px;
+    width: 30px;
+  }
 }
 </style>
