@@ -4,11 +4,9 @@ import router from "./router";
 import store from "./store";
 
 import "./plugins/ant-design";
-import "./plugins/bootstrap";
+import "./plugins/bootstrap-vue";
 import "./plugins/vee-validate";
 import "./assets/main.scss";
-
-import "./plugins/bootstrap-vue";
 
 Vue.config.productionTip = false;
 
