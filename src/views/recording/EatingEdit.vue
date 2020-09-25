@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar></Navbar>
     <Title title="早餐的營養攝取記錄"></Title>
     <form action="">
       <RecordingRow
@@ -13,13 +12,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
 import Title from "@/components/common/BaseTitle";
 import RecordingRow from "@/components/common/RecordingRow";
 
 export default {
   components: {
-    Navbar,
     Title,
     RecordingRow
   },
