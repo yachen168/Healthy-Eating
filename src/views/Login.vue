@@ -15,7 +15,11 @@
         placeholder="**********"
         @update:input="login = { ...login, password: $event }"
       ></commonInput>
-      <commonButton title="登入" :disabledState="disabledState"></commonButton>
+      <commonButton
+        title="登入"
+        :disabledState="disabledState"
+        class="login-button"
+      ></commonButton>
     </section>
   </div>
 </template>
@@ -45,5 +49,8 @@ export default {
 <style lang="scss" scoped>
 .main {
   padding: 0 32px;
+}
+.login-button {
+  margin-top: 12px;
 }
 </style>
