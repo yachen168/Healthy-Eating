@@ -18,7 +18,7 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 18px 16px;
   background-color: #407d60;
   .logo {
     font-size: 24px;
