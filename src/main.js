@@ -8,6 +8,8 @@ import "./plugins/bootstrap";
 import "./plugins/vee-validate";
 import "./assets/main.scss";
 
+import "./plugins/bootstrap-vue";
+
 Vue.config.productionTip = false;
 
 new Vue({
