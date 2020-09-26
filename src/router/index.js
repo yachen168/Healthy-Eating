@@ -32,11 +32,11 @@ const routes = [
       ),
     children: [
       {
-        path: "home",
-        name: "Recording_Home",
+        path: "recording-states",
+        name: "RecordingStates",
         component: () =>
           import(
-            /* webpackChunkName: "recording-home" */ "@/views/recording/Home.vue"
+            /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
           )
       },
       {
