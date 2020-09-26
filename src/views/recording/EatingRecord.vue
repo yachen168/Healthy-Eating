@@ -30,7 +30,7 @@ export default {
         { key: "dairy", label: "奶品類" },
         { key: "vegetables", label: "蔬菜類" },
         { key: "fruits", label: "水果類" },
-        { key: "nuts", label: "油脂及堅果類" }
+        { key: "nuts", label: "油脂及堅果種子類" }
       ],
       items: [
         {
