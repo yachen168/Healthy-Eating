@@ -8,6 +8,14 @@
           :items="items"
           @update:quantity="updateQuantity"
         ></RecordingTable>
+        <div class="form-footer">
+          <div class="button-wrapper">
+            <CommonButton title="取消"></CommonButton>
+          </div>
+          <div class="button-wrapper">
+            <CommonButton title="確認" :disabledState="true"></CommonButton>
+          </div>
+        </div>
       </form>
     </main>
   </div>
@@ -16,11 +24,12 @@
 <script>
 import Title from "@/components/common/BaseTitle";
 import RecordingTable from "@/components/common/RecordingTable";
-
+import CommonButton from "@/components/common/commonButton";
 export default {
   components: {
     Title,
-    RecordingTable
+    RecordingTable,
+    CommonButton
   },
   data() {
     return {
@@ -48,7 +57,6 @@ export default {
   },
   methods: {
     updateQuantity(data, num) {
-      console.log(123);
       let total = data.item[data.field.key];
       // 數量只能介於 0~10
       if (total === 0 && num < 0) return;
@@ -65,5 +73,15 @@ export default {
 }
 main {
   padding: 0 32px;
+  .form-footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 11px -7px 0;
+    .button-wrapper {
+      min-width: 143px;
+      padding: 0 7px;
+      flex: 1 0 0;
+    }
+  }
 }
 </style>
