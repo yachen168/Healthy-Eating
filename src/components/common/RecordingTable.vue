@@ -49,6 +49,7 @@ export default {
 .table {
   background-color: #fff;
   border-radius: 6px;
+  margin-bottom: 0;
 }
 
 ::v-deep .table td {
