@@ -1,11 +1,12 @@
 <template>
   <div class="recording-card" :class="[borderStyle]">
-    <Dot size="lg"></Dot>
     <!-- 之後替換成 svg 圖 -->
     <a-icon type="plus-circle" class="header-icon" v-if="hasHeaderIcon" />
-    <div class="recording-card-footer">
-      <slot></slot>
+    <div class="recording-body" v-if="hasBodyIcon">
+      <!-- 之後替換成 svg 圖 -->
+      <Dot :size="size"></Dot>
     </div>
+    <slot class="recording-card-footer"></slot>
   </div>
 </template>
 
@@ -20,9 +21,18 @@ export default {
       type: Boolean,
       default: false
     },
+    hasBodyIcon: {
+      type: Boolean,
+      default: false
+    },
     borderStyle: {
       type: String,
       default: ""
+    },
+    //  之後替換成 svg 圖時移除
+    size: {
+      type: String,
+      default: "lg"
     }
   }
 };
@@ -34,9 +44,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 7px;
-  width: 143px;
-  height: 80px;
+  justify-content: flex-end;
+  padding: 6px 0 3px;
+  width: 100%;
+  min-height: 80px;
   border-radius: 6px;
   background-color: #fff;
   cursor: pointer;
