@@ -2,7 +2,7 @@
   <div>
     <b-table stacked small :fields="fields" :items="items" responsive="sm">
       <template v-slot:cell()="data">
-        <div class="record recording-col">
+        <div class="recording">
           <b-icon
             @click="$emit('update:quantity', data, -0.5)"
             icon="patch-minus"
@@ -14,8 +14,13 @@
             @click="$emit('update:quantity', data, 0.5)"
             icon="file-plus"
           />
+          <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
           <span class="unit">{{
-            data.field.key !== "dairy" ? "份" : "杯"
+            data.field.key === "dairy"
+              ? "杯"
+              : data.field.key === "water"
+              ? "公升"
+              : "份"
           }}</span>
         </div>
         <span class="info"
@@ -91,7 +96,7 @@ export default {
   }
 }
 
-.record {
+.recording {
   user-select: none;
   text-align: right;
   color: #383838;
