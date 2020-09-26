@@ -1,9 +1,11 @@
 <template>
-  <div class="recording-rectangle">
+  <div class="recording-card" :class="[borderStyle]">
     <Dot size="lg"></Dot>
-    <p>{{ title }}</p>
     <!-- 之後替換成 svg 圖 -->
-    <div class="icon-add"><a-icon type="plus-circle" /></div>
+    <a-icon type="plus-circle" class="header-icon" v-if="hasHeaderIcon" />
+    <div class="recording-card-footer">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -14,37 +16,53 @@ export default {
     Dot
   },
   props: {
-    title: {
+    hasHeaderIcon: {
+      type: Boolean,
+      default: false
+    },
+    borderStyle: {
       type: String,
-      required: true
+      default: ""
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.recording-rectangle {
+.recording-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 7px;
   width: 143px;
   height: 80px;
-  border: 2px solid #9cc2b0;
   border-radius: 6px;
   background-color: #fff;
+  cursor: pointer;
   p {
     margin: 0;
     text-align: center;
     color: #a8a8a8;
     font-size: 13px;
   }
-  .icon-add {
+  .header-icon {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    line-height: 0;
+    right: 7px;
+    top: 7px;
     color: #9cc2b0;
+  }
+}
+
+.recording-card.light-green {
+  border: 2px solid #9cc2b0;
+}
+
+.recording-card.dark-green {
+  border: 2px solid #407d60;
+  .header-icon {
+    color: #407d60;
   }
 }
 </style>
