@@ -1,13 +1,15 @@
 <template>
   <div>
     <Title title="早餐的營養攝取記錄"></Title>
-    <form action="">
-      <RecordingTable
-        :fields="fields"
-        :items="items"
-        @update:quantity="updateQuantity"
-      ></RecordingTable>
-    </form>
+    <main>
+      <form action="">
+        <RecordingTable
+          :fields="fields"
+          :items="items"
+          @update:quantity="updateQuantity"
+        ></RecordingTable>
+      </form>
+    </main>
   </div>
 </template>
 
@@ -57,4 +59,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.page-title {
+  margin-bottom: 23px;
+}
+main {
+  padding: 0 32px;
+}
+</style>

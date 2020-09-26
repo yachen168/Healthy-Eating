@@ -7,12 +7,20 @@
             @click="$emit('update:quantity', data, -0.5)"
             icon="patch-minus"
           />
-          <span class="unit">{{ data.value }}</span>
+          <span class="quantity">{{
+            data.value ? data.value.toFixed(1) : data.value
+          }}</span>
           <b-icon
             @click="$emit('update:quantity', data, 0.5)"
             icon="file-plus"
           />
+          <span class="unit">{{
+            data.field.key !== "dairy" ? "份" : "杯"
+          }}</span>
         </div>
+        <span class="info"
+          ><b-icon icon="info-circle" aria-hidden="true"></b-icon>份量說明</span
+        >
       </template>
     </b-table>
   </div>
@@ -33,38 +41,61 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep .table td {
-  border-top: 1px dashed #9cc2b0;
-  padding: 20px;
+.table {
+  background-color: #fff;
+  border-radius: 6px;
 }
-::v-deep .table.b-table.b-table-stacked > tbody > tr > :first-child {
+
+::v-deep .table td {
+  position: relative;
   border-top: none;
+  background: linear-gradient(
+      to right,
+      #9cc2b0 12.5%,
+      transparent 12.5% 25%,
+      #9cc2b0 25% 37.5%,
+      transparent 37.5% 50%,
+      #9cc2b0 50% 62.5%,
+      transparent 62.5% 75%,
+      #9cc2b0 75% 87.5%,
+      transparent 87.5% 100%
+    )
+    repeat-x top;
+  background-size: 45px 1px;
+  padding: 16px 0 13px;
+  color: #383838;
 }
 
 ::v-deep .table.b-table.b-table-stacked > tbody > tr {
-  padding: 10px;
-}
-::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
-  text-align: left;
-  padding-left: 30px;
-  background-size: 25px;
-  background-image: radial-gradient(
-    circle at 50% 50%,
-    #407d60 10px,
-    transparent 11px
-  );
-  background-repeat: no-repeat;
-}
-::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
-  width: 50%;
+  padding: 0 10px;
+  > :first-child {
+    background: none;
+  }
+  > [data-label]::before {
+    width: 55%;
+    text-align: left;
+    padding-left: 35px;
+    padding-bottom: 25px;
+    background-size: 30px;
+    background-image: radial-gradient(
+      circle at 15px 20px,
+      #c4c4c4 15px,
+      transparent 11px
+    );
+    background-repeat: no-repeat;
+  }
+  > [data-label] > div {
+    width: 45%;
+    height: 30px;
+    margin-top: 8px;
+  }
 }
 
-::v-deep .table.b-table.b-table-stacked > tbody > tr > [data-label] > div {
-  width: 50%;
-}
 .record {
   user-select: none;
   text-align: right;
+  color: #383838;
+  font-weight: 700;
   svg {
     cursor: pointer;
   }
@@ -79,11 +110,31 @@ export default {
     background-color: #f5f5f5;
     border-radius: 2px;
   }
-  .unit {
+  .quantity {
     display: inline-block;
     text-align: center;
     margin: 0 10px;
-    width: 30px;
+    min-width: 32px;
+    height: 30px;
+    font-size: 13px;
+    line-height: 30px;
+    background-color: #f5f5f5;
+  }
+  .unit {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}
+
+.info {
+  color: #407d60;
+  position: absolute;
+  bottom: 15px;
+  left: 35px;
+  font-size: 14px;
+  cursor: pointer;
+  svg {
+    margin-right: 3px;
   }
 }
 </style>
