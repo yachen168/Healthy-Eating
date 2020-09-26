@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div>
-      <h4 v-if="$route.name !== 'Home'" class="logo" slot="left">甲呼健康</h4>
+      <h4 v-if="$route.name !== 'Home'" class="logo" slot="left">呷呼健康</h4>
     </div>
     <div>
       <slot></slot>
