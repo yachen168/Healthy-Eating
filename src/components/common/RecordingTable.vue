@@ -77,10 +77,9 @@ export default {
     background: none;
   }
   > [data-label]::before {
-    width: 55%;
+    width: 60%;
     text-align: left;
-    padding-left: 35px;
-    padding-bottom: 25px;
+    padding: 0 0 25px 35px;
     background-size: 30px;
     background-image: radial-gradient(
       circle at 15px 20px,
@@ -90,9 +89,10 @@ export default {
     background-repeat: no-repeat;
   }
   > [data-label] > div {
-    width: 45%;
+    width: 40%;
     height: 30px;
     margin-top: 8px;
+    padding: 0;
   }
 }
 
@@ -118,7 +118,7 @@ export default {
   .quantity {
     display: inline-block;
     text-align: center;
-    margin: 0 10px;
+    margin: 0 4px;
     min-width: 32px;
     height: 30px;
     font-size: 13px;
