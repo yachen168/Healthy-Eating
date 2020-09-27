@@ -5,7 +5,11 @@
         <b-avatar src="" size="130px"></b-avatar>
         <h2 class="user-name">健康先生</h2>
       </div>
-      <CommonButton title="編輯個人檔案" buttonStyle="default"></CommonButton>
+      <CommonButton
+        @click.native="$router.push({ name: 'UserInfoEdit' })"
+        title="編輯個人檔案"
+        buttonStyle="default"
+      ></CommonButton>
       <UserInfoTable :items="userInfo"></UserInfoTable>
     </main>
   </div>
@@ -31,9 +35,9 @@ export default {
           created_at: "2020-09-23 18:43:41",
           image_path: null,
           height: 168,
-          weight: "50",
-          gender: "female",
-          birthday: "2020-12-12",
+          weight: 50,
+          gender: null,
+          birthday: null,
           diet_standard: null
         }
       ]

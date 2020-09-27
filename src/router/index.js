@@ -57,7 +57,7 @@ const routes = [
       },
       {
         path: "user-info-view",
-        name: "userInfoView",
+        name: "UserInfoView",
         component: () =>
           import(
             /* webpackChunkName: "user-info-view" */ "@/views/userInfo/UserInfoView.vue"
@@ -65,7 +65,7 @@ const routes = [
       },
       {
         path: "user-info-edit",
-        name: "userInfoEdit",
+        name: "UserInfoEdit",
         component: () =>
           import(
             /* webpackChunkName: "user-info-edit" */ "@/views/userInfo/UserInfoEdit.vue"
