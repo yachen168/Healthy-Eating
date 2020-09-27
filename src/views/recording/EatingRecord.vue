@@ -41,6 +41,7 @@ export default {
         { key: "fruits", label: "水果類" },
         { key: "nuts", label: "油脂及堅果種子類" }
       ],
+      // ===== Api 資料格式=====
       items: [
         {
           kind: "doctor",
