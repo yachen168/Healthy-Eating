@@ -25,14 +25,14 @@ const routes = [
   {
     path: "/recording",
     name: "Entry",
-    redirect: "/recording/home",
+    redirect: "/recording/states",
     component: () =>
       import(
         /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
       ),
     children: [
       {
-        path: "recording-states",
+        path: "states",
         name: "RecordingStates",
         component: () =>
           import(
