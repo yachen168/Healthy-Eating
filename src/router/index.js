@@ -54,6 +54,22 @@ const routes = [
           import(
             /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
           )
+      },
+      {
+        path: "user-info-view",
+        name: "userInfoView",
+        component: () =>
+          import(
+            /* webpackChunkName: "user-info-view" */ "@/views/userInfo/UserInfoView.vue"
+          )
+      },
+      {
+        path: "user-info-edit",
+        name: "userInfoEdit",
+        component: () =>
+          import(
+            /* webpackChunkName: "user-info-edit" */ "@/views/userInfo/UserInfoEdit.vue"
+          )
       }
     ]
   }
