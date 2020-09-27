@@ -39,7 +39,7 @@
 
 <script>
 import BaseTitle from "@/components/common/BaseTitle";
-import RecordingCard from "@/components/common/RecordingCard";
+import RecordingCard from "@/components/recording/RecordingCard";
 export default {
   components: {
     BaseTitle,

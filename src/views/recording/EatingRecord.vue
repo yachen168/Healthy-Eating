@@ -23,7 +23,7 @@
 
 <script>
 import Title from "@/components/common/BaseTitle";
-import RecordingTable from "@/components/common/RecordingTable";
+import RecordingTable from "@/components/recording/RecordingTable";
 import CommonButton from "@/components/common/commonButton";
 export default {
   components: {
