@@ -1,6 +1,6 @@
 import Vue from "vue";
 import {
-  ButtonPlugin,
+  // ButtonPlugin,
   FormInputPlugin,
   TablePlugin,
   BootstrapVueIcons,
@@ -12,7 +12,7 @@ import {
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
-Vue.use(ButtonPlugin);
+// Vue.use(ButtonPlugin);
 Vue.use(FormInputPlugin);
 Vue.use(TablePlugin);
 Vue.use(NavbarPlugin);

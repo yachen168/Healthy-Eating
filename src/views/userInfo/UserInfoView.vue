@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import CommonButton from "@/components/common/commonButton";
+import CommonButton from "@/components/common/CommonButton";
 import UserInfoTable from "@/components/userInfo/UserInfoTable";
 
 export default {

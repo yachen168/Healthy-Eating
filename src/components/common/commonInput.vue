@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "commonInput",
+  name: "CommonInput",
   data() {
     return {
       isSlash: true

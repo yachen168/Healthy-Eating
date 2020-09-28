@@ -1,19 +1,19 @@
 <template>
   <div class="commonButton">
-    <b-button
-      block
+    <button
       class="base-button"
       :disabled="disabledState"
-      :class="[{ 'disable-button': disabledState }, buttonStyle]"
-      @click="$emit('update:check')"
-      >{{ title }}</b-button
+      :class="[{ disabled: disabledState }, buttonStyle]"
+      @click="$emit('click:event')"
     >
+      {{ title }}
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "commonButton",
+  name: "CommonButton",
   props: {
     title: {
       type: String,
@@ -21,7 +21,7 @@ export default {
     },
     disabledState: {
       type: Boolean,
-      required: true
+      default: false
     },
     buttonStyle: {
       type: String,
@@ -32,25 +32,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.disable-button.btn-secondary.disabled {
-  background-color: #a8a8a8;
-  border-color: #a8a8a8;
-}
-
-.btn-secondary:hover {
-  background-color: #407d60;
-  border-color: #407d60;
-}
-
 .base-button {
+  border: none;
+  width: 100%;
   line-height: 1.9;
   font-size: 14px;
   font-family: Roboto;
   font-weight: 700;
   border-radius: 6px;
-  background-color: #407d60;
-  border-color: #407d60;
-  margin: 0 auto;
 }
 
 /* primary: 白字綠底 */
