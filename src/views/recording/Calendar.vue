@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import Calendar from "@/components/recording/Calendar";
 export default {
   components: {
@@ -36,6 +37,10 @@ export default {
     printSelectedDate(date) {
       console.log(date);
     }
+  },
+  created() {
+    // day.js 測試
+    console.log(dayjs(new Date()).format("YYYY/MM/DD"));
   }
 };
 </script>
