@@ -10,10 +10,10 @@
         ></RecordingTable>
         <div class="form-footer">
           <div class="button-wrapper">
-            <CommonButton title="取消"></CommonButton>
+            <BaseButton title="取消"></BaseButton>
           </div>
           <div class="button-wrapper">
-            <CommonButton title="確認" :disabledState="true"></CommonButton>
+            <BaseButton title="確認" :disabledState="true"></BaseButton>
           </div>
         </div>
       </form>
@@ -24,12 +24,12 @@
 <script>
 import Title from "@/components/common/BaseTitle";
 import RecordingTable from "@/components/recording/RecordingTable";
-import CommonButton from "@/components/common/CommonButton";
+import BaseButton from "@/components/common/BaseButton";
 export default {
   components: {
     Title,
     RecordingTable,
-    CommonButton
+    BaseButton
   },
   data() {
     return {

@@ -5,23 +5,23 @@
         <b-avatar src="" size="130px"></b-avatar>
         <h2 class="user-name">健康先生</h2>
       </div>
-      <CommonButton
+      <BaseButton
         @click.native="$router.push({ name: 'UserInfoEdit' })"
         title="編輯個人檔案"
         buttonStyle="default"
-      ></CommonButton>
+      ></BaseButton>
       <UserInfoTable :items="userInfo"></UserInfoTable>
     </main>
   </div>
 </template>
 
 <script>
-import CommonButton from "@/components/common/CommonButton";
+import BaseButton from "@/components/common/BaseButton";
 import UserInfoTable from "@/components/userInfo/UserInfoTable";
 
 export default {
   components: {
-    CommonButton,
+    BaseButton,
     UserInfoTable
   },
   data() {

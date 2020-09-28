@@ -2,18 +2,18 @@
   <div class="home">
     <Navbar>
       <div class="buttons-wrapper">
-        <Button
+        <BaseButton
           class="button-login"
-          buttonText="登入"
-          buttonClass="transparent"
-          @clickHandler="$router.push({ name: 'Login' })"
-        ></Button>
-        <Button
-          buttonText="開始註冊"
+          title="登入"
+          buttonStyle="transparent"
+          @click:event="$router.push({ name: 'Login' })"
+        ></BaseButton>
+        <BaseButton
+          title="開始註冊"
           style="width: 100px;fontSize: 18px"
-          buttonClass="default"
-          @clickHandler="$router.push({ name: 'Register' })"
-        ></Button>
+          buttonStyle="default"
+          @click:event="$router.push({ name: 'Register' })"
+        ></BaseButton>
       </div>
     </Navbar>
     <section class="banner">
@@ -30,7 +30,7 @@
       </div>
     </section>
     <section class="feature">
-      <Title title="甲呼健康的特色"></Title>
+      <BaseTitle title="甲呼健康的特色"></BaseTitle>
       <div class="feature-content">
         <div class="anchor" id="bottom"></div>
         <div class="image">
@@ -40,12 +40,12 @@
           <img src="https://i.imgur.com/UMeQSLh.png" alt="" />
         </div>
       </div>
-      <Button
-        buttonText="開始註冊使用"
+      <BaseButton
+        title="開始註冊使用"
         style="width: 160px;fontSize: 18px"
-        buttonClass="primary"
-        @clickHandler="$router.push({ name: 'Register' })"
-      ></Button>
+        buttonStyle="primary"
+        @click:event="$router.push({ name: 'Register' })"
+      ></BaseButton>
     </section>
     <div class="anchor" id="bottom"></div>
   </div>
@@ -53,14 +53,14 @@
 
 <script>
 import Navbar from "@/components/common/Navbar";
-import Title from "@/components/common/BaseTitle";
-import Button from "@/components/common/BaseButton";
+import BaseTitle from "@/components/common/BaseTitle";
+import BaseButton from "@/components/common/BaseButton";
 export default {
   name: "Home",
   components: {
     Navbar,
-    Title,
-    Button
+    BaseTitle,
+    BaseButton
   },
   data() {
     return {
@@ -74,6 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.buttons-wrapper {
+  display: flex;
+}
 .banner {
   display: flex;
   flex-direction: column;
