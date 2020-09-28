@@ -1,4 +1,6 @@
 # healthy-eating
+this is git 
+
 
 ## Project setup
 ```
