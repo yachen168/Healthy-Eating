@@ -9,7 +9,11 @@
         :type="type"
         @input="$emit('update:input', $event)"
       ></b-form-input>
-      <button v-if="isShowEye" class="show-password" @click="test">
+      <button
+        v-if="isShowEye"
+        class="show-password"
+        @click="isSlash = !isSlash"
+      >
         <b-icon v-if="isSlash" icon="eye-slash-fill"></b-icon>
         <b-icon v-else icon="eye-fill"></b-icon>
       </button>
@@ -45,11 +49,6 @@ export default {
     isShowEye: {
       type: Boolean,
       default: false
-    }
-  },
-  methods: {
-    test() {
-      this.isSlash = !this.isSlash;
     }
   }
 };
