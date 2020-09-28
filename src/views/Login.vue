@@ -15,12 +15,12 @@
         title="密碼"
         @update:input="login = { ...login, password: $event }"
       ></PasswordInput>
-      <CommonButton
+      <BaseButton
         title="登入"
         :disabledState="disabledState"
         class="login-button"
         buttonStyle="primary"
-      ></CommonButton>
+      ></BaseButton>
     </section>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script>
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
-import CommonButton from "@/components/common/CommonButton";
+import BaseButton from "@/components/common/BaseButton";
 import CommonInput from "@/components/common/CommonInput";
 import PasswordInput from "@/components/common/PasswordInput";
 export default {
@@ -41,7 +41,7 @@ export default {
   methods: {},
   components: {
     Navbar,
-    CommonButton,
+    BaseButton,
     CommonInput,
     BaseTitle,
     PasswordInput

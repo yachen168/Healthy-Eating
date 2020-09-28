@@ -1,67 +1,81 @@
 <template>
-  <div class="button" :class="buttonClass" @click="$emit('clickHandler')">
-    {{ buttonText }}
+  <div class="BaseButton">
+    <button
+      class="base-button"
+      :disabled="disabledState"
+      :class="[{ disabled: disabledState }, buttonStyle]"
+      @click="$emit('click:event')"
+    >
+      {{ title }}
+    </button>
   </div>
 </template>
 
 <script>
 export default {
+  name: "BaseButton",
   props: {
-    buttonText: {
+    title: {
       type: String,
       required: true
     },
-    buttonClass: {
-      type: String
+    disabledState: {
+      type: Boolean,
+      default: false
+    },
+    buttonStyle: {
+      type: String,
+      default: ""
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.button {
-  width: 296px;
-  font-size: 14px;
+.base-button {
+  border: none;
+  width: 100%;
   height: 40px;
   line-height: 40px;
-  border-radius: 5px;
+  font-size: 14px;
+  font-family: Roboto;
   font-weight: 700;
-  text-align: center;
-  cursor: pointer;
+  border-radius: 6px;
 }
 
 /* primary: 白字綠底 */
-.button.primary {
+.base-button.primary {
   color: #fff;
   background-color: #407d60;
 }
 
 /* default: 綠字白底 */
-.button.default {
+.base-button.default {
   color: #407d60;
   background-color: #fff;
 }
 
 /* info: 白字藍底 */
-.button.info {
+.base-button.info {
   color: #fff;
   background-color: #4b7cc7;
 }
 
 /* disabled: 白字灰底 */
-.button.disabled {
+.base-button.disabled {
   color: #fff;
   background-color: #a8a8a8;
 }
 
 /* danger: 白字紅底 */
-.button.danger {
+.base-button.danger {
   color: #fff;
   background-color: #e36e6e;
 }
 
 /* danger: 白字透明底 */
-.button.transparent {
+.base-button.transparent {
   color: #fff;
+  background-color: transparent;
 }
 </style>
