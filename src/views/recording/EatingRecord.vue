@@ -24,7 +24,7 @@
 <script>
 import Title from "@/components/common/BaseTitle";
 import RecordingTable from "@/components/recording/RecordingTable";
-import CommonButton from "@/components/common/commonButton";
+import CommonButton from "@/components/common/CommonButton";
 export default {
   components: {
     Title,
