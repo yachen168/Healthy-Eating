@@ -9,13 +9,7 @@
         :type="type"
         @input="$emit('update:input', $event)"
       ></b-form-input>
-      <button
-        v-if="isShowEye"
-        class="show-password"
-        :class="{ 'check-password': isShowEye }"
-        :v-bind="$attrs"
-        @click="isSlash = !isSlash"
-      >
+      <button v-if="isShowEye" class="show-password" @click="test">
         <b-icon v-if="isSlash" icon="eye-slash-fill"></b-icon>
         <b-icon v-else icon="eye-fill"></b-icon>
       </button>
@@ -52,6 +46,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  methods: {
+    test() {
+      this.isSlash = !this.isSlash;
+    }
   }
 };
 </script>
@@ -81,7 +80,6 @@ export default {
 }
 
 .show-password {
-  display: none;
   color: #407d60;
   font-size: 20px;
   position: absolute;
@@ -90,14 +88,10 @@ export default {
   bottom: 5px;
   margin: auto;
   background-color: white;
-  border: 0;
+  border: none;
   outline: none;
   & svg {
     vertical-align: baseline;
   }
-}
-
-.check-password {
-  display: block;
 }
 </style>
