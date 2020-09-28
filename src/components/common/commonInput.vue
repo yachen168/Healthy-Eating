@@ -1,34 +1,19 @@
 <template>
-  <div>
+  <div class="common-input">
     <label :for="inputId" class="label-title">{{ title }}</label>
-    <div class="input-area">
-      <b-form-input
-        :id="inputId"
-        :placeholder="placeholder"
-        class="form-input"
-        :type="type"
-        @input="$emit('update:input', $event)"
-      ></b-form-input>
-      <button
-        v-if="isShowEye"
-        class="show-password"
-        @click="isSlash = !isSlash"
-      >
-        <b-icon v-if="isSlash" icon="eye-slash-fill"></b-icon>
-        <b-icon v-else icon="eye-fill"></b-icon>
-      </button>
-    </div>
+    <b-form-input
+      :id="inputId"
+      :placeholder="placeholder"
+      :type="type"
+      @input="$emit('update:input', $event)"
+      class="form-input"
+    ></b-form-input>
   </div>
 </template>
 
 <script>
 export default {
   name: "CommonInput",
-  data() {
-    return {
-      isSlash: true
-    };
-  },
   props: {
     inputId: {
       type: String,
@@ -40,15 +25,11 @@ export default {
     },
     placeholder: {
       type: String,
-      required: true
+      default: ""
     },
     type: {
       type: String,
       required: true
-    },
-    isShowEye: {
-      type: Boolean,
-      default: false
     }
   }
 };
@@ -72,25 +53,5 @@ export default {
 
 ::placeholder {
   color: #a8a8a8;
-}
-
-.input-area {
-  position: relative;
-}
-
-.show-password {
-  color: #407d60;
-  font-size: 20px;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  bottom: 5px;
-  margin: auto;
-  background-color: white;
-  border: none;
-  outline: none;
-  & svg {
-    vertical-align: baseline;
-  }
 }
 </style>
