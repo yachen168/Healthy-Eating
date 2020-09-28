@@ -3,13 +3,22 @@
     <Navbar></Navbar>
     <section class="main">
       <BaseTitle title="登入"></BaseTitle>
-      <CommonInput
-        inputId="account"
-        title="帳號(電子信箱)"
-        type="email"
-        placeholder="posttaro1234@gmail.com"
-        @update:input="login = { ...login, email: $event }"
-      ></CommonInput>
+      <!-- <ValidationProvider rules="email" v-slot="{ errors }">
+        <input v-model="emailFortmat" type="text" />
+        <span>{{ errors[0] }}</span>
+      </ValidationProvider> -->
+
+      <ValidationProvider rules="email" v-slot="{ errors }">
+        <CommonInput
+          inputId="account"
+          title="帳號(電子信箱)"
+          type="email"
+          placeholder="posttaro1234@gmail.com"
+          @update:input="login = { ...login, email: $event }"
+          v-model="emailFortmat"
+        ></CommonInput>
+        <span>{{ errors[0] }}</span>
+      </ValidationProvider>
       <PasswordInput
         inputId="login-password"
         title="密碼"
@@ -41,7 +50,9 @@ export default {
   data() {
     return {
       disabledState: true,
-      login: {}
+      login: {},
+      emailFortmat: "",
+      value: ""
     };
   },
   methods: {},

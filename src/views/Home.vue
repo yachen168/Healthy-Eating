@@ -6,13 +6,13 @@
           class="button-login"
           title="登入"
           buttonStyle="transparent"
-          @click:event="$router.push({ name: 'Login' })"
+          @click="$router.push({ name: 'Login' })"
         ></BaseButton>
         <BaseButton
           title="開始註冊"
           style="width: 100px;fontSize: 18px"
           buttonStyle="default"
-          @click:event="$router.push({ name: 'Register' })"
+          @click="$router.push({ name: 'Register' })"
         ></BaseButton>
       </div>
     </Navbar>
@@ -44,7 +44,7 @@
         title="開始註冊使用"
         style="width: 160px;fontSize: 18px"
         buttonStyle="primary"
-        @click:event="$router.push({ name: 'Register' })"
+        @click="$router.push({ name: 'Register' })"
       ></BaseButton>
     </section>
     <div class="anchor" id="bottom"></div>
