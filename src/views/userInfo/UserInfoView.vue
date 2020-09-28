@@ -6,7 +6,7 @@
         <h2 class="user-name">健康先生</h2>
       </div>
       <BaseButton
-        @click.native="$router.push({ name: 'UserInfoEdit' })"
+        @click="$router.push({ name: 'UserInfoEdit' })"
         title="編輯個人檔案"
         buttonStyle="primary"
       ></BaseButton>
