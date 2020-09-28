@@ -4,11 +4,18 @@
       <BaseTitle title="今天 2020/09/26"></BaseTitle>
       <b-row class="meals" no-gutters>
         <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
-        <b-col cols="6" class="card-wrapper" v-for="item in items" :key="item">
+        <b-col
+          cols="6"
+          class="card-wrapper"
+          v-for="(item, index) in items"
+          :key="item"
+        >
           <RecordingCard
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
-            borderStyle="light-green"
+            :borderStyle="
+              mealsRecordingStates[index].detail ? 'dark-green' : 'light-green'
+            "
             ><span>{{ item }}</span></RecordingCard
           >
         </b-col>
@@ -26,10 +33,16 @@
       </b-row>
       <hr class="divid" />
       <b-row class="sum-nutrition" no-gutters>
-        <h2>今天營養總攝取量</h2>
-        <b-col cols="4" v-for="item in items" :key="item">
+        <h2>
+          今天營養總攝取量
+        </h2>
+        <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition">
           <RecordingCard :hasBodyIcon="true" size="sm"
-            ><span class="description">{{ "0/6" }}</span></RecordingCard
+            ><span class="description"
+              >{{ sumNutritionOfDay[0][nutrition] }}/{{
+                targetNutritionOfDay[nutrition]
+              }}</span
+            ></RecordingCard
           >
         </b-col>
       </b-row>
@@ -47,7 +60,88 @@ export default {
   },
   data() {
     return {
-      items: ["飲水量", "早餐", "午餐", "午茶點心", "晚餐", "宵夜"]
+      items: ["飲水量", "早餐", "午餐", "午茶點心", "晚餐", "宵夜"],
+      nutritions: [
+        "grains",
+        "proteins",
+        "dairy",
+        "vegetables",
+        "fruits",
+        "nuts"
+      ],
+      // ====== api 每餐紀錄狀態資料格式 ======
+      mealsRecordingStates: [
+        {
+          diet_type: "water", // 水格式待轉
+          detail: null
+        },
+        {
+          diet_type: "breakfast",
+          detail: null
+        },
+        {
+          diet_type: "lunch",
+          detail: {
+            id: 3, //diet_id
+            updated_at: "2020-09-13 00:39:50",
+            user_id: 5,
+            fruits: 3,
+            vegetables: 3,
+            grains: 5,
+            nuts: 5,
+            proteins: 6,
+            dairy: null
+          }
+        },
+        {
+          diet_type: "snack",
+          detail: null // 未紀錄
+        },
+        {
+          diet_type: "dinner",
+          detail: null
+        },
+        {
+          diet_type: "supper",
+          detail: {
+            id: 3, //diet_id
+            updated_at: "2020-09-13 00:39:50",
+            user_id: 5,
+            fruits: 2,
+            vegetables: 2.1,
+            grains: 55,
+            nuts: 5,
+            proteins: 6,
+            dairy: null
+          }
+        }
+      ],
+      // ===== api 當日攝取總量資料格式 =====
+      sumNutritionOfDay: [
+        {
+          id: 9,
+          updated_at: "2020-09-28 01:00:50",
+          user_id: 15,
+          kind: "daily",
+          diet_type: "launch",
+          fruits: 2,
+          vegetables: 3,
+          grains: 6,
+          nuts: 1,
+          proteins: 5,
+          dairy: 4
+        }
+      ],
+      // ===== api 目標攝取資料格式 =====
+      targetNutritionOfDay: {
+        kind: "personal",
+        fruits: 4,
+        vegetables: 5,
+        grains: 5,
+        nuts: 5,
+        proteins: 5,
+        dairy: 5
+      }
     };
   }
 };
@@ -76,6 +170,9 @@ main {
       font-size: 13px;
       margin-top: 2px;
     }
+  }
+  .recording-card.dark-green span {
+    color: #407d60;
   }
 }
 
@@ -124,6 +221,7 @@ main {
   }
   .description {
     font-size: 13px;
+    font-weight: 500;
   }
 }
 </style>
