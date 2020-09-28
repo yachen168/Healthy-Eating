@@ -9,14 +9,14 @@
       </ValidationProvider> -->
 
       <ValidationProvider rules="email" v-slot="{ errors }">
-        <CommonInput
+        <BaseInput
           inputId="account"
           title="帳號(電子信箱)"
           type="email"
           placeholder="posttaro1234@gmail.com"
           @update:input="login = { ...login, email: $event }"
           v-model="emailFortmat"
-        ></CommonInput>
+        ></BaseInput>
         <span>{{ errors[0] }}</span>
       </ValidationProvider>
       <PasswordInput
@@ -44,7 +44,7 @@
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
-import CommonInput from "@/components/common/CommonInput";
+import BaseInput from "@/components/common/BaseInput";
 import PasswordInput from "@/components/common/PasswordInput";
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
   components: {
     Navbar,
     BaseButton,
-    CommonInput,
+    BaseInput,
     BaseTitle,
     PasswordInput
   }
