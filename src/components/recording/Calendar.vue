@@ -5,9 +5,12 @@
       :language="language"
       :format="DatePickerFormat"
       :highlighted="highlighted"
+      :value="selectedDate"
       calendar-button-icon="fa fa-calendar"
       calendar-class="calendarStyle"
-    ></Datepicker>
+      @input="$emit('update:date', $event)"
+    >
+    </Datepicker>
   </div>
 </template>
 
@@ -22,10 +25,15 @@ export default {
     highlighted: {
       type: Object,
       required: true
+    },
+    selectedDate: {
+      type: String,
+      defualt: ""
     }
   },
   data() {
     return {
+      date: "",
       DatePickerFormat: "yyyy-MM-dd",
       language: {
         language: "Chinese",
@@ -66,7 +74,6 @@ export default {
     .day__month_btn {
       font-size: 24px;
       color: #383838;
-      pointer-events: none;
     }
   }
   header ~ div {
@@ -90,7 +97,6 @@ export default {
     font-size: 14px;
     color: #383838;
     max-height: 62px;
-    pointer-events: none;
   }
   .cell.today {
     position: relative;
@@ -125,5 +131,17 @@ export default {
       background-color: #9cc2b0;
     }
   }
+}
+
+::v-deep .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover {
+  border: 1px solid #fff;
+}
+
+::v-deep .vdp-datepicker__calendar .cell.selected:hover {
+  background-color: #fff;
+}
+
+::v-deep .vdp-datepicker__calendar .cell.selected {
+  background-color: #fff;
 }
 </style>
