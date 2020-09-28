@@ -21,6 +21,12 @@
         class="login-button"
         buttonStyle="primary"
       ></BaseButton>
+      <p class="member-application">
+        <a href="##">第一次使用？註冊會員</a>
+      </p>
+      <p class="member-application">
+        <a href="##">忘記密碼</a>
+      </p>
     </section>
   </div>
 </template>
@@ -55,5 +61,19 @@ export default {
 }
 .login-button {
   margin-top: 12px;
+}
+
+.member-application {
+  text-align: right;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 20px;
+  text-decoration: underline;
+  & a {
+    color: #407d60;
+    text-decoration: none;
+  }
 }
 </style>
