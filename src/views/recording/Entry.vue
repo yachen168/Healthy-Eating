@@ -1,19 +1,17 @@
 <template>
   <div>
-    <header>
-      <Navbar>
-        <div>
-          <b-icon icon="bar-chart"></b-icon>
-          <b-icon icon="calendar3"></b-icon>
-          <!-- ===== 漢堡選單按鈕 ==== -->
-          <b-navbar toggleable class="p-0 d-inline">
-            <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
-            </b-navbar-toggle>
-          </b-navbar>
-          <Sidebar></Sidebar>
-        </div>
-      </Navbar>
-    </header>
+    <Navbar>
+      <div>
+        <b-icon icon="bar-chart"></b-icon>
+        <b-icon icon="calendar3"></b-icon>
+        <!-- ===== 漢堡選單按鈕 ==== -->
+        <b-navbar toggleable class="p-0 d-inline">
+          <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
+          </b-navbar-toggle>
+        </b-navbar>
+        <Sidebar></Sidebar>
+      </div>
+    </Navbar>
     <router-view />
   </div>
 </template>
@@ -31,14 +29,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header {
-  svg {
-    font-size: 20px;
-    color: #fff;
-  }
-  svg + svg {
-    margin-left: 10px;
-  }
+svg {
+  font-size: 20px;
+  color: #fff;
+}
+svg + svg {
+  margin-left: 10px;
 }
 ::v-deep .navbar-light .navbar-toggler {
   color: #fff;
