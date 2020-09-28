@@ -4,7 +4,7 @@
       class="base-button"
       :disabled="disabledState"
       :class="[{ disabled: disabledState }, buttonStyle]"
-      @click="$emit('click:event')"
+      @click="$emit('click')"
     >
       {{ title }}
     </button>
