@@ -8,7 +8,7 @@
       <BaseButton
         @click.native="$router.push({ name: 'UserInfoEdit' })"
         title="編輯個人檔案"
-        buttonStyle="default"
+        buttonStyle="primary"
       ></BaseButton>
       <UserInfoTable :items="userInfo"></UserInfoTable>
     </main>
