@@ -2,7 +2,11 @@
   <div class="calendar-page">
     <main>
       <div class="calendar-wrapper">
-        <Calendar :highlighted="highlighted"></Calendar>
+        <Calendar
+          :highlighted="highlighted"
+          :selectedDate="selectedDate"
+          @update:date="printSelectedDate"
+        ></Calendar>
       </div>
     </main>
   </div>
@@ -23,8 +27,15 @@ export default {
           new Date(2020, 8, 27),
           new Date(2020, 8, 30)
         ]
-      }
+      },
+      selectedDate: ""
     };
+  },
+  methods: {
+    // 成功接收 selected date
+    printSelectedDate(date) {
+      console.log(date);
+    }
   }
 };
 </script>
