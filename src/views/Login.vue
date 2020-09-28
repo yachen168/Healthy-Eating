@@ -10,14 +10,11 @@
         placeholder="posttaro1234@gmail.com"
         @update:input="login = { ...login, email: $event }"
       ></CommonInput>
-      <CommonInput
-        inputId="password"
+      <PasswordInput
+        inputId="login-password"
         title="密碼"
-        placeholder="**********"
-        type="password"
-        :isShowEye="true"
         @update:input="login = { ...login, password: $event }"
-      ></CommonInput>
+      ></PasswordInput>
       <CommonButton
         title="登入"
         :disabledState="disabledState"
@@ -32,7 +29,8 @@
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import CommonButton from "@/components/common/CommonButton";
-import CommonInput from "@//components/common/CommonInput";
+import CommonInput from "@/components/common/CommonInput";
+import PasswordInput from "@/components/common/PasswordInput";
 export default {
   data() {
     return {
@@ -45,7 +43,8 @@ export default {
     Navbar,
     CommonButton,
     CommonInput,
-    BaseTitle
+    BaseTitle,
+    PasswordInput
   }
 };
 </script>
