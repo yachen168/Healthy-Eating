@@ -1,6 +1,5 @@
 <template>
   <div class="calendar-page">
-    <Navbar></Navbar>
     <main>
       <div class="calendar-wrapper">
         <Calendar :highlighted="highlighted"></Calendar>
@@ -10,12 +9,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
-import Calendar from "@/components/common/Calendar";
+import Calendar from "@/components/recording/Calendar";
 export default {
   components: {
-    Calendar,
-    Navbar
+    Calendar
   },
   data() {
     return {

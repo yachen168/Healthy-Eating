@@ -21,21 +21,57 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "@/views/Register.vue")
   },
+  /* ============================ recording ============================= */
   {
-    path: "/recording/eating-edit",
-    name: "EatingEdit",
+    path: "/recording",
+    name: "Entry",
+    redirect: "/recording/states",
     component: () =>
       import(
-        /* webpackChunkName: "eating-edit" */ "@/views/recording/EatingEdit.vue"
-      )
-  },
-  {
-    path: "/recording/calendar",
-    name: "Calendar",
-    component: () =>
-      import(
-        /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
-      )
+        /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
+      ),
+    children: [
+      {
+        path: "states",
+        name: "RecordingStates",
+        component: () =>
+          import(
+            /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
+          )
+      },
+      {
+        path: "eating-record",
+        name: "EatingRecord",
+        component: () =>
+          import(
+            /* webpackChunkName: "eating-record" */ "@/views/recording/EatingRecord.vue"
+          )
+      },
+      {
+        path: "calendar",
+        name: "Calendar",
+        component: () =>
+          import(
+            /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
+          )
+      },
+      {
+        path: "user-info-view",
+        name: "UserInfoView",
+        component: () =>
+          import(
+            /* webpackChunkName: "user-info-view" */ "@/views/userInfo/UserInfoView.vue"
+          )
+      },
+      {
+        path: "user-info-edit",
+        name: "UserInfoEdit",
+        component: () =>
+          import(
+            /* webpackChunkName: "user-info-edit" */ "@/views/userInfo/UserInfoEdit.vue"
+          )
+      }
+    ]
   }
 ];
 
