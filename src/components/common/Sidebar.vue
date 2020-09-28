@@ -33,6 +33,7 @@ export default {};
 .sidebar-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
   background: linear-gradient(
       to right,

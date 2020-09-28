@@ -56,7 +56,7 @@ export default {
 }
 
 /* default: 綠字白底，加邊框 */
-.base-button.primary {
+.base-button.outline-default {
   color: #407d60;
   background-color: #fff;
   line-height: 32px;
