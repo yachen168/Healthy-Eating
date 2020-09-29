@@ -35,12 +35,9 @@ export default {
   methods: {
     // 成功接收 selected date
     printSelectedDate(date) {
-      console.log(date);
+      // day.js 測試
+      console.log(dayjs(date).format("YYYY/MM/DD"));
     }
-  },
-  created() {
-    // day.js 測試
-    console.log(dayjs(new Date()).format("YYYY/MM/DD"));
   }
 };
 </script>
