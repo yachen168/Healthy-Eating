@@ -66,11 +66,11 @@ export default {
   width: 100%;
   margin: 0 auto;
   border: none;
-  background-color: #f7f7f7;
   color: #262d33;
   header {
     height: 50px;
     margin-bottom: 15px;
+    background-color: #e5e5e5;
     .day__month_btn {
       font-size: 24px;
       font-weight: 700;
