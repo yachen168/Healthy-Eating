@@ -1,20 +1,16 @@
 <template>
   <div>
-    <Title title="早餐的營養攝取記錄"></Title>
     <main>
+      <Title title="早餐的營養攝取記錄"></Title>
       <form action="">
         <RecordingTable
           :fields="fields"
           :items="items"
           @update:quantity="updateQuantity"
         ></RecordingTable>
-        <div class="form-footer">
-          <div class="button-wrapper">
-            <BaseButton title="取消"></BaseButton>
-          </div>
-          <div class="button-wrapper">
-            <BaseButton title="確認" :disabledState="true"></BaseButton>
-          </div>
+        <div class="button-wrapper">
+          <BaseButton title="取消" buttonStyle="outline-default"></BaseButton>
+          <BaseButton title="確認" :disabledState="true"></BaseButton>
         </div>
       </form>
     </main>
@@ -69,19 +65,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-title {
-  margin-bottom: 23px;
-}
 main {
-  padding: 0 32px;
-  .form-footer {
+  padding: 30px 32px 10px;
+  .base-title {
+    margin-bottom: 23px;
+  }
+  .button-wrapper {
     display: flex;
     justify-content: space-between;
-    margin: 11px -7px 0;
-    .button-wrapper {
-      min-width: 143px;
-      padding: 0 7px;
+    margin-top: 11px;
+    .BaseButton {
       flex: 1 0 0;
+    }
+    .BaseButton + .BaseButton {
+      margin-left: 14px;
     }
   }
 }
