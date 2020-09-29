@@ -2,8 +2,8 @@
   <div class="BaseButton">
     <button
       class="base-button"
-      :disabled="disabledState"
-      :class="[{ disabled: disabledState }, buttonStyle]"
+      :disabled="!disabledState"
+      :class="[{ disabled: !disabledState }, buttonStyle]"
       @click="$emit('click')"
     >
       {{ title }}

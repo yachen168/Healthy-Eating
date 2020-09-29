@@ -1,0 +1,39 @@
+.label-title {
+    color: #407d60;
+    line-height: 2.2;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 3px;
+    margin-bottom: 0;
+  }
+  
+  .form-input {
+    border-radius: 6px;
+    &::placeholder {
+        color: #a8a8a8;
+      }
+  }
+
+  .input-area {
+    position: relative;
+  }
+  
+  .show-password {
+    color: #407d60;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    bottom: 5px;
+    margin: auto;
+    background-color: white;
+    border: none;
+    outline: none;
+    & .b-icon.bi {
+      vertical-align: baseline;
+    }
+  }
+  
+ 
