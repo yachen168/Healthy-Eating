@@ -1,8 +1,8 @@
 <template>
   <div class="login-page">
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <section class="main">
-      <BaseTitle title="登入"></BaseTitle>
+      <BaseTitle title="登入" class="base-title"></BaseTitle>
       <ValidationObserver v-slot="{ valid }">
         <label for="email" class="label-title">帳號(電子信箱)</label>
         <ValidationProvider
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
+// import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 // import BaseInput from "@/components/common/BaseInput";
@@ -89,7 +89,7 @@ export default {
     }
   },
   components: {
-    Navbar,
+    // Navbar,
     BaseButton,
     // BaseInput,
     BaseTitle
@@ -101,6 +101,11 @@ export default {
 <style lang="scss" scoped>
 .main {
   padding: 0 32px;
+}
+
+.base-title {
+  margin-top: 31px;
+  margin-bottom: 53px;
 }
 
 .font-error {

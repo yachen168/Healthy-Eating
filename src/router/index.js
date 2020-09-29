@@ -11,16 +11,31 @@ const routes = [
     component: Home
   },
   {
-    path: "/login",
-    name: "Login",
-    component: () => import(/* webpackChunkName: "login" */ "@/views/Login.vue")
-  },
-  {
-    path: "/register",
-    name: "Register",
+    path: "/member-application",
+    name: "MemberApplication",
+    redirect: "/member-application/login",
     component: () =>
-      import(/* webpackChunkName: "register" */ "@/views/Register.vue")
+      import(
+        /* webpackChunkName: "member-application" */ "@/views/member/MemberApplication.vue"
+      ),
+    children: [
+      {
+        path: "login",
+        name: "Login",
+        component: () =>
+          import(/* webpackChunkName: "login" */ "@/views/member/Login.vue")
+      },
+      {
+        path: "register",
+        name: "Register",
+        component: () =>
+          import(
+            /* webpackChunkName: "register" */ "@/views/member/Register.vue"
+          )
+      }
+    ]
   },
+
   /* ============================ recording ============================= */
   {
     path: "/recording",
