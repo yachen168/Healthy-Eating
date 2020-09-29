@@ -9,8 +9,12 @@
           @update:quantity="updateQuantity"
         ></RecordingTable>
         <div class="button-wrapper">
-          <BaseButton title="取消" buttonStyle="outline-default"></BaseButton>
-          <BaseButton title="確認" :disabledState="true"></BaseButton>
+          <BaseButton
+            title="取消"
+            :disabledState="true"
+            buttonStyle="outline-default"
+          ></BaseButton>
+          <BaseButton title="確認" :disabledState="false"></BaseButton>
         </div>
       </form>
     </main>
