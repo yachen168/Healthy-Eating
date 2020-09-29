@@ -70,10 +70,11 @@ export default {
   background-color: #4b7cc7;
 }
 
-/* disabled: 白字灰底 */
+/* disabled: 白字灰底(禁用) */
 .base-button.disabled {
   color: #fff;
   background-color: #a8a8a8;
+  cursor: not-allowed;
 }
 
 /* danger: 白字紅底 */
