@@ -1,0 +1,12 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="19" y="30" width="2" height="8" rx="1" fill="#CBA368"/>
+<ellipse cx="20" cy="5.5" rx="3" ry="3.5" fill="#CBA368"/>
+<ellipse cx="23.3869" cy="11.5962" rx="2.5" ry="4" transform="rotate(45 23.3869 11.5962)" fill="#CBA368"/>
+<ellipse cx="16.5962" cy="11.5962" rx="2.5" ry="4" transform="rotate(-45 16.5962 11.5962)" fill="#CBA368"/>
+<ellipse cx="23.3869" cy="25.5962" rx="2.5" ry="4" transform="rotate(45 23.3869 25.5962)" fill="#CBA368"/>
+<ellipse cx="16.5962" cy="25.5962" rx="2.5" ry="4" transform="rotate(-45 16.5962 25.5962)" fill="#CBA368"/>
+<ellipse cx="23.3869" cy="18.5962" rx="2.5" ry="4" transform="rotate(45 23.3869 18.5962)" fill="#CBA368"/>
+<ellipse cx="16.5962" cy="18.5962" rx="2.5" ry="4" transform="rotate(-45 16.5962 18.5962)" fill="#CBA368"/>
+<ellipse cx="25.1088" cy="32.6301" rx="1" ry="6.8615" transform="rotate(60 25.1088 32.6301)" fill="#CBA368"/>
+<ellipse cx="14.4422" cy="32.2536" rx="1" ry="6.8615" transform="rotate(-60 14.4422 32.2536)" fill="#CBA368"/>
+</svg>

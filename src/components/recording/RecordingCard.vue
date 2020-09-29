@@ -4,18 +4,14 @@
     <a-icon type="plus-circle" class="header-icon" v-if="hasHeaderIcon" />
     <div class="recording-body" v-if="hasBodyIcon">
       <!-- 之後替換成 svg 圖 -->
-      <Dot :size="size"></Dot>
+      <img :src="imgUrl" alt="" />
     </div>
     <slot class="recording-card-footer"></slot>
   </div>
 </template>
 
 <script>
-import Dot from "@/components/common/Dot";
 export default {
-  components: {
-    Dot
-  },
   props: {
     hasHeaderIcon: {
       type: Boolean,
@@ -30,9 +26,9 @@ export default {
       default: ""
     },
     //  之後替換成 svg 圖時移除
-    size: {
+    imgUrl: {
       type: String,
-      default: "lg"
+      default: ""
     }
   }
 };

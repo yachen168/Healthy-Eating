@@ -7,16 +7,17 @@
         <b-col
           cols="6"
           class="card-wrapper"
-          v-for="(item, index) in items"
-          :key="item"
+          v-for="(meal, index) in meals"
+          :key="meal.type"
         >
           <RecordingCard
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
+            :imgUrl="meal.imgUrl"
             :borderStyle="
               mealsRecordingStates[index].detail ? 'dark-green' : 'light-green'
             "
-            ><span>{{ item }}</span></RecordingCard
+            ><span>{{ meal.type }}</span></RecordingCard
           >
         </b-col>
       </b-row>
@@ -36,11 +37,11 @@
         <h2>
           今天營養總攝取量
         </h2>
-        <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition">
-          <RecordingCard :hasBodyIcon="true" size="sm"
+        <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
+          <RecordingCard :hasBodyIcon="true" :imgUrl="nutrition.imgUrl"
             ><span class="description"
-              >{{ sumNutritionOfDay[0][nutrition] }}/{{
-                targetNutritionOfDay[nutrition]
+              >{{ sumNutritionOfDay[0][nutrition.type] }}/{{
+                targetNutritionOfDay[nutrition.type]
               }}</span
             ></RecordingCard
           >
@@ -60,14 +61,24 @@ export default {
   },
   data() {
     return {
-      items: ["飲水量", "早餐", "午餐", "午茶點心", "晚餐", "宵夜"],
+      meals: [
+        { type: "飲水量", imgUrl: require("@/assets/images/ic_water.svg") },
+        { type: "早餐", imgUrl: require("@/assets/images/ic_morning.svg") },
+        { type: "午餐", imgUrl: require("@/assets/images/ic_lunch.svg") },
+        {
+          type: "午茶點心",
+          imgUrl: require("@/assets/images/ic_afternoon.svg")
+        },
+        { type: "晚餐", imgUrl: require("@/assets/images/ic_dinner.svg") },
+        { type: "宵夜", imgUrl: require("@/assets/images/ic_night.svg") }
+      ],
       nutritions: [
-        "grains",
-        "proteins",
-        "dairy",
-        "vegetables",
-        "fruits",
-        "nuts"
+        { type: "grains", imgUrl: require("@/assets/images/ic_malt.svg") },
+        { type: "proteins", imgUrl: require("@/assets/images/ic_meat.svg") },
+        { type: "dairy", imgUrl: require("@/assets/images/ic_milk.svg") },
+        { type: "vegetables", imgUrl: require("@/assets/images/ic_veg.svg") },
+        { type: "fruits", imgUrl: require("@/assets/images/ic_fruit.svg") },
+        { type: "nuts", imgUrl: require("@/assets/images/ic_water.svg") }
       ],
       // ====== api 每餐紀錄狀態資料格式 ======
       mealsRecordingStates: [
@@ -153,7 +164,7 @@ main {
   margin: 0 auto 32px;
   padding: 0 33px;
   .page-title {
-    margin-bottom: 23px;
+    // margin-bottom: 23px;
   }
 }
 .meals {
