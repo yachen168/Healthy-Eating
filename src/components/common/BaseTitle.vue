@@ -19,8 +19,6 @@ export default {
 
 <style lang="scss" scoped>
 .page-title {
-  margin-top: 31px;
-  margin-bottom: 60px;
   font-size: 24px;
   text-align: center;
   color: #407d60;
