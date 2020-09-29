@@ -77,23 +77,36 @@ export default {
   > :first-child {
     background: none;
   }
-  > [data-label]::before {
-    width: 60%;
-    text-align: left;
-    padding: 0 0 25px 35px;
-    background-size: 30px;
-    background-image: radial-gradient(
-      circle at 15px 20px,
-      #c4c4c4 15px,
-      transparent 11px
-    );
-    background-repeat: no-repeat;
-  }
   > [data-label] > div {
     width: 40%;
     height: 30px;
     margin-top: 8px;
     padding: 0;
+  }
+  > [data-label]::before {
+    width: 60%;
+    text-align: left;
+    padding: 0 0 25px 50px;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+  }
+  > [data-label]:first-of-type::before {
+    background-image: url("~@/assets/images/ic_malt.svg");
+  }
+  > [data-label]:nth-of-type(2)::before {
+    background-image: url("~@/assets/images/ic_meat.svg");
+  }
+  > [data-label]:nth-of-type(3)::before {
+    background-image: url("~@/assets/images/ic_milk.svg");
+  }
+  > [data-label]:nth-of-type(4)::before {
+    background-image: url("~@/assets/images/ic_veg.svg");
+  }
+  > [data-label]:nth-of-type(5)::before {
+    background-image: url("~@/assets/images/ic_fruit.svg");
+  }
+  > [data-label]:nth-of-type(6)::before {
+    background-image: url("~@/assets/images/ic_oil.svg");
   }
 }
 
@@ -136,7 +149,7 @@ export default {
   color: #407d60;
   position: absolute;
   bottom: 15px;
-  left: 35px;
+  left: 50px;
   font-size: 14px;
   cursor: pointer;
   svg {
