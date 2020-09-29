@@ -6,26 +6,28 @@
           class="button-login"
           title="登入"
           buttonStyle="transparent"
+          :disabledState="true"
           @click="$router.push({ name: 'Login' })"
         ></BaseButton>
         <BaseButton
+          class="button-register"
           title="開始註冊"
-          style="width: 100px;fontSize: 18px"
           buttonStyle="default"
+          :disabledState="true"
           @click="$router.push({ name: 'Register' })"
         ></BaseButton>
       </div>
     </Navbar>
     <section class="banner">
       <div class="image">
-        <img src="https://i.imgur.com/1gGigaq.png" alt="" />
+        <img src="@/assets/images/img_home_1.png" alt="" />
       </div>
       <div class="banner-footer">
         <div class="button-scroll-down">
           <a-anchor :target-offset="targetOffset">
             <a-anchor-link href="#bottom" title="eeee" />
           </a-anchor>
-          <a-icon type="down-circle" />
+          <img src="@/assets/images/ic_arrowdown.svg" alt="scroll-down" />
         </div>
       </div>
     </section>
@@ -34,16 +36,17 @@
       <div class="feature-content">
         <div class="anchor" id="bottom"></div>
         <div class="image">
-          <img src="https://i.imgur.com/OSJyIeQ.png" alt="" />
+          <img src="@/assets/images/img_home_2.png" alt="" />
         </div>
         <div class="image">
-          <img src="https://i.imgur.com/UMeQSLh.png" alt="" />
+          <img src="@/assets/images/img_home_3.png" alt="" />
         </div>
       </div>
       <BaseButton
+        class="button-start-register"
         title="開始註冊使用"
-        style="width: 160px;fontSize: 18px"
         buttonStyle="primary"
+        :disabledState="true"
         @click="$router.push({ name: 'Register' })"
       ></BaseButton>
     </section>
@@ -76,6 +79,14 @@ export default {
 <style lang="scss" scoped>
 .buttons-wrapper {
   display: flex;
+  .BaseButton {
+    font-weight: 400;
+    font-size: 18px;
+  }
+  .button-register {
+    width: 100px;
+    margin-left: 16px;
+  }
 }
 .banner {
   display: flex;
@@ -124,10 +135,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0 60px;
+  padding: 45px 0 60px;
   background-color: #fff;
-  &-content {
-    margin-bottom: 50px;
+  .base-title {
+    margin-bottom: 65px;
   }
   .image {
     width: 60%;
@@ -137,7 +148,7 @@ export default {
     }
   }
   .image + .image {
-    margin-top: 30px;
+    margin-top: 43px;
   }
 }
 
@@ -157,9 +168,9 @@ export default {
   }
 }
 
-.button-login {
-  width: fit-content;
+.button-start-register {
+  width: 160px;
+  margin-top: 105px;
   font-size: 18px;
-  margin-right: 16px;
 }
 </style>
