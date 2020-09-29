@@ -48,6 +48,22 @@ const routes = [
           )
       },
       {
+        path: "weight-record",
+        name: "WeightRecord",
+        component: () =>
+          import(
+            /* webpackChunkName: "weight-record" */ "@/views/recording/WeightRecord.vue"
+          )
+      },
+      {
+        path: "water-record",
+        name: "WaterRecord",
+        component: () =>
+          import(
+            /* webpackChunkName: "water-record" */ "@/views/recording/WaterRecord.vue"
+          )
+      },
+      {
         path: "calendar",
         name: "Calendar",
         component: () =>
