@@ -1,19 +1,28 @@
 <template>
   <div class="common-input">
     <label :for="inputId" class="label-title">{{ title }}</label>
-    <b-form-input
-      :id="inputId"
-      :placeholder="placeholder"
-      :type="type"
-      @input="$emit('update:input', $event)"
-      class="form-input"
-    ></b-form-input>
+    <ValidationProvider
+      :rules="rules"
+      :name="type"
+      v-slot="{ errors }"
+      :mode="mode"
+    >
+      <b-form-input
+        :id="inputId"
+        :placeholder="placeholder"
+        :type="type"
+        :value="value"
+        @input="$emit('update:input', $event)"
+        class="form-input"
+      ></b-form-input>
+      <span :class="{ test: errors[0] }">{{ errors[0] }}</span>
+    </ValidationProvider>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Baseput",
+  name: "BaseInput",
   props: {
     inputId: {
       type: String,
@@ -30,6 +39,15 @@ export default {
     type: {
       type: String,
       required: true
+    },
+    rules: {
+      type: String
+    },
+    value: {
+      type: String
+    },
+    mode: {
+      type: String
     }
   }
 };
