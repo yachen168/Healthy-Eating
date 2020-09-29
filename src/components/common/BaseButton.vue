@@ -41,6 +41,7 @@ export default {
   font-family: Roboto;
   font-weight: 700;
   border-radius: 6px;
+  outline: none;
 }
 
 /* primary: 白字綠底 */
