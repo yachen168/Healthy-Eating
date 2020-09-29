@@ -70,9 +70,10 @@ export default {
   color: #262d33;
   header {
     height: 50px;
-    background-color: #e5e5e5;
+    margin-bottom: 15px;
     .day__month_btn {
       font-size: 24px;
+      font-weight: 700;
       color: #383838;
     }
   }
