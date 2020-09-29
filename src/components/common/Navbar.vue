@@ -1,7 +1,9 @@
 <template>
   <div class="navbar">
     <div>
-      <h4 v-if="$route.name !== 'Home'" class="logo" slot="left">呷呼健康</h4>
+      <h2 v-if="$route.name !== 'Home'" class="logo" @click="$emit('click')">
+        <img src="@/assets/images/img_logo.svg" alt="brand" />
+      </h2>
     </div>
     <div>
       <slot></slot>
