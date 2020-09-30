@@ -7,7 +7,7 @@
         <span class="info-error">帳號或密碼錯誤</span>
       </b-alert>
       <ValidationObserver v-slot="{ invalid }">
-        <label for="login-email" class="label-title">帳號(電子信箱)</label>
+        <label for="login-email" class="label-title">帳號 (電子信箱)</label>
         <ValidationProvider
           rules="required|email"
           v-slot="{ errors }"
@@ -115,6 +115,7 @@ export default {
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
+  margin-top: 5px;
 }
 .login-button {
   margin-top: 12px;
