@@ -108,8 +108,8 @@
         ></BaseButton>
       </ValidationObserver>
 
-      <p class="member-application" @click="$router.push({ name: 'Login' })">
-        <a>已有帳號？從此登入</a>
+      <p class="member-application">
+        <a @click="$router.push({ name: 'Login' })">已有帳號？從此登入</a>
       </p>
     </section>
   </div>

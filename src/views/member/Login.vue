@@ -56,8 +56,8 @@
           @click="test"
         ></BaseButton>
       </ValidationObserver>
-      <p class="member-application" @click="$router.push({ name: 'Register' })">
-        <a>第一次使用？註冊會員</a>
+      <p class="member-application">
+        <a @click="$router.push({ name: 'Register' })">第一次使用？註冊會員</a>
       </p>
       <p class="member-application">
         <a>忘記密碼</a>
