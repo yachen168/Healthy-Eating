@@ -18,8 +18,16 @@
         </div>
       </div>
       <nav class="sidebar-body">
-        <p class="nav-item">修改密碼</p>
-        <p class="nav-item">登出</p>
+        <div class="nav-item">
+          <img src="@/assets/images/ic_changepassword.svg" alt="" /><span
+            >修改密碼</span
+          >
+        </div>
+        <div class="nav-item">
+          <img src="@/assets/images/ic_logout.svg" alt="登出" /><span
+            >登出</span
+          >
+        </div>
       </nav>
     </b-sidebar>
   </div>
@@ -62,12 +70,19 @@ export default {};
 
 .sidebar-body {
   padding-top: 20px;
-  padding-left: 32px;
   .nav-item {
+    padding-left: 32px;
     color: #383838;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
+    img {
+      vertical-align: middle;
+      margin-right: 24px;
+    }
+    span {
+      vertical-align: middle;
+    }
   }
   .nav-item + .nav-item {
     margin-top: 42px;
