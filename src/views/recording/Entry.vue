@@ -2,8 +2,8 @@
   <div>
     <Navbar>
       <div>
-        <b-icon icon="bar-chart"></b-icon>
-        <b-icon icon="calendar3"></b-icon>
+        <img src="@/assets/images/ic_chart.svg" alt="圖表" />
+        <img src="@/assets/images/ic_calendar.svg" alt="行事曆" />
         <!-- ===== 漢堡選單按鈕 ==== -->
         <b-navbar toggleable class="p-0 d-inline">
           <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
@@ -29,16 +29,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-svg {
-  font-size: 20px;
-  color: #fff;
+.navbar {
+  img {
+    margin-right: 20px;
+    cursor: pointer;
+  }
 }
-svg + svg {
-  margin-left: 10px;
-}
-::v-deep .navbar-light .navbar-toggler {
-  color: #fff;
-  border-color: transparent;
-  outline: none;
+
+::v-deep .navbar-light {
+  .navbar-toggler {
+    padding: 0;
+    border-color: transparent;
+    outline: none;
+  }
+  .navbar-toggler-icon {
+    background-image: url("~@/assets/images/ic_burger.svg");
+  }
 }
 </style>
