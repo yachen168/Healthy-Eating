@@ -7,7 +7,8 @@ import {
   NavbarPlugin,
   SidebarPlugin,
   AvatarPlugin,
-  LayoutPlugin
+  LayoutPlugin,
+  AlertPlugin
 } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -20,3 +21,4 @@ Vue.use(SidebarPlugin);
 Vue.use(AvatarPlugin);
 Vue.use(LayoutPlugin);
 Vue.use(BootstrapVueIcons);
+Vue.use(AlertPlugin);
