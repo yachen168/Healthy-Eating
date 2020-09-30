@@ -1,9 +1,12 @@
 <template>
   <div class="login-page">
-    <!-- <Navbar></Navbar> -->
     <section class="main">
       <BaseTitle title="登入" class="base-title"></BaseTitle>
-      <ValidationObserver v-slot="{ valid }">
+      <b-alert v-model="showDismissibleAlert" dismissible fade>
+        <b-icon icon="exclamation-circle" class="exclamation-mark"></b-icon>
+        <span class="info-error">帳號或密碼錯誤</span>
+      </b-alert>
+      <ValidationObserver v-slot="{ invalid }">
         <label for="email" class="label-title">帳號(電子信箱)</label>
         <ValidationProvider
           rules="required|email"
@@ -47,7 +50,7 @@
         </div>
         <BaseButton
           title="登入"
-          :disabledState="valid"
+          :disabledState="invalid"
           class="login-button"
           buttonStyle="primary"
           @click="test"
@@ -64,17 +67,15 @@
 </template>
 
 <script>
-// import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
-// import BaseInput from "@/components/common/BaseInput";
-// import PasswordInput from "@/components/common/PasswordInput";
 export default {
   data() {
     return {
       login: {},
       isSlash: true,
-      type: "password"
+      type: "password",
+      showDismissibleAlert: true
     };
   },
   methods: {
@@ -89,16 +90,16 @@ export default {
     }
   },
   components: {
-    // Navbar,
     BaseButton,
-    // BaseInput,
     BaseTitle
-    // PasswordInput
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.login-page {
+  position: relative;
+}
 .main {
   padding: 0 32px;
 }
@@ -135,7 +136,53 @@ export default {
     }
   }
 }
+
 ::v-deep .is-invalid {
   background-image: none;
+}
+
+::v-deep .alert {
+  height: 40px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 32px;
+  left: 32px;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+::v-deep .alert-dismissible {
+  color: black;
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid #e97979;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 11px 16px;
+  & .exclamation-mark {
+    color: #e97979;
+    font-size: 1rem;
+    line-height: 19px;
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+  & .info-error {
+    line-height: 19px;
+  }
+  & .close {
+    position: static;
+    font-size: 26px;
+    font-weight: 50;
+    line-height: 19px;
+    padding: 0;
+  }
+}
+
+::v-deep .b-icon.bi {
+  vertical-align: middle;
 }
 </style>
