@@ -7,14 +7,14 @@
         <span class="info-error">帳號或密碼錯誤</span>
       </b-alert>
       <ValidationObserver v-slot="{ invalid }">
-        <label for="email" class="label-title">帳號(電子信箱)</label>
+        <label for="login-email" class="label-title">帳號(電子信箱)</label>
         <ValidationProvider
           rules="required|email"
           v-slot="{ errors }"
           mode="lazy"
         >
           <b-form-input
-            id="email"
+            id="login-email"
             placeholder="請輸入會員電子信箱"
             type="email"
             :state="errors[0] ? false : null"
@@ -27,14 +27,14 @@
           </p>
         </ValidationProvider>
 
-        <label for="password" class="label-title">密碼</label>
+        <label for="login-password" class="label-title">密碼</label>
         <div class="input-area">
           <ValidationProvider
             rules="required|minmax:6,12|alpha_num"
             v-slot="{ errors }"
           >
             <b-form-input
-              id="password"
+              id="login-password"
               placeholder="**********"
               :type="type"
               :state="errors[0] ? false : null"
