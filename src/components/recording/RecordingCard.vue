@@ -1,7 +1,13 @@
 <template>
   <div class="recording-card" :class="[borderStyle]">
-    <!-- 之後替換成 svg 圖 -->
-    <a-icon type="plus-circle" class="header-icon" v-if="hasHeaderIcon" />
+    <div class="header-icon" v-if="hasHeaderIcon">
+      <img
+        v-if="borderStyle === 'dark-green'"
+        src="@/assets/images/button_add_abled.svg"
+        alt="add"
+      />
+      <img v-else src="@/assets/images/button_add_abled_light.svg" alt="add" />
+    </div>
     <div class="recording-body" v-if="hasBodyIcon">
       <!-- 之後替換成 svg 圖 -->
       <img :src="imgUrl" alt="" />
@@ -25,7 +31,6 @@ export default {
       type: String,
       default: ""
     },
-    //  之後替換成 svg 圖時移除
     imgUrl: {
       type: String,
       default: ""
@@ -55,10 +60,8 @@ export default {
   }
   .header-icon {
     position: absolute;
-    line-height: 0;
     right: 7px;
     top: 7px;
-    color: #9cc2b0;
   }
 }
 
@@ -68,8 +71,5 @@ export default {
 
 .recording-card.dark-green {
   border: 2px solid #407d60;
-  .header-icon {
-    color: #407d60;
-  }
 }
 </style>
