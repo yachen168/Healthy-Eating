@@ -99,9 +99,13 @@ export default {
   }
   > [data-label]::before {
     width: 60%;
+    padding: 0 0 25px 45px;
+    font-size: 14px;
+    font-weight: 700;
     text-align: left;
-    padding: 0 0 25px 50px;
-    background-position: 0 50%;
+    color: #383838;
+    background-position: 0 40%;
+    background-size: 23%;
     background-repeat: no-repeat;
   }
   > [data-label]:first-of-type::before {
@@ -163,7 +167,7 @@ export default {
   color: #407d60;
   position: absolute;
   bottom: 15px;
-  left: 50px;
+  left: 45px;
   font-size: 14px;
   cursor: pointer;
   svg {
