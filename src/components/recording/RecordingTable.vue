@@ -3,16 +3,30 @@
     <b-table stacked small :fields="fields" :items="items" responsive="sm">
       <template v-slot:cell()="data">
         <div class="recording">
-          <b-icon
+          <img
+            v-if="data.value > 0"
             @click="$emit('update:quantity', data, -0.5)"
-            icon="patch-minus"
+            src="@/assets/images/button_sub_abled.svg"
+            alt="minus"
+          />
+          <img
+            v-else
+            src="@/assets/images/button_sub_disabled.svg"
+            alt="minus-not-allowed"
           />
           <span class="quantity">{{
             data.value ? data.value.toFixed(1) : data.value
           }}</span>
-          <b-icon
+          <img
+            v-if="data.value < 10"
             @click="$emit('update:quantity', data, 0.5)"
-            icon="file-plus"
+            src="@/assets/images/button_add_abled.svg"
+            alt="add"
+          />
+          <img
+            v-else
+            src="@/assets/images/button_add_disabled.svg"
+            alt="add-not-allowed"
           />
           <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
           <span class="unit">{{

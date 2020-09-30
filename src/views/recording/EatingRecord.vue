@@ -58,10 +58,6 @@ export default {
   },
   methods: {
     updateQuantity(data, num) {
-      let total = data.item[data.field.key];
-      // 數量只能介於 0~10
-      if (total === 0 && num < 0) return;
-      if (total === 10 && num > 0) return;
       data.item[data.field.key] += num;
     }
   }
