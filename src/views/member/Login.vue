@@ -151,6 +151,10 @@ export default {
   left: 32px;
   padding: 0;
   margin-bottom: 0;
+  & svg {
+    stroke: #e97979;
+    stroke-width: 0.5px;
+  }
 }
 
 ::v-deep .alert-dismissible {

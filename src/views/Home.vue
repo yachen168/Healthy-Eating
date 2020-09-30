@@ -6,14 +6,14 @@
           class="button-login"
           title="登入"
           buttonStyle="transparent"
-          :disabledState="true"
+          :disabledState="false"
           @click="$router.push({ name: 'Login' })"
         ></BaseButton>
         <BaseButton
           class="button-register"
           title="開始註冊"
           buttonStyle="default"
-          :disabledState="true"
+          :disabledState="false"
           @click="$router.push({ name: 'Register' })"
         ></BaseButton>
       </div>
