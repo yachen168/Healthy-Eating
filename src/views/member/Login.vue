@@ -44,8 +44,8 @@
             ></b-form-input>
           </ValidationProvider>
           <button @click="showPassword" class="show-password">
-            <b-icon v-show="isSlash" icon="eye-slash-fill"></b-icon>
-            <b-icon v-show="!isSlash" icon="eye-fill"></b-icon>
+            <img src="@/assets/images/ic_eye_close.svg" v-show="isSlash" />
+            <img src="@/assets/images/ic_eye_open.svg" v-show="!isSlash" />
           </button>
         </div>
         <BaseButton
