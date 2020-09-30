@@ -50,10 +50,18 @@ export default {
   background-color: #407d60;
 }
 
-/* default: 綠字白底 */
+/* default: 綠字白底，無邊框 */
 .base-button.default {
   color: #407d60;
   background-color: #fff;
+}
+
+/* outline-default: 綠字白底，加邊框 */
+.base-button.outline-default {
+  color: #407d60;
+  background-color: #fff;
+  line-height: 32px;
+  border: 2px solid #9cc2b0;
 }
 
 /* info: 白字藍底 */

@@ -11,10 +11,10 @@
         <div class="button-wrapper">
           <BaseButton
             title="取消"
-            :disabledState="true"
+            :disabledState="false"
             buttonStyle="outline-default"
           ></BaseButton>
-          <BaseButton title="確認" :disabledState="false"></BaseButton>
+          <BaseButton title="確認" :disabledState="true"></BaseButton>
         </div>
       </form>
     </main>
