@@ -13,7 +13,11 @@
           <RecordingCard
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
-            :imgUrl="meal.imgUrl"
+            :imgUrl="
+              mealsRecordingStates[index].detail
+                ? meal.imgUrl_filled
+                : meal.imgUrl_empty
+            "
             :borderStyle="
               mealsRecordingStates[index].detail ? 'dark-green' : 'light-green'
             "
@@ -62,22 +66,55 @@ export default {
   data() {
     return {
       meals: [
-        { type: "飲水量", imgUrl: require("@/assets/images/ic_water.svg") },
-        { type: "早餐", imgUrl: require("@/assets/images/ic_morning.svg") },
-        { type: "午餐", imgUrl: require("@/assets/images/ic_lunch.svg") },
+        {
+          type: "飲水量",
+          imgUrl_empty: require("@/assets/images/ic_water.svg"),
+          imgUrl_filled: require("@/assets/images/ic_water.svg")
+        },
+        {
+          type: "早餐",
+          imgUrl_empty: require("@/assets/images/ic_morning.svg"),
+          imgUrl_filled: require("@/assets/images/ic_morning.svg")
+        },
+        {
+          type: "午餐",
+          imgUrl_empty: require("@/assets/images/ic_lunch.svg"),
+          imgUrl_filled: require("@/assets/images/ic_lunch.svg")
+        },
         {
           type: "午茶點心",
-          imgUrl: require("@/assets/images/ic_afternoon.svg")
+          imgUrl_empty: require("@/assets/images/ic_afternoon.svg"),
+          imgUrl_filled: require("@/assets/images/ic_afternoon.svg")
         },
-        { type: "晚餐", imgUrl: require("@/assets/images/ic_dinner.svg") },
-        { type: "宵夜", imgUrl: require("@/assets/images/ic_night.svg") }
+        {
+          type: "晚餐",
+          imgUrl_empty: require("@/assets/images/ic_dinner.svg"),
+          imgUrl_filled: require("@/assets/images/ic_dinner.svg")
+        },
+        {
+          type: "宵夜",
+          imgUrl_empty: require("@/assets/images/ic_night.svg"),
+          imgUrl_filled: require("@/assets/images/ic_night.svg")
+        }
       ],
       nutritions: [
-        { type: "grains", imgUrl: require("@/assets/images/ic_malt.svg") },
-        { type: "proteins", imgUrl: require("@/assets/images/ic_meat.svg") },
+        {
+          type: "grains",
+          imgUrl: require("@/assets/images/ic_malt.svg")
+        },
+        {
+          type: "proteins",
+          imgUrl: require("@/assets/images/ic_meat.svg")
+        },
         { type: "dairy", imgUrl: require("@/assets/images/ic_milk.svg") },
-        { type: "vegetables", imgUrl: require("@/assets/images/ic_veg.svg") },
-        { type: "fruits", imgUrl: require("@/assets/images/ic_fruit.svg") },
+        {
+          type: "vegetables",
+          imgUrl: require("@/assets/images/ic_veg.svg")
+        },
+        {
+          type: "fruits",
+          imgUrl: require("@/assets/images/ic_fruit.svg")
+        },
         { type: "nuts", imgUrl: require("@/assets/images/ic_water.svg") }
       ],
       // ====== api 每餐紀錄狀態資料格式 ======
@@ -162,9 +199,9 @@ export default {
 main {
   width: fit-content;
   margin: 0 auto 32px;
-  padding: 0 33px;
-  .page-title {
-    // margin-bottom: 23px;
+  padding: 31px 32px 20px;
+  .base-title {
+    margin-bottom: 20px;
   }
 }
 .meals {
