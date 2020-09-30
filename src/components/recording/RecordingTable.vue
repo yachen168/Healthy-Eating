@@ -105,7 +105,7 @@ export default {
     text-align: left;
     color: #383838;
     background-position: 0 40%;
-    background-size: 23%;
+    background-size: 38px;
     background-repeat: no-repeat;
   }
   > [data-label]:first-of-type::before {
