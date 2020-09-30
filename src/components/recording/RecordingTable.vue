@@ -37,9 +37,11 @@
               : "份"
           }}</span>
         </div>
-        <span class="info"
-          ><b-icon icon="info-circle" aria-hidden="true"></b-icon>份量說明</span
-        >
+        <div class="info">
+          <img src="@/assets/images/ic_info.svg" alt="information" /><span
+            >份量說明</span
+          >
+        </div>
       </template>
     </b-table>
   </div>
@@ -164,14 +166,18 @@ export default {
 }
 
 .info {
-  color: #407d60;
   position: absolute;
   bottom: 15px;
   left: 45px;
+  color: #407d60;
   font-size: 14px;
   cursor: pointer;
-  svg {
+  img {
     margin-right: 3px;
+    vertical-align: middle;
+  }
+  span {
+    vertical-align: middle;
   }
 }
 </style>
