@@ -17,7 +17,7 @@
 
 <script>
 import BaseButton from "@/components/common/BaseButton";
-import RegisterSuccess from "@/assets/images/img_loginsuccess.svg";
+import RegisterSuccess from "@/assets/images/img_loginsuccess.svg?inline";
 export default {
   components: {
     BaseButton,

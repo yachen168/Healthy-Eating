@@ -19,22 +19,24 @@
       </div>
       <nav class="sidebar-body">
         <div class="nav-item">
-          <img src="@/assets/images/ic_changepassword.svg" alt="" /><span
-            >修改密碼</span
-          >
+          <PasswordIcon class="icon" /><span>修改密碼</span>
         </div>
-        <div class="nav-item">
-          <img src="@/assets/images/ic_logout.svg" alt="登出" /><span
-            >登出</span
-          >
-        </div>
+        <div class="nav-item"><LogoutIcon class="icon" /><span>登出</span></div>
       </nav>
     </b-sidebar>
   </div>
 </template>
 
 <script>
-export default {};
+import PasswordIcon from "@/assets/images/ic_changepassword.svg?inline";
+import LogoutIcon from "@/assets/images/ic_logout.svg?inline";
+
+export default {
+  components: {
+    PasswordIcon,
+    LogoutIcon
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -76,7 +78,7 @@ export default {};
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    img {
+    .icon {
       vertical-align: middle;
       margin-right: 24px;
     }
