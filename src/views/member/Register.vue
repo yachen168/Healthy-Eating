@@ -47,8 +47,8 @@
               {{ errors[0] }}
             </p>
             <button @click="showPassword" class="show-password">
-              <img src="@/assets/images/ic_eye_close.svg" v-show="isSlash" />
-              <img src="@/assets/images/ic_eye_open.svg" v-show="!isSlash" />
+              <EyeCloseIcon v-show="isSlash"></EyeCloseIcon>
+              <EyeOpenIcon v-show="!isSlash"></EyeOpenIcon>
             </button>
           </div>
         </ValidationProvider>
@@ -117,6 +117,9 @@
 <script>
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
+import EyeCloseIcon from "@/assets/images/ic_eye_close.svg";
+import EyeOpenIcon from "@/assets/images/ic_eye_open.svg";
+
 export default {
   data() {
     return {
@@ -139,7 +142,9 @@ export default {
   },
   components: {
     BaseButton,
-    BaseTitle
+    BaseTitle,
+    EyeCloseIcon,
+    EyeOpenIcon
   }
 };
 </script>
