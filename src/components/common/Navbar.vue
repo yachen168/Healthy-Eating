@@ -2,7 +2,7 @@
   <div class="navbar">
     <div>
       <h2 v-if="$route.name !== 'Home'" class="logo" @click="$emit('click')">
-        <img src="@/assets/images/img_logo.svg" alt="brand" />
+        <BrandIcon />
       </h2>
     </div>
     <div>
@@ -12,7 +12,12 @@
 </template>
 
 <script>
-export default {};
+import BrandIcon from "@/assets/images/img_logo.svg";
+export default {
+  components: {
+    BrandIcon
+  }
+};
 </script>
 
 <style lang="scss" scoped>
