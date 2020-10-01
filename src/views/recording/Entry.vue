@@ -2,8 +2,8 @@
   <div>
     <Navbar>
       <div>
-        <img src="@/assets/images/ic_chart.svg" alt="圖表" />
-        <img src="@/assets/images/ic_calendar.svg" alt="行事曆" />
+        <ChartIcon class="icon" />
+        <CalendarIcon class="icon" />
         <!-- ===== 漢堡選單按鈕 ==== -->
         <b-navbar toggleable class="p-0 d-inline">
           <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
@@ -19,18 +19,22 @@
 <script>
 import Navbar from "@/components/common/Navbar";
 import Sidebar from "@/components/common/Sidebar";
+import ChartIcon from "@/assets/images/ic_chart.svg?inline";
+import CalendarIcon from "@/assets/images/ic_calendar.svg?inline";
 
 export default {
   components: {
     Navbar,
-    Sidebar
+    Sidebar,
+    ChartIcon,
+    CalendarIcon
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .navbar {
-  img {
+  .icon {
     margin-right: 20px;
     cursor: pointer;
   }

@@ -69,8 +69,8 @@
 <script>
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
-import EyeCloseIcon from "@/assets/images/ic_eye_close.svg";
-import EyeOpenIcon from "@/assets/images/ic_eye_open.svg";
+import EyeCloseIcon from "@/assets/images/ic_eye_close.svg?inline";
+import EyeOpenIcon from "@/assets/images/ic_eye_open.svg?inline";
 export default {
   data() {
     return {

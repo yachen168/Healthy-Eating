@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import BrandIcon from "@/assets/images/img_logo.svg";
+import BrandIcon from "@/assets/images/img_logo.svg?inline";
 export default {
   components: {
     BrandIcon
