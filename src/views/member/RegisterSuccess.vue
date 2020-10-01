@@ -2,7 +2,7 @@
   <div class="register-success">
     <section class="main">
       <div class="success-icon">
-        <img src="@/assets/images/img_loginsuccess.svg" />
+        <RegisterSuccess></RegisterSuccess>
       </div>
       <p class="successful">註冊會員成功請重新登入</p>
       <BaseButton
@@ -17,9 +17,11 @@
 
 <script>
 import BaseButton from "@/components/common/BaseButton";
+import RegisterSuccess from "@/assets/images/img_loginsuccess.svg";
 export default {
   components: {
-    BaseButton
+    BaseButton,
+    RegisterSuccess
   },
   methods: {
     test() {
