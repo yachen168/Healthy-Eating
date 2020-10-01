@@ -25,10 +25,12 @@
               : "份"
           }}</span>
         </div>
-        <div class="info">
-          <img src="@/assets/images/ic_info.svg" alt="information" /><span
-            >份量說明</span
-          >
+        <div
+          class="info"
+          v-b-modal.modal-scrollable
+          @click="$emit('showModal', data.field.label)"
+        >
+          <InfoIcon class="icon" /><span>份量說明</span>
         </div>
       </template>
     </b-table>
@@ -38,21 +40,31 @@
 <script>
 import MinusIcon from "@/assets/images/button_sub_abled.svg?inline";
 import AddIcon from "@/assets/images/button_add_abled.svg?inline";
+import InfoIcon from "@/assets/images/ic_info.svg?inline";
 
 export default {
   components: {
     MinusIcon,
-    AddIcon
+    AddIcon,
+    InfoIcon
   },
   props: {
-    fields: {
-      type: Array,
-      required: true
-    },
     items: {
       type: Array,
       required: true
     }
+  },
+  data() {
+    return {
+      fields: [
+        { key: "grains", label: "全穀雜糧類" },
+        { key: "proteins", label: "豆魚蛋肉類" },
+        { key: "dairy", label: "奶品類" },
+        { key: "vegetables", label: "蔬菜類" },
+        { key: "fruits", label: "水果類" },
+        { key: "nuts", label: "油脂及堅果種子類" }
+      ]
+    };
   }
 };
 </script>
@@ -140,7 +152,7 @@ export default {
       stroke: currentColor;
     }
   }
-  svg {
+  .icon {
     cursor: pointer;
   }
   .total {
@@ -177,24 +189,15 @@ export default {
   color: #407d60;
   font-size: 14px;
   cursor: pointer;
-  img {
+  &:focus {
+    outline: none;
+  }
+  .icon {
     margin-right: 3px;
     vertical-align: middle;
   }
   span {
     vertical-align: middle;
   }
-}
-
-::v-deep .modal-dialog {
-  position: absolute;
-  width: 82%;
-  max-width: 473px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 514px;
 }
 </style>
