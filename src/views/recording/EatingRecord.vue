@@ -1,23 +1,33 @@
 <template>
   <div>
     <main>
-      <Title title="早餐的營養攝取記錄"></Title>
-      <form action="">
+      <Title title="早餐的營養攝取記錄" />
+      <form @submit.prevent>
         <RecordingTable
-          :fields="fields"
-          :items="items"
+          :items="userDiet"
           @update:quantity="updateQuantity"
-        ></RecordingTable>
+          @showModal="titleOfConversionTable = $event"
+        />
         <div class="button-wrapper">
           <BaseButton
             title="取消"
-            :disabledState="false"
             buttonStyle="outline-default"
-          ></BaseButton>
-          <BaseButton title="確認" :disabledState="true"></BaseButton>
+            :disabledState="false"
+          />
+          <BaseButton
+            title="確認"
+            buttonStyle="primary"
+            :disabledState="comfirmButtonState"
+          />
         </div>
       </form>
     </main>
+    <b-modal id="modal-scrollable" scrollable hide-footer>
+      <div slot="modal-title">
+        {{ titleOfConversionTable }} 1 份<br />換算表
+      </div>
+      <ConversionTable :items="nutritionalInformation" />
+    </b-modal>
   </div>
 </template>
 
@@ -25,25 +35,22 @@
 import Title from "@/components/common/BaseTitle";
 import RecordingTable from "@/components/recording/RecordingTable";
 import BaseButton from "@/components/common/BaseButton";
+import ConversionTable from "@/components/recording/ConversionTable";
+import nutritionalInformation from "@/NutritionalConversion.js"; // 六大食物資料
 
 export default {
   components: {
     Title,
     RecordingTable,
-    BaseButton
+    BaseButton,
+    ConversionTable
   },
   data() {
     return {
-      fields: [
-        { key: "grains", label: "全穀雜糧類" },
-        { key: "proteins", label: "豆魚蛋肉類" },
-        { key: "dairy", label: "奶品類" },
-        { key: "vegetables", label: "蔬菜類" },
-        { key: "fruits", label: "水果類" },
-        { key: "nuts", label: "油脂及堅果種子類" }
-      ],
+      titleOfConversionTable: "",
+      comfirmButtonState: true,
       // ===== Api 資料格式=====
-      items: [
+      userDiet: [
         {
           kind: "doctor",
           fruits: 0,
@@ -64,6 +71,23 @@ export default {
       if (total === 0 && num < 0) return;
       if (total === 10 && num > 0) return;
       data.item[data.field.key] += num;
+      this.checkComfirmButtonState();
+    },
+    checkComfirmButtonState() {
+      const obj = this.items[0];
+      obj.fruits ||
+      obj.vegetables ||
+      obj.grains ||
+      obj.nuts ||
+      obj.proteins ||
+      obj.dairy
+        ? (this.comfirmButtonState = false)
+        : (this.comfirmButtonState = true);
+    }
+  },
+  computed: {
+    nutritionalInformation() {
+      return nutritionalInformation["grains"].items;
     }
   }
 };
@@ -85,6 +109,37 @@ main {
     .BaseButton + .BaseButton {
       margin-left: 14px;
     }
+  }
+}
+
+::v-deep .modal-dialog {
+  position: absolute;
+  width: 82%;
+  max-width: 473px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 514px;
+  .modal-header {
+    border-bottom: none;
+  }
+  .modal-title {
+    font-size: 24px;
+    color: #407d60;
+    font-weight: 700;
+  }
+  .modal-body {
+    padding: 0 10px;
+  }
+  .b-table-sticky-header,
+  .table-responsive {
+    margin-bottom: 0;
+  }
+  .modal-header .close {
+    padding: 0;
+    margin: 4px 0 0;
   }
 }
 </style>
