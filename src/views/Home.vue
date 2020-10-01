@@ -57,7 +57,8 @@
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
-import ArrowDownIcon from "@/assets/images/ic_arrowdown.svg";
+import ArrowDownIcon from "@/assets/images/ic_arrowdown.svg?inline";
+
 export default {
   name: "Home",
   components: {
