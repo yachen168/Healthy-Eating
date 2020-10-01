@@ -3,30 +3,18 @@
     <b-table stacked small :fields="fields" :items="items" responsive="sm">
       <template v-slot:cell()="data">
         <div class="recording">
-          <img
-            v-if="data.value > 0"
+          <MinusIcon
+            class="icon"
+            :class="{ disabled: data.value === 0 }"
             @click="$emit('update:quantity', data, -0.5)"
-            src="@/assets/images/button_sub_abled.svg"
-            alt="minus"
-          />
-          <img
-            v-else
-            src="@/assets/images/button_sub_disabled.svg"
-            alt="minus-not-allowed"
           />
           <span class="quantity">{{
             data.value ? data.value.toFixed(1) : data.value
           }}</span>
-          <img
-            v-if="data.value < 10"
+          <AddIcon
+            class="icon"
+            :class="{ disabled: data.value === 10 }"
             @click="$emit('update:quantity', data, 0.5)"
-            src="@/assets/images/button_add_abled.svg"
-            alt="add"
-          />
-          <img
-            v-else
-            src="@/assets/images/button_add_disabled.svg"
-            alt="add-not-allowed"
           />
           <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
           <span class="unit">{{
@@ -48,7 +36,14 @@
 </template>
 
 <script>
+import MinusIcon from "@/assets/images/button_sub_abled.svg?inline";
+import AddIcon from "@/assets/images/button_add_abled.svg?inline";
+
 export default {
+  components: {
+    MinusIcon,
+    AddIcon
+  },
   props: {
     fields: {
       type: Array,
@@ -135,6 +130,16 @@ export default {
   text-align: right;
   color: #383838;
   font-weight: 700;
+  .icon.disabled {
+    color: #a8a8a8;
+    cursor: not-allowed;
+    rect {
+      fill: currentColor;
+    }
+    circle {
+      stroke: currentColor;
+    }
+  }
   svg {
     cursor: pointer;
   }
@@ -179,5 +184,17 @@ export default {
   span {
     vertical-align: middle;
   }
+}
+
+::v-deep .modal-dialog {
+  position: absolute;
+  width: 82%;
+  max-width: 473px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 514px;
 }
 </style>
