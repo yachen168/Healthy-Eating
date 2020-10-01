@@ -25,9 +25,9 @@
       <div class="banner-footer">
         <div class="button-scroll-down">
           <a-anchor :target-offset="targetOffset">
-            <a-anchor-link href="#bottom" title="eeee" />
+            <a-anchor-link href="#bottom" title="scroll-down" />
           </a-anchor>
-          <img src="@/assets/images/ic_arrowdown.svg" alt="scroll-down" />
+          <ArrowDownIcon />
         </div>
       </div>
     </section>
@@ -36,17 +36,16 @@
       <div class="feature-content">
         <div class="anchor" id="bottom"></div>
         <div class="image">
-          <img src="@/assets/images/img_home_2.png" alt="" />
+          <img src="@/assets/images/img_home_2.png" alt="banner" />
         </div>
         <div class="image">
-          <img src="@/assets/images/img_home_3.png" alt="" />
+          <img src="@/assets/images/img_home_3.png" alt="banner" />
         </div>
       </div>
       <BaseButton
-        class="button-start-register"
         title="開始註冊使用"
         buttonStyle="primary"
-        :disabledState="true"
+        :disabledState="false"
         @click="$router.push({ name: 'Register' })"
       ></BaseButton>
     </section>
@@ -58,12 +57,14 @@
 import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
+import ArrowDownIcon from "@/assets/images/ic_arrowdown.svg";
 export default {
   name: "Home",
   components: {
     Navbar,
     BaseTitle,
-    BaseButton
+    BaseButton,
+    ArrowDownIcon
   },
   data() {
     return {
@@ -125,10 +126,6 @@ export default {
       transform: translateY(-50%);
       cursor: pointer;
     }
-    i {
-      font-size: 55px;
-      line-height: 0;
-    }
   }
 }
 .feature {
@@ -150,6 +147,11 @@ export default {
   .image + .image {
     margin-top: 43px;
   }
+  .BaseButton {
+    width: 160px;
+    margin-top: 105px;
+    font-size: 18px;
+  }
 }
 
 ::v-deep .ant-anchor-wrapper {
@@ -166,11 +168,5 @@ export default {
     padding: 0;
     border-radius: 50%;
   }
-}
-
-.button-start-register {
-  width: 160px;
-  margin-top: 105px;
-  font-size: 18px;
 }
 </style>
