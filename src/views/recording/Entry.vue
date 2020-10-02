@@ -3,7 +3,10 @@
     <Navbar>
       <div>
         <ChartIcon class="icon" />
-        <CalendarIcon class="icon" />
+        <CalendarIcon
+          class="icon"
+          @click="$router.push({ name: 'Calendar' })"
+        />
         <!-- ===== 漢堡選單按鈕 ==== -->
         <b-navbar toggleable class="p-0 d-inline">
           <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
