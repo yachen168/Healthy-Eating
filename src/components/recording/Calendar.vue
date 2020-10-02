@@ -134,15 +134,16 @@ export default {
   }
 }
 
-::v-deep .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover {
-  border: 1px solid #fff;
-}
-
-::v-deep .vdp-datepicker__calendar .cell.selected:hover {
-  background-color: #fff;
-}
-
-::v-deep .vdp-datepicker__calendar .cell.selected {
-  background-color: #fff;
+::v-deep .vdp-datepicker__calendar {
+  background-color: transparent;
+  & .cell:not(.blank):not(.disabled).day:hover {
+    border: 1px solid #fff;
+  }
+  & .cell.selected:hover {
+    background-color: #fff;
+  }
+  & .cell.selected {
+    background-color: #fff;
+  }
 }
 </style>
