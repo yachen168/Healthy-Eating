@@ -1,7 +1,6 @@
 const NutritionalConversionList = {
   grains: {
     name: "全穀雜糧類",
-    description: "每份含蛋白質 2 克，醣類 15 克，熱量 70 大卡",
     items: [
       { name: "糙米飯(熟)", quantity: "1/4 碗", weight: 50 },
       { name: "雜糧飯(熟)", quantity: "1/4 碗", weight: 50 },
@@ -25,28 +24,79 @@ const NutritionalConversionList = {
   },
   proteins: {
     name: "豆魚蛋肉類",
-    description: "每份含蛋白質 7 克，脂肪 5 克，熱量 75 大卡",
-    list: []
+    list: [
+      { name: "雞蛋", quantity: "1 顆", weight: 55 },
+      { name: "豆皮(生)", quantity: "", weight: 15 },
+      { name: "豆漿", quantity: "1 杯", weight: 260 },
+      { name: "傳統豆腐", quantity: "", weight: 80 },
+      { name: "嫩豆腐", quantity: "1/2 盒", weight: 140 },
+      { name: "黃豆", quantity: "", weight: 20 },
+      { name: "魚丸", quantity: "", weight: 50 }
+    ]
   },
   dairy: {
     name: "奶品類",
     list: [
-      "雞蛋 1 顆",
-      "雞腿肉 (40 克)",
-      "牡蠣(熟) 65 克",
-      "花枝(熟) 40 克",
-      "雞胸肉 (30 克)",
-      "豆腐 1 塊 (30 克)"
+      { name: "鮮奶", quantity: "1 杯", weight: 240 },
+      { name: "奶粉", quantity: "4 湯匙", weight: 30 }
     ]
   },
   description: "",
   vegetables: {
     name: "蔬菜類",
-    description: "",
-    list: ["生菜 100 克", "蔬菜(熟) 半碗"]
+    list: [
+      { name: "小黃瓜", quantity: "", weight: 100 },
+      { name: "高麗菜", quantity: "", weight: 100 },
+      { name: "空心菜", quantity: "", weight: 100 },
+      { name: "苦瓜", quantity: "", weight: 100 },
+      { name: "金針菇", quantity: "", weight: 100 },
+      { name: "花椰菜", quantity: "", weight: 100 },
+      { name: "洋蔥", quantity: "", weight: 100 },
+      { name: "茭白筍", quantity: "", weight: 100 },
+      { name: "玉米筍", quantity: "", weight: 100 },
+      { name: "青江菜", quantity: "", weight: 100 },
+      { name: "地瓜葉", quantity: "", weight: 100 },
+      { name: "茼蒿", quantity: "", weight: 100 },
+      { name: "香菇", quantity: "", weight: 100 }
+    ]
   },
-  fruits: { name: "水果類", description: "", list: [] },
-  nuts: { name: "油脂及堅果種子類", description: "", list: [] }
+  fruits: {
+    name: "水果類",
+    list: [
+      { name: "蘋果(小)", quantity: "1 顆", weight: 120 },
+      { name: "聖女番茄", quantity: "23 個", weight: 175 },
+      { name: "荔枝", quantity: "9 個", weight: 100 },
+      { name: "草莓", quantity: "", weight: 160 },
+      { name: "香蕉(中)", quantity: "1 根", weight: 75 },
+      { name: "鳳梨", quantity: "", weight: 130 },
+      { name: "奇異果", quantity: "1 個", weight: 115 },
+      { name: "葡萄", quantity: "13 個", weight: 105 },
+      { name: "蓮霧", quantity: "2 個", weight: 170 },
+      { name: "柳丁", quantity: "1 顆", weight: 130 },
+      { name: "芭樂", quantity: "1 顆", weight: 155 },
+      { name: "水梨", quantity: "3/4 顆", weight: 150 },
+      { name: "水蜜桃(小)", quantity: "1 顆", weight: 145 },
+      { name: "白柚", quantity: "2 片", weight: 165 },
+      { name: "木瓜", quantity: "1/3 顆", weight: 120 },
+      { name: "西瓜(黃)", quantity: "", weight: 195 },
+      { name: "西瓜(紅)", quantity: "", weight: 250 },
+      { name: "哈密瓜", quantity: "", weight: 195 }
+    ]
+  },
+  nuts: {
+    name: "油脂及堅果種子類",
+    list: [
+      { name: "油", quantity: "1 茶匙", weight: 5 },
+      { name: "杏仁果", quantity: "5 粒", weight: 7 },
+      { name: "開心果", quantity: "10 粒", weight: 7 },
+      { name: "腰果", quantity: "5 粒", weight: 8 },
+      { name: "南瓜子", quantity: "30 顆", weight: 8 },
+      { name: "花生仁", quantity: "10 粒", weight: 8 },
+      { name: "培根", quantity: "1 片", weight: 10 },
+      { name: "鮮奶油", quantity: "1 茶匙", weight: 30 },
+      { name: "酪梨", quantity: "1/6 個", weight: 30 }
+    ]
+  }
 };
 
 export default NutritionalConversionList;
