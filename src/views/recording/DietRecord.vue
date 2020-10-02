@@ -1,7 +1,7 @@
 <template>
   <div>
     <main>
-      <Title title="早餐的營養攝取記錄" />
+      <Title :title="$route.params.dietType + '的營養攝取記錄'" />
       <form @submit.prevent>
         <RecordingTable
           :items="userDiet"
@@ -74,7 +74,7 @@ export default {
       this.checkComfirmButtonState();
     },
     checkComfirmButtonState() {
-      const obj = this.items[0];
+      const obj = this.userDiet[0];
       obj.fruits ||
       obj.vegetables ||
       obj.grains ||
