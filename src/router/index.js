@@ -57,17 +57,18 @@ const routes = [
       {
         path: "states",
         name: "RecordingStates",
+        props: true,
         component: () =>
           import(
             /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
           )
       },
       {
-        path: "eating-record",
-        name: "EatingRecord",
+        path: "diet-record/:dietType",
+        name: "DietRecord",
         component: () =>
           import(
-            /* webpackChunkName: "eating-record" */ "@/views/recording/EatingRecord.vue"
+            /* webpackChunkName: "diet-record" */ "@/views/recording/DietRecord.vue"
           )
       },
       {
