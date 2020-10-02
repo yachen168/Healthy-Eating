@@ -23,10 +23,10 @@ export default {
     return {
       highlighted: {
         dates: [
-          new Date(2020, 8, 23),
-          new Date(2020, 8, 26),
-          new Date(2020, 8, 27),
-          new Date(2020, 8, 30)
+          new Date(2020, 9, 23),
+          new Date(2020, 9, 26),
+          new Date(2020, 9, 27),
+          new Date(2020, 9, 30)
         ]
       },
       selectedDate: ""
