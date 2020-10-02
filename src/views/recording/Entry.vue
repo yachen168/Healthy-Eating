@@ -43,6 +43,7 @@ export default {
 ::v-deep .navbar-light {
   .navbar-toggler {
     padding: 0;
+    vertical-align: top;
     border-color: transparent;
     outline: none;
   }
