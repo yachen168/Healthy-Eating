@@ -13,37 +13,43 @@
           <RecordingCard
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
-            :imgUrl="
-              mealsRecordingStates[index].detail
-                ? meal.imgUrl_filled
-                : meal.imgUrl_empty
-            "
-            :borderStyle="
-              mealsRecordingStates[index].detail ? 'dark-green' : 'light-green'
-            "
-            ><span>{{ meal.type }}</span></RecordingCard
+            :class="{ recorded: mealsRecordingStates[index].detail }"
+          >
+            <img
+              slot="card-body"
+              :src="
+                mealsRecordingStates[index].detail
+                  ? meal.imgUrl_filled
+                  : meal.imgUrl_empty
+              "
+              :alt="meals.type"
+            />
+            <span slot="card-footer">{{ meal.type }}</span></RecordingCard
           >
         </b-col>
       </b-row>
-      <b-row class="water">
+      <b-row class="weight">
         <!-- ==== 體重紀錄狀態 ==== -->
         <b-col cols="12" class="card-wrapper">
-          <RecordingCard borderStyle="light-green"
-            ><div>
-              <p class="weight">{{ "45 kg" }}</p>
-              <span class="description">今天體重</span>
-            </div></RecordingCard
-          >
+          <RecordingCard :class="{ recorded: true }">
+            <p slot="card-body" class="title">
+              {{ "45 kg" }}<PenIcon class="icon-pen" />
+            </p>
+            <span slot="card-footer" class="description">今天體重 </span>
+          </RecordingCard>
         </b-col>
       </b-row>
       <hr class="divid" />
       <b-row class="sum-nutrition" no-gutters>
-        <h2>
-          今天營養總攝取量
-        </h2>
+        <h2>今天營養總攝取量</h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
-          <RecordingCard :hasBodyIcon="true" :imgUrl="nutrition.imgUrl"
-            ><span class="description"
+          <RecordingCard :hasBodyIcon="true">
+            <img
+              slot="card-body"
+              :src="nutrition.imgUrl"
+              :alt="nutritions.type"
+            />
+            <span slot="card-footer" class="description"
               >{{ sumNutritionOfDay[0][nutrition.type] }}/{{
                 targetNutritionOfDay[nutrition.type]
               }}</span
@@ -58,10 +64,12 @@
 <script>
 import BaseTitle from "@/components/common/BaseTitle";
 import RecordingCard from "@/components/recording/RecordingCard";
+import PenIcon from "@/assets/images/ic_pen.svg?inline";
 export default {
   components: {
     BaseTitle,
-    RecordingCard
+    RecordingCard,
+    PenIcon
   },
   data() {
     return {
@@ -69,32 +77,32 @@ export default {
         {
           type: "飲水量",
           imgUrl_empty: require("@/assets/images/ic_water.svg"),
-          imgUrl_filled: require("@/assets/images/ic_water.svg")
+          imgUrl_filled: require("@/assets/images/ic_water_selected.svg")
         },
         {
           type: "早餐",
           imgUrl_empty: require("@/assets/images/ic_morning.svg"),
-          imgUrl_filled: require("@/assets/images/ic_morning.svg")
+          imgUrl_filled: require("@/assets/images/ic_morning_selected.svg")
         },
         {
           type: "午餐",
           imgUrl_empty: require("@/assets/images/ic_lunch.svg"),
-          imgUrl_filled: require("@/assets/images/ic_lunch.svg")
+          imgUrl_filled: require("@/assets/images/ic_lunch_selected.svg")
         },
         {
           type: "午茶點心",
           imgUrl_empty: require("@/assets/images/ic_afternoon.svg"),
-          imgUrl_filled: require("@/assets/images/ic_afternoon.svg")
+          imgUrl_filled: require("@/assets/images/ic_afternoon_selected.svg")
         },
         {
           type: "晚餐",
           imgUrl_empty: require("@/assets/images/ic_dinner.svg"),
-          imgUrl_filled: require("@/assets/images/ic_dinner.svg")
+          imgUrl_filled: require("@/assets/images/ic_dinner_selected.svg")
         },
         {
           type: "宵夜",
           imgUrl_empty: require("@/assets/images/ic_night.svg"),
-          imgUrl_filled: require("@/assets/images/ic_night.svg")
+          imgUrl_filled: require("@/assets/images/ic_night_selected.svg")
         }
       ],
       nutritions: [
@@ -115,7 +123,7 @@ export default {
           type: "fruits",
           imgUrl: require("@/assets/images/ic_fruit.svg")
         },
-        { type: "nuts", imgUrl: require("@/assets/images/ic_water.svg") }
+        { type: "nuts", imgUrl: require("@/assets/images/ic_oil.svg") }
       ],
       // ====== api 每餐紀錄狀態資料格式 ======
       mealsRecordingStates: [
@@ -219,22 +227,32 @@ main {
       margin-top: 2px;
     }
   }
-  .recording-card.dark-green span {
-    color: #407d60;
+  .recording-card.recorded {
+    span {
+      color: #407d60;
+    }
   }
 }
 
-.water {
+.weight {
   position: relative;
   text-align: center;
-  .weight {
+  .title {
+    position: relative;
     font-size: 24px;
     color: #383838;
     font-weight: 700;
+    .icon-pen {
+      position: absolute;
+      right: -50px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   .description {
+    position: relative;
     font-size: 13px;
-    line-height: 28px;
+    line-height: 18px;
     color: #407d60;
   }
 }
@@ -258,7 +276,7 @@ main {
 }
 
 .sum-nutrition {
-  padding: 15px 30px;
+  padding: 15px 30px 20px;
   background: #fff;
   border-radius: 6px;
   h2 {
