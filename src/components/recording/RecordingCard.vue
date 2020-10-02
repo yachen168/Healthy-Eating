@@ -1,23 +1,17 @@
 <template>
-  <div class="recording-card" :class="[borderStyle]">
-    <div class="header-icon" v-if="hasHeaderIcon">
-      <img
-        v-if="borderStyle === 'dark-green'"
-        src="@/assets/images/button_add_abled.svg"
-        alt="add"
-      />
-      <img v-else src="@/assets/images/button_add_abled_light.svg" alt="add" />
-    </div>
-    <div class="recording-body" v-if="hasBodyIcon">
-      <!-- 之後替換成 svg 圖 -->
-      <img :src="imgUrl" alt="" />
-    </div>
-    <slot class="recording-card-footer"></slot>
+  <div class="recording-card">
+    <AddIcon class="add-icon" v-if="hasHeaderIcon" />
+    <slot name="card-body" class="recording-card-body"></slot>
+    <slot name="card-footer" class="recording-card-footer"></slot>
   </div>
 </template>
 
 <script>
+import AddIcon from "@/assets/images/button_add_abled_light.svg?inline";
 export default {
+  components: {
+    AddIcon
+  },
   props: {
     hasHeaderIcon: {
       type: Boolean,
@@ -26,14 +20,6 @@ export default {
     hasBodyIcon: {
       type: Boolean,
       default: false
-    },
-    borderStyle: {
-      type: String,
-      default: ""
-    },
-    imgUrl: {
-      type: String,
-      default: ""
     }
   }
 };
@@ -51,25 +37,31 @@ export default {
   min-height: 80px;
   border-radius: 6px;
   background-color: #fff;
+  border: 2px solid transparent;
   cursor: pointer;
+  &.empty {
+    border-color: #9cc2b0;
+  }
+  &.recorded {
+    border-color: #407d60;
+    color: #407d60;
+    rect {
+      fill: currentColor;
+    }
+    circle {
+      stroke: currentColor;
+    }
+  }
   p {
     margin: 0;
     text-align: center;
     color: #a8a8a8;
     font-size: 13px;
   }
-  .header-icon {
+  .add-icon {
     position: absolute;
     right: 7px;
     top: 7px;
   }
-}
-
-.recording-card.light-green {
-  border: 2px solid #9cc2b0;
-}
-
-.recording-card.dark-green {
-  border: 2px solid #407d60;
 }
 </style>
