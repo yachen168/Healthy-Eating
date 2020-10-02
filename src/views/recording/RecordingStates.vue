@@ -1,14 +1,15 @@
 <template>
   <div>
     <main>
-      <BaseTitle title="今天 2020/09/26"></BaseTitle>
+      <BaseTitle :title="$route.query.date.split('-').join('/')"></BaseTitle>
+      <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
       <b-row class="meals" no-gutters>
-        <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
         <b-col
           cols="6"
           class="card-wrapper"
           v-for="(meal, index) in meals"
           :key="meal.type"
+          @click="toDietRecordingPage(meal.type)"
         >
           <RecordingCard
             :hasHeaderIcon="true"
@@ -22,26 +23,38 @@
                   ? meal.imgUrl_filled
                   : meal.imgUrl_empty
               "
-              :alt="meals.type"
+              :alt="meals.name"
             />
-            <span slot="card-footer">{{ meal.type }}</span></RecordingCard
+            <span slot="card-footer">{{ meal.name }}</span></RecordingCard
           >
         </b-col>
       </b-row>
+      <!-- ====== 體重紀錄狀態 ====== -->
       <b-row class="weight">
-        <!-- ==== 體重紀錄狀態 ==== -->
-        <b-col cols="12" class="card-wrapper">
+        <b-col
+          cols="12"
+          class="card-wrapper"
+          @click="
+            $router.push({
+              name: 'WeightRecord',
+              query: { date: $route.query.date }
+            })
+          "
+        >
           <RecordingCard :class="{ recorded: true }">
             <p slot="card-body" class="title">
               {{ "45 kg" }}<PenIcon class="icon-pen" />
             </p>
-            <span slot="card-footer" class="description">今天體重 </span>
+            <span slot="card-footer" class="description"
+              >{{ $route.query.date.split("-").join("/") }} 體重
+            </span>
           </RecordingCard>
         </b-col>
       </b-row>
       <hr class="divid" />
+      <!-- ====== 營養總攝取量 ====== -->
       <b-row class="sum-nutrition" no-gutters>
-        <h2>今天營養總攝取量</h2>
+        <h2>{{ $route.query.date.split("-").join("/") }} 營養總攝取量</h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
           <RecordingCard :hasBodyIcon="true">
             <img
@@ -75,32 +88,38 @@ export default {
     return {
       meals: [
         {
-          type: "飲水量",
+          type: "water",
+          name: "飲水量",
           imgUrl_empty: require("@/assets/images/ic_water.svg"),
           imgUrl_filled: require("@/assets/images/ic_water_selected.svg")
         },
         {
-          type: "早餐",
+          type: "breakfast",
+          name: "早餐",
           imgUrl_empty: require("@/assets/images/ic_morning.svg"),
           imgUrl_filled: require("@/assets/images/ic_morning_selected.svg")
         },
         {
-          type: "午餐",
+          type: "lunch",
+          name: "午餐",
           imgUrl_empty: require("@/assets/images/ic_lunch.svg"),
           imgUrl_filled: require("@/assets/images/ic_lunch_selected.svg")
         },
         {
-          type: "午茶點心",
+          type: "snack",
+          name: "午茶點心",
           imgUrl_empty: require("@/assets/images/ic_afternoon.svg"),
           imgUrl_filled: require("@/assets/images/ic_afternoon_selected.svg")
         },
         {
-          type: "晚餐",
+          type: "dinner",
+          name: "晚餐",
           imgUrl_empty: require("@/assets/images/ic_dinner.svg"),
           imgUrl_filled: require("@/assets/images/ic_dinner_selected.svg")
         },
         {
-          type: "宵夜",
+          type: "supper",
+          name: "宵夜",
           imgUrl_empty: require("@/assets/images/ic_night.svg"),
           imgUrl_filled: require("@/assets/images/ic_night_selected.svg")
         }
@@ -199,6 +218,22 @@ export default {
         dairy: 5
       }
     };
+  },
+  methods: {
+    toDietRecordingPage(type) {
+      if (type !== "water") {
+        this.$router.push({
+          name: "DietRecord",
+          params: { dietType: type },
+          query: { date: this.$route.query.date }
+        });
+      } else {
+        this.$router.push({
+          name: "WaterRecord",
+          query: { date: this.$route.query.date }
+        });
+      }
+    }
   }
 };
 </script>
