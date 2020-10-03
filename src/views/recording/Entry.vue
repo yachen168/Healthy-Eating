@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar>
+    <Navbar @click="$router.push({ name: 'RecordingStates' })">
       <div>
         <ChartIcon class="icon" />
         <CalendarIcon
