@@ -6,6 +6,7 @@
       :format="DatePickerFormat"
       :highlighted="highlighted"
       :value="selectedDate"
+      maximum-view="day"
       calendar-button-icon="fa fa-calendar"
       calendar-class="calendarStyle"
       @input="$emit('update:date', $event)"
@@ -84,11 +85,6 @@ export default {
     background: #fff;
     box-shadow: 0 0 0 3px #fff;
   }
-  .day__month_btn {
-    font-size: 17px;
-    font-weight: 500;
-    color: #000;
-  }
   .cell {
     display: inline-flex;
     justify-content: center;
@@ -136,6 +132,31 @@ export default {
 
 ::v-deep .vdp-datepicker__calendar {
   background-color: transparent;
+  & header {
+    padding: 0 10px;
+  }
+  & header .next,
+  .prev {
+    &::after {
+      width: 20px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      border: none;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      transform: translate(0, 0);
+    }
+  }
+  & header .next::after {
+    background-image: url("~@/assets/images/ic_next.svg");
+  }
+  & header .prev::after {
+    background-image: url("~@/assets/images/ic_prev.svg");
+  }
   & .cell:not(.blank):not(.disabled).day:hover {
     border: 1px solid #fff;
   }
