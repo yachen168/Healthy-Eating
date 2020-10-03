@@ -6,7 +6,7 @@
         <RecordingTable
           :items="userDiet"
           @update:quantity="updateQuantity"
-          @showModal="titleOfConversionTable = $event"
+          @showModal="dataOfConversionTable = $event"
         />
         <div class="button-wrapper">
           <BaseButton
@@ -24,7 +24,7 @@
     </main>
     <b-modal id="modal-scrollable" scrollable hide-footer>
       <div slot="modal-title">
-        {{ titleOfConversionTable }} 1 份<br />換算表
+        {{ dataOfConversionTable.label }} 1 份<br />換算表
       </div>
       <ConversionTable :items="nutritionalInformation" />
     </b-modal>
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      titleOfConversionTable: "",
+      dataOfConversionTable: {},
       comfirmButtonState: true,
       // ===== Api 資料格式=====
       userDiet: [
@@ -87,7 +87,9 @@ export default {
   },
   computed: {
     nutritionalInformation() {
-      return nutritionalInformation["grains"].items;
+      return this.dataOfConversionTable.key
+        ? nutritionalInformation[this.dataOfConversionTable.key].items
+        : "";
     }
   }
 };

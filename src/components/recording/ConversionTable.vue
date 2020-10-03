@@ -4,6 +4,11 @@
       <template v-slot:head()="scope">
         <div class="text-nowrap">{{ scope.label }}</div>
       </template>
+      <template v-slot:cell(quantity)="data">
+        <div class="text-nowrap">
+          {{ data.value ? data.value : "-" }}
+        </div>
+      </template>
       <template v-slot:cell(weight)="data">
         <div class="text-nowrap">
           {{ data.value ? data.value + " 克" : "-" }}
@@ -24,10 +29,7 @@ export default {
   data() {
     return {
       fields: [
-        {
-          key: "name",
-          label: "名稱"
-        },
+        { key: "name", label: "名稱" },
         { key: "quantity", label: "份量" },
         { key: "weight", label: "重量" }
       ]
