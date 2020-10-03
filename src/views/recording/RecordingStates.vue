@@ -1,7 +1,11 @@
 <template>
   <div>
     <main>
-      <BaseTitle :title="$route.query.date.split('-').join('/')"></BaseTitle>
+      <BaseTitle
+        :title="
+          $route.query.date ? $route.query.date.split('-').join('/') : '今天'
+        "
+      ></BaseTitle>
       <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
       <b-row class="meals" no-gutters>
         <b-col
@@ -46,7 +50,11 @@
               {{ "45 kg" }}<PenIcon class="icon-pen" />
             </p>
             <span slot="card-footer" class="description"
-              >{{ $route.query.date.split("-").join("/") }} 體重
+              >{{
+                $route.query.date
+                  ? $route.query.date.split("-").join("/")
+                  : "今天"
+              }}體重
             </span>
           </RecordingCard>
         </b-col>
@@ -54,7 +62,11 @@
       <hr class="divid" />
       <!-- ====== 營養總攝取量 ====== -->
       <b-row class="sum-nutrition" no-gutters>
-        <h2>{{ $route.query.date.split("-").join("/") }} 營養總攝取量</h2>
+        <h2>
+          {{
+            $route.query.date ? $route.query.date.split("-").join("/") : "今天"
+          }}營養總攝取量
+        </h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
           <RecordingCard :hasBodyIcon="true">
             <img
