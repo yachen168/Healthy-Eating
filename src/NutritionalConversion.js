@@ -24,7 +24,7 @@ const NutritionalConversionList = {
   },
   proteins: {
     name: "豆魚蛋肉類",
-    list: [
+    items: [
       { name: "雞蛋", quantity: "1 顆", weight: 55 },
       { name: "豆皮(生)", quantity: "", weight: 15 },
       { name: "豆漿", quantity: "1 杯", weight: 260 },
@@ -36,7 +36,7 @@ const NutritionalConversionList = {
   },
   dairy: {
     name: "奶品類",
-    list: [
+    items: [
       { name: "鮮奶", quantity: "1 杯", weight: 240 },
       { name: "奶粉", quantity: "4 湯匙", weight: 30 }
     ]
@@ -44,7 +44,7 @@ const NutritionalConversionList = {
   description: "",
   vegetables: {
     name: "蔬菜類",
-    list: [
+    items: [
       { name: "小黃瓜", quantity: "", weight: 100 },
       { name: "高麗菜", quantity: "", weight: 100 },
       { name: "空心菜", quantity: "", weight: 100 },
@@ -62,7 +62,7 @@ const NutritionalConversionList = {
   },
   fruits: {
     name: "水果類",
-    list: [
+    items: [
       { name: "蘋果(小)", quantity: "1 顆", weight: 120 },
       { name: "聖女番茄", quantity: "23 個", weight: 175 },
       { name: "荔枝", quantity: "9 個", weight: 100 },
@@ -85,7 +85,7 @@ const NutritionalConversionList = {
   },
   nuts: {
     name: "油脂及堅果種子類",
-    list: [
+    items: [
       { name: "油", quantity: "1 茶匙", weight: 5 },
       { name: "杏仁果", quantity: "5 粒", weight: 7 },
       { name: "開心果", quantity: "10 粒", weight: 7 },

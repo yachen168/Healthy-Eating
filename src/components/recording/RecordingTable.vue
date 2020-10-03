@@ -28,7 +28,7 @@
         <div
           class="info"
           v-b-modal.modal-scrollable
-          @click="$emit('showModal', data.field.label)"
+          @click="$emit('showModal', data.field)"
         >
           <InfoIcon class="icon" /><span>份量說明</span>
         </div>
