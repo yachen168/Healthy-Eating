@@ -96,19 +96,19 @@ const routes = [
           )
       },
       {
-        path: "user-info-view",
-        name: "UserInfoView",
+        path: "user-profile-view",
+        name: "UserProfileView",
         component: () =>
           import(
-            /* webpackChunkName: "user-info-view" */ "@/views/userInfo/UserInfoView.vue"
+            /* webpackChunkName: "user-profile-view" */ "@/views/userProfile/UserProfileView.vue"
           )
       },
       {
-        path: "user-info-edit",
-        name: "UserInfoEdit",
+        path: "user-profile-edit",
+        name: "UserProfileEdit",
         component: () =>
           import(
-            /* webpackChunkName: "user-info-edit" */ "@/views/userInfo/UserInfoEdit.vue"
+            /* webpackChunkName: "user-profile-edit" */ "@/views/userProfile/UserProfileEdit.vue"
           )
       }
     ]
