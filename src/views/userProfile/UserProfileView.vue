@@ -6,28 +6,28 @@
         <h2 class="user-name">健康先生</h2>
       </div>
       <BaseButton
-        @click="$router.push({ name: 'UserInfoEdit' })"
+        @click="$router.push({ name: 'UserProfileEdit' })"
         title="編輯個人檔案"
         buttonStyle="outline-default"
       ></BaseButton>
-      <UserInfoTable :items="userInfo"></UserInfoTable>
+      <UserProfileTable :items="userProfile"></UserProfileTable>
     </main>
   </div>
 </template>
 
 <script>
 import BaseButton from "@/components/common/BaseButton";
-import UserInfoTable from "@/components/userInfo/UserInfoTable";
+import UserProfileTable from "@/components/userProfile/UserProfileTable";
 
 export default {
   components: {
     BaseButton,
-    UserInfoTable
+    UserProfileTable
   },
   data() {
     return {
       // ========== Api 資料格式 ===========
-      userInfo: [
+      userProfile: [
         {
           id: 23,
           name: "yachen",

@@ -14,9 +14,9 @@
         <!-- ======== -->
         <div class="user-info">
           <h2 class="user-name">{{ "健康先生" }}</h2>
-          <span class="details" @click="$router.push({ name: 'UserInfoView' })"
-            >查看個人檔案</span
-          >
+          <router-link class="details" :to="{ name: 'UserProfileView' }">
+            查看個人檔案
+          </router-link>
         </div>
       </div>
       <nav class="sidebar-body">
