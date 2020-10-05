@@ -17,6 +17,19 @@ export default new Vuex.Store({
       } catch (error) {
         return error.response.data.message;
       }
+    },
+    async postLogin({}, loginData) {
+      try {
+        const response = await API.post("/login", loginData);
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.data.remember_token)
+        );
+        console.log(response.data.data.remember_token);
+        // router.push({ name: "RegisterSuccess" });
+      } catch (error) {
+        return error.response.data.message;
+      }
     }
   },
   modules: {}
