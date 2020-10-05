@@ -118,6 +118,41 @@ const routes = [
           import(
             /* webpackChunkName: "user-profile-edit" */ "@/views/userProfile/UserProfileEdit.vue"
           )
+      },
+      {
+        path: "chart",
+        name: "ChartEntry",
+        redirect: "/recording/chart/nutrition-intake",
+        component: () =>
+          import(
+            /* webpackChunkName: "chart-enrty" */ "@/views/charts/ChartEntry.vue"
+          ),
+        children: [
+          {
+            path: "nutrition-intake",
+            name: "NutritionIntakeChart",
+            component: () =>
+              import(
+                /* webpackChunkName: "nutrition-intake-chart" */ "@/views/charts/NutritionIntakeChart.vue"
+              )
+          },
+          {
+            path: "water-intake",
+            name: "NutritionIntakeChart",
+            component: () =>
+              import(
+                /* webpackChunkName: "water-intake-chart" */ "@/views/charts/WaterIntakeChart.vue"
+              )
+          },
+          {
+            path: "weight",
+            name: "WeightsChart",
+            component: () =>
+              import(
+                /* webpackChunkName: "weight-chart" */ "@/views/charts/WeightChart.vue"
+              )
+          }
+        ]
       }
     ]
   }
