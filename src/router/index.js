@@ -138,7 +138,7 @@ const routes = [
           },
           {
             path: "water-intake",
-            name: "NutritionIntakeChart",
+            name: "WaterIntakeChart",
             component: () =>
               import(
                 /* webpackChunkName: "water-intake-chart" */ "@/views/charts/WaterIntakeChart.vue"
