@@ -1,26 +1,27 @@
 <template>
-  <div class="base-title">
+<div class="base-title">
     <h1 class="page-title">
-      {{ title }}
+        {{ title }}
     </h1>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true
+    props: {
+        title: {
+            type: String,
+            required: true
+        }
     }
-  }
 };
 </script>
 
 <style lang="scss" scoped>
 .page-title {
-  font-size: 24px;
-  text-align: center;
-  color: #407d60;
+    font-size: 24px;
+    text-align: center;
+    color: #407d60;
+    font-weight: bold;
 }
 </style>
