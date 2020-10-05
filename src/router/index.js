@@ -10,7 +10,7 @@ const routes = [
     name: "Home",
     component: Home
   },
-  
+
   {
     path: "/member-application",
     name: "MemberApplication",
@@ -50,10 +50,8 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "member-application" */ "@/views/member/ForgetPassword.vue"
-      ),
+      )
   },
-  
-
   /* ============================ recording ============================= */
   {
     path: "/recording",
