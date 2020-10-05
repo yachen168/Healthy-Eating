@@ -53,7 +53,7 @@
           :disabledState="invalid"
           class="login-button"
           buttonStyle="primary"
-          @click="test"
+          @click="loginData"
         ></BaseButton>
       </ValidationObserver>
       <p class="member-application">
@@ -87,8 +87,8 @@ export default {
         : (this.type = "password");
       this.isSlash = !this.isSlash;
     },
-    test() {
-      console.log("test");
+    loginData() {
+      console.log(this.login);
     }
   },
   components: {
