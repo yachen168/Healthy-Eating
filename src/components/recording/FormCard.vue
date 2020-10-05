@@ -24,7 +24,7 @@ export default {
   },
   props: {
     quantity: {
-      type: Number,
+      type: [Number, String],
       required: true
     },
     unit: {
