@@ -2,7 +2,12 @@
   <div class="login-page">
     <section class="main">
       <BaseTitle title="登入" class="base-title"></BaseTitle>
-      <b-alert v-model="showDismissibleAlert" dismissible fade>
+      <b-alert
+        v-model="showDismissibleAlert"
+        dismissible
+        fade
+        v-if="loginError"
+      >
         <b-icon icon="exclamation-circle" class="exclamation-mark"></b-icon>
         <span class="info-error">帳號或密碼錯誤</span>
       </b-alert>
@@ -18,8 +23,8 @@
             placeholder="請輸入會員電子信箱"
             type="email"
             :state="errors[0] ? false : null"
-            :value="login.email"
-            @input="login = { ...login, email: $event }"
+            :value="loginData.email"
+            @input="loginData = { ...loginData, email: $event }"
             class="form-input"
           ></b-form-input>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
@@ -38,8 +43,8 @@
               placeholder="**********"
               :type="type"
               :state="errors[0] ? false : null"
-              :value="login.password"
-              @input="login = { ...login, password: $event }"
+              :value="loginData.password"
+              @input="loginData = { ...loginData, password: $event }"
               class="form-input"
             ></b-form-input>
           </ValidationProvider>
@@ -53,7 +58,7 @@
           :disabledState="invalid"
           class="login-button"
           buttonStyle="primary"
-          @click="loginData"
+          @click="login"
         ></BaseButton>
       </ValidationObserver>
       <p class="member-application">
@@ -74,10 +79,11 @@ import EyeOpenIcon from "@/assets/images/ic_eye_open.svg?inline";
 export default {
   data() {
     return {
-      login: {},
+      loginData: {},
       isSlash: true,
       type: "password",
-      showDismissibleAlert: true
+      showDismissibleAlert: true,
+      loginError: ""
     };
   },
   methods: {
@@ -87,8 +93,14 @@ export default {
         : (this.type = "password");
       this.isSlash = !this.isSlash;
     },
-    loginData() {
-      console.log(this.login);
+    async login() {
+      const loginError = await this.$store.dispatch(
+        "postLogin",
+        this.loginData
+      );
+      if (loginError) {
+        this.loginError = loginError;
+      }
     }
   },
   components: {

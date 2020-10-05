@@ -9,7 +9,7 @@
         title="登入會員"
         class="successful-button"
         buttonStyle="primary"
-        @click="test"
+        @click="$router.push({ name: 'Login' })"
       ></BaseButton>
     </section>
   </div>
@@ -22,11 +22,6 @@ export default {
   components: {
     BaseButton,
     RegisterSuccess
-  },
-  methods: {
-    test() {
-      console.log("test");
-    }
   }
 };
 </script>
