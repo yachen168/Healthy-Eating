@@ -2,6 +2,15 @@
   <div class="register-page">
     <section class="main">
       <BaseTitle title="註冊會員" class="base-title"></BaseTitle>
+      <b-alert
+        v-model="showDismissibleAlert"
+        dismissible
+        fade
+        v-if="registrationError"
+      >
+        <b-icon icon="exclamation-circle" class="exclamation-mark"></b-icon>
+        <span class="info-error">{{ registrationError }}</span>
+      </b-alert>
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <ValidationProvider
           rules="required|email"
@@ -126,7 +135,9 @@ export default {
       register: {},
       isSlash: true,
       type: "password",
-      firstPassword: ""
+      firstPassword: "",
+      registrationError: "",
+      showDismissibleAlert: ""
     };
   },
   methods: {
@@ -137,9 +148,13 @@ export default {
       this.isSlash = !this.isSlash;
     },
     async createAccount() {
-      const a = await this.$store.dispatch("postRegister", this.register);
-      console.log(a);
-      // console.log(this.register);
+      const registrationError = await this.$store.dispatch(
+        "postRegister",
+        this.register
+      );
+      if (registrationError) {
+        this.registrationError = registrationError;
+      }
     }
   },
   components: {
@@ -190,6 +205,51 @@ export default {
     }
   }
 }
+::v-deep .alert {
+  height: 40px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 32px;
+  left: 32px;
+  padding: 0;
+  margin-bottom: 0;
+  & svg {
+    stroke: #e97979;
+    stroke-width: 0.5px;
+  }
+}
+
+::v-deep .alert-dismissible {
+  color: black;
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid #e97979;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 11px 16px;
+  & .exclamation-mark {
+    color: #e97979;
+    font-size: 1rem;
+    line-height: 19px;
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+  & .info-error {
+    line-height: 19px;
+  }
+  & .close {
+    position: static;
+    font-size: 26px;
+    font-weight: 50;
+    line-height: 19px;
+    padding: 0;
+  }
+}
+
 ::v-deep .is-invalid {
   background-image: none;
 }
