@@ -13,7 +13,7 @@
         <BaseButton title="取消" buttonStyle="outline-default"></BaseButton>
         <BaseButton
           title="確認"
-          :disabledState="true"
+          :disabledState="false"
           buttonStyle="primary"
         ></BaseButton>
       </div>
