@@ -10,6 +10,7 @@ const routes = [
     name: "Home",
     component: Home
   },
+  
   {
     path: "/member-application",
     name: "MemberApplication",
@@ -43,6 +44,15 @@ const routes = [
       }
     ]
   },
+  {
+    path: "/forgetPassword",
+    name: "ForgetPassword",
+    component: () =>
+      import(
+        /* webpackChunkName: "member-application" */ "@/views/member/ForgetPassword.vue"
+      ),
+  },
+  
 
   /* ============================ recording ============================= */
   {
