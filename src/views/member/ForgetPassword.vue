@@ -1,7 +1,6 @@
 <template>
   <div class="forgetPassword-page">
     <section class="main">
-      <Navbar />
       <BaseTitle title="忘記密碼" class="base-title" />
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <ValidationProvider
@@ -34,14 +33,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 
 export default {
   components: {
-    // name: "ForgetPassword",
-    Navbar,
     BaseTitle,
     BaseButton
   },
