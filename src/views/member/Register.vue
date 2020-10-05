@@ -104,7 +104,7 @@
           :disabledState="invalid"
           class="register-button"
           buttonStyle="primary"
-          @click="test"
+          @click="createAccount"
         ></BaseButton>
       </ValidationObserver>
 
@@ -136,8 +136,10 @@ export default {
         : (this.type = "password");
       this.isSlash = !this.isSlash;
     },
-    test() {
-      console.log("test");
+    async createAccount() {
+      const a = await this.$store.dispatch("postRegister", this.register);
+      console.log(a);
+      // console.log(this.register);
     }
   },
   components: {
