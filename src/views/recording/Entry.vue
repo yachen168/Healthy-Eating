@@ -2,11 +2,12 @@
   <div>
     <Navbar @click="$router.push({ name: 'RecordingStates' })">
       <div>
-        <ChartIcon class="icon" />
-        <CalendarIcon
-          class="icon"
-          @click="$router.push({ name: 'Calendar' })"
-        />
+        <router-link :to="{ name: 'NutritionIntakeChart' }">
+          <ChartIcon class="icon" />
+        </router-link>
+        <router-link :to="{ name: 'Calendar' }">
+          <CalendarIcon class="icon" />
+        </router-link>
         <!-- ===== 漢堡選單按鈕 ==== -->
         <b-navbar toggleable class="p-0 d-inline">
           <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
