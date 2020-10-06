@@ -42,27 +42,27 @@ const routes = [
           )
       },
       {
-        path: "forgetPassword",
+        path: "forget-Password",
         name: "ForgetPassword",
         component: () =>
           import(
-            /* webpackChunkName: "member-application" */ "@/views/member/ForgetPassword.vue"
+            /* webpackChunkName: "forget-Password" */ "@/views/member/ForgetPassword.vue"
           )
       },
       {
-        path: "resetPassword",
+        path: "reset-Password",
         name: "ResetPassword",
         component: () =>
           import(
-            /* webpackChunkName: "member-application" */ "@/views/member/ResetPassword.vue"
+            /* webpackChunkName: "reset-Password" */ "@/views/member/ResetPassword.vue"
           )
       },
       {
-        path: "settingWeight",
+        path: "setting-Weight",
         name: "SettingWeight",
         component: () =>
           import(
-            /* webpackChunkName: "member-application" */ "@/views/member/SettingWeight.vue"
+            /* webpackChunkName: "setting-Weight" */ "@/views/member/SettingWeight.vue"
           )
       }
     ]
