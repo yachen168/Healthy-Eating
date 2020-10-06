@@ -19,7 +19,7 @@
           <b-navbar-toggle target="nav-collapse" v-b-toggle.sidebar-backdrop>
           </b-navbar-toggle>
         </b-navbar>
-        <Sidebar></Sidebar>
+        <Sidebar :avatarUrl="$store.getters.avatarUrl"></Sidebar>
       </div>
     </Navbar>
     <router-view />
@@ -38,9 +38,6 @@ export default {
     Sidebar,
     ChartIcon,
     CalendarIcon
-  },
-  created() {
-    console.log(this.$router);
   }
 };
 </script>

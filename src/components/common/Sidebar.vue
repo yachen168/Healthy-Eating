@@ -10,7 +10,7 @@
     >
       <div class="sidebar-header">
         <!-- ===== 使用者大頭照 ===== -->
-        <b-avatar src="" size="42px"></b-avatar>
+        <b-avatar :src="avatarUrl" size="42px"></b-avatar>
         <!-- ======== -->
         <div class="user-info">
           <h2 class="user-name">{{ "健康先生" }}</h2>
@@ -37,6 +37,12 @@ export default {
   components: {
     PasswordIcon,
     LogoutIcon
+  },
+  props: {
+    avatarUrl: {
+      type: String,
+      required: true
+    }
   }
 };
 </script>

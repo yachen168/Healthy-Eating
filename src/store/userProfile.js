@@ -23,6 +23,10 @@ export default {
   getters: {
     userProfile(state) {
       return [state.userProfile]; // format for table of BootstrapVue
+    },
+    avatarUrl(state) {
+      const domainURL = "https://k88d02.ml";
+      return `${domainURL}${state.userProfile.image_path}`;
     }
   }
 };
