@@ -18,17 +18,34 @@ export default new Vuex.Store({
         return error.response.data.message;
       }
     },
-    async postLogin({}, loginData) {
+    async postLogin({ dispatch }, loginData) {
       try {
         const response = await API.post("/login", loginData);
-        localStorage.setItem(
-          "token",
-          JSON.stringify(response.data.data.remember_token)
-        );
-        console.log(response.data.data.remember_token);
-        // router.push({ name: "RegisterSuccess" });
+        localStorage.setItem("token", response.data.data.remember_token);
+        const weight = await dispatch("getUserInfo");
+        if (weight === null) {
+          setTimeout(() => {
+            router.push({ name: "Entry" });
+          }, 500);
+        } else {
+          setTimeout(() => {
+            router.push({ name: "Entry" });
+          }, 500);
+        }
       } catch (error) {
         return error.response.data.message;
+      }
+    },
+    async getUserInfo({}) {
+      try {
+        const response = await API.post("/info", {
+          remember_token: localStorage.getItem("token")
+        });
+        return response.data.data.weight;
+      } catch (error) {
+        setTimeout(() => {
+          router.push({ name: "Login" });
+        }, 500);
       }
     }
   },

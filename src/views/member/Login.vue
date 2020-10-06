@@ -65,7 +65,7 @@
         <a @click="$router.push({ name: 'Register' })">第一次使用？註冊會員</a>
       </p>
       <p class="member-application">
-        <a>忘記密碼</a>
+        <a @click="$router.push({ name: 'ForgetPassword' })">忘記密碼</a>
       </p>
     </section>
   </div>
