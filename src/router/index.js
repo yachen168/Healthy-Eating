@@ -56,6 +56,14 @@ const routes = [
           import(
             /* webpackChunkName: "member-application" */ "@/views/member/ResetPassword.vue"
           )
+      },
+      {
+        path: "settingWeight",
+        name: "SettingWeight",
+        component: () =>
+          import(
+            /* webpackChunkName: "member-application" */ "@/views/member/settingWeight.vue"
+          )
       }
     ]
   },
