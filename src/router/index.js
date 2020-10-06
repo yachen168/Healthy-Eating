@@ -10,10 +10,6 @@ const routes = [
     name: "Home",
     component: Home
   },
-<<<<<<< 41d6cb953079c98dd28a57a6b5529a3af25ce227
-
-=======
->>>>>>> fix: combine 2 nested router
   {
     path: "/member-application",
     name: "MemberApplication",
@@ -55,18 +51,7 @@ const routes = [
       }
     ]
   },
-<<<<<<< 41d6cb953079c98dd28a57a6b5529a3af25ce227
-  {
-    path: "/forgetPassword",
-    name: "ForgetPassword",
-    component: () =>
-      import(
-        /* webpackChunkName: "member-application" */ "@/views/member/ForgetPassword.vue"
-      )
-  },
-=======
 
->>>>>>> fix: combine 2 nested router
   /* ============================ recording ============================= */
   {
     path: "/recording",
