@@ -1,6 +1,6 @@
 <template>
   <div class="member-application">
-    <Navbar></Navbar>
+    <Navbar @click="$router.push({ name: 'Home' })"></Navbar>
     <router-view />
   </div>
 </template>

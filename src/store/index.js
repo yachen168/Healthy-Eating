@@ -25,7 +25,7 @@ export default new Vuex.Store({
         const weight = await dispatch("getUserInfo");
         if (weight === null) {
           setTimeout(() => {
-            router.push({ name: "Entry" });
+            router.push({ name: "SettingWeight" });
           }, 500);
         } else {
           setTimeout(() => {
