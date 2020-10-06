@@ -67,4 +67,12 @@ export default {
 .nextStep-button {
   margin-top: 22px;
 }
+.font-error {
+  color: #e36e6e;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  margin-top: 5px;
+}
 </style>
