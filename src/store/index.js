@@ -21,8 +21,9 @@ export default new Vuex.Store({
     async postLogin({ dispatch }, loginData) {
       try {
         const response = await API.post("/login", loginData);
-        localStorage.setItem("token", response.data.data.remember_token);
-        const weight = await dispatch("getUserInfo");
+        const token = response.data.data.remember_token;
+        localStorage.setItem("token", token);
+        const weight = await dispatch("getUserInfo", token);
         if (weight === null) {
           setTimeout(() => {
             router.push({ name: "SettingWeight" });
@@ -36,10 +37,10 @@ export default new Vuex.Store({
         return error.response.data.message;
       }
     },
-    async getUserInfo({}) {
+    async getUserInfo({}, token) {
       try {
         const response = await API.post("/info", {
-          remember_token: localStorage.getItem("token")
+          remember_token: token
         });
         return response.data.data.weight;
       } catch (error) {
