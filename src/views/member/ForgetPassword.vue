@@ -35,7 +35,6 @@
 <script>
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
-
 export default {
   components: {
     BaseTitle,
