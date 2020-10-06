@@ -1,6 +1,12 @@
 <template>
   <div>
-    <Navbar @click="$router.push({ name: 'RecordingStates' })">
+    <Navbar
+      @click="
+        $router.history.current.name === 'UserProfileView'
+          ? $router.push({ name: 'RecordingStates' })
+          : ''
+      "
+    >
       <div>
         <router-link :to="{ name: 'NutritionIntakeChart' }">
           <ChartIcon class="icon" />
@@ -32,6 +38,9 @@ export default {
     Sidebar,
     ChartIcon,
     CalendarIcon
+  },
+  created() {
+    console.log(this.$router);
   }
 };
 </script>
