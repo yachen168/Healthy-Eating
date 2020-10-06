@@ -3,10 +3,16 @@
     <b-table stacked small :fields="fields" :items="items" responsive="sm">
       <!-- ===== 性別欄的顯示方式 ======= -->
       <template v-slot:cell(gender)="data">
-        <span v-if="data.value === 'female'">女</span>
-        <span v-if="data.value === 'male'">男</span>
+        <span v-if="data.value === 'female'"
+          ><FemaleIcon class="gender-icon" /><span class="gender"
+            >女</span
+          ></span
+        >
+        <span v-if="data.value === 'male'"
+          ><MaleIcon class="gender-icon" />男</span
+        >
         <span v-if="data.value === 'others'">其他</span>
-        <span v-else class="empty">未選擇</span>
+        <span v-if="!data.value" class="empty">未選擇</span>
       </template>
 
       <!-- ===== 轉換生日欄的資料格式 ======= -->
@@ -32,12 +38,18 @@
 </template>
 
 <script>
+import MaleIcon from "@/assets/images/ic_male.svg?inline";
+import FemaleIcon from "@/assets/images/ic_female.svg?inline";
 export default {
   props: {
     items: {
       type: Array,
       required: true
     }
+  },
+  components: {
+    MaleIcon,
+    FemaleIcon
   },
   data() {
     return {
@@ -57,6 +69,12 @@ export default {
   background-color: #fff;
   border-radius: 6px;
   overflow: hidden;
+  .gender {
+    vertical-align: middle;
+    &-icon {
+      margin-right: 5px;
+    }
+  }
 }
 
 .unit {
