@@ -65,6 +65,14 @@ const routes = [
           import(
             /* webpackChunkName: "setting-Weight" */ "@/views/member/SettingWeight.vue"
           )
+      },
+      {
+        path: "password-Success",
+        name: "PasswordSuccess",
+        component: () =>
+          import(
+            /* webpackChunkName: "password-Success" */ "@/views/member/PasswordSuccess"
+          )
       }
     ]
   },
