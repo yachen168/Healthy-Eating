@@ -148,6 +148,14 @@ const routes = [
           )
       },
       {
+        path: "modify-password",
+        name: "ModifyPassword",
+        component: () =>
+          import(
+            /* webpackChunkName: "modify-password" */ "@/views/member/ModifyPassword.vue"
+          )
+      },
+      {
         path: "chart",
         name: "ChartEntry",
         redirect: "/recording/chart/nutrition-intake",
