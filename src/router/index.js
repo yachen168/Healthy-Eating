@@ -62,7 +62,7 @@ const routes = [
         name: "SettingWeight",
         component: () =>
           import(
-            /* webpackChunkName: "member-application" */ "@/views/member/settingWeight.vue"
+            /* webpackChunkName: "member-application" */ "@/views/member/SettingWeight.vue"
           )
       }
     ]
