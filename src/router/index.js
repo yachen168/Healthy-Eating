@@ -85,6 +85,10 @@ const routes = [
       import(
         /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
       ),
+    beforeEnter: async (to, from, next) => {
+      await store.dispatch("fetchUserProfile");
+      next();
+    },
     children: [
       {
         path: "states",
@@ -133,11 +137,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "user-profile-view" */ "@/views/userProfile/UserProfileView.vue"
-          ),
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchUserProfile");
-          next();
-        }
+          )
       },
       {
         path: "user-profile-edit",

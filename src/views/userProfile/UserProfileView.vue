@@ -2,7 +2,7 @@
   <div>
     <main>
       <div class="user">
-        <b-avatar src="" size="130px"></b-avatar>
+        <b-avatar :src="$store.getters.avatarUrl" size="130px"></b-avatar>
         <h2 class="user-name">{{ $store.getters.userProfile[0].name }}</h2>
       </div>
       <BaseButton
