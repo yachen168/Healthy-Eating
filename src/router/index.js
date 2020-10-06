@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
@@ -124,7 +125,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "user-profile-view" */ "@/views/userProfile/UserProfileView.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       },
       {
         path: "user-profile-edit",

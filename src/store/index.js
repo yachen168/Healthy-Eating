@@ -3,6 +3,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import API from "@/api/service";
 import router from "../router";
+import UserProfile from "./userProfile";
 
 Vue.use(Vuex);
 
@@ -50,5 +51,7 @@ export default new Vuex.Store({
       }
     }
   },
-  modules: {}
+  modules: {
+    UserProfile
+  }
 });
