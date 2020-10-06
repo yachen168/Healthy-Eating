@@ -2,7 +2,7 @@
   <div>
     <Navbar
       @click="
-        $router.history.current.name === 'UserProfileView'
+        $router.history.current.name !== 'RecordingStates'
           ? $router.push({ name: 'RecordingStates' })
           : ''
       "
