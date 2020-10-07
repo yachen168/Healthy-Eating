@@ -10,7 +10,10 @@
   }
   
   .form-input {
+    height: 40px;
+    padding: 8px;
     border-radius: 6px;
+    color: #383838;
     &:focus{
       outline: none;
     }
@@ -26,6 +29,11 @@
         color: #a8a8a8;
         font-size: 14px;
       }
+    // Remove Arrows/Spinners
+    &::-webkit-outer-spin-button,&::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 
   .input-area {
