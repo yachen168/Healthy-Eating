@@ -64,7 +64,10 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "setting-Weight" */ "@/views/member/SettingWeight.vue"
-          )
+          ),
+        meta: {
+          requiredAuth: true
+        }
       },
       {
         path: "password-Success",
@@ -202,6 +205,14 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (!localStorage.getItem("token") && to.meta.requiredAuth) {
+    next({ name: "Login" });
+    return;
+  }
+  next();
 });
 
 export default router;
