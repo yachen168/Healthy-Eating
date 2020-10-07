@@ -9,7 +9,10 @@ import {
   AvatarPlugin,
   LayoutPlugin,
   AlertPlugin,
-  ModalPlugin
+  ModalPlugin,
+  BFormFile,
+  InputGroupPlugin,
+  FormRadioPlugin
 } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -24,3 +27,6 @@ Vue.use(LayoutPlugin);
 Vue.use(ModalPlugin);
 Vue.use(BootstrapVueIcons);
 Vue.use(AlertPlugin);
+Vue.use(InputGroupPlugin);
+Vue.use(FormRadioPlugin);
+Vue.component("b-form-file", BFormFile);

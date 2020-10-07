@@ -26,7 +26,9 @@ export default {
     },
     avatarUrl(state) {
       const domainURL = "https://k88d02.ml";
-      return `${domainURL}${state.userProfile.image_path}`;
+      return state.userProfile.image_path
+        ? `${domainURL}${state.userProfile.image_path}`
+        : "";
     }
   }
 };
