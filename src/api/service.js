@@ -30,7 +30,7 @@ API.interceptors.response.use(
   },
   function(error) {
     if (
-      error.response.status === 400 &&
+      error.response.status === 401 &&
       router.history.current.name !== "Login"
     ) {
       router.push({ name: "Login" });
