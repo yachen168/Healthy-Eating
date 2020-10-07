@@ -13,7 +13,7 @@
         <b-avatar :src="avatarUrl" size="42px"></b-avatar>
         <!-- ======== -->
         <div class="user-info">
-          <h2 class="user-name">{{ "健康先生" }}</h2>
+          <h2 class="user-name">{{ $store.getters.userProfile[0].name }}</h2>
           <router-link class="details" :to="{ name: 'UserProfileView' }">
             查看個人檔案
           </router-link>
