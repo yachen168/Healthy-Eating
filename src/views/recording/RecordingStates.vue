@@ -47,7 +47,8 @@
         >
           <RecordingCard :class="{ recorded: true }">
             <p slot="card-body" class="title">
-              {{ "45 kg" }}<PenIcon class="icon-pen" />
+              {{ Math.round($store.getters.userProfile.weight * 100) / 100
+              }}<PenIcon class="icon-pen" />
             </p>
             <span slot="card-footer" class="description"
               >{{

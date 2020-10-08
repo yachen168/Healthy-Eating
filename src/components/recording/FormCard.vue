@@ -7,7 +7,9 @@
         :class="{ disabled: quantity == 0 }"
         @click="$emit('minus:quantity')"
       />
-      <h2 class="quantity">{{ quantity.toFixed(1) }} {{ unit }}</h2>
+      <h2 class="quantity">
+        {{ Math.round(quantity * 100) / 100 }} {{ unit }}
+      </h2>
       <AddIcon class="icon" @click="$emit('add:quantity')" />
     </div>
     <slot name="footer"></slot>
