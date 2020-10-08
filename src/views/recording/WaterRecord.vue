@@ -18,7 +18,7 @@
         ></BaseButton>
         <BaseButton
           title="確認"
-          :disabledState="true"
+          :disabledState="waterIntake === 0"
           buttonStyle="primary"
         ></BaseButton>
       </div>
