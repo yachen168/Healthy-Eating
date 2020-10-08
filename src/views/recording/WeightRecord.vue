@@ -4,17 +4,32 @@
       <BaseTitle title="體重紀錄"></BaseTitle>
       <FormCard
         unit="kg"
-        :quantity="weight.toFixed(1)"
-        @minus:quantity="weight -= 0.1"
-        @add:quantity="weight += 0.1"
+        :quantity="+$store.getters.userProfile.weight"
+        @minus:quantity="
+          $store.commit('UserInfo', {
+            ...$store.getters.userProfile,
+            weight: +$store.getters.userProfile.weight - 0.1
+          })
+        "
+        @add:quantity="
+          $store.commit('UserInfo', {
+            ...$store.getters.userProfile,
+            weight: +$store.getters.userProfile.weight + 0.1
+          })
+        "
         ><WaterRecordIcon slot="image" />
       </FormCard>
       <div class="button-wrapper">
-        <BaseButton title="取消" buttonStyle="outline-default"></BaseButton>
+        <BaseButton
+          title="取消"
+          buttonStyle="outline-default"
+          @click="$router.push({ name: 'RecordingStates' })"
+        ></BaseButton>
         <BaseButton
           title="確認"
-          :disabledState="false"
           buttonStyle="primary"
+          :disabledState="+$store.getters.userProfile.weight === 0"
+          @click="confirmUpdateWeight"
         ></BaseButton>
       </div>
     </main>
@@ -34,10 +49,11 @@ export default {
     FormCard,
     WaterRecordIcon
   },
-  data() {
-    return {
-      weight: 45
-    };
+  methods: {
+    confirmUpdateWeight() {
+      this.$store.dispatch("postUserProfile", this.$store.getters.userProfile);
+      this.$router.push({ name: "RecordingStates" });
+    }
   }
 };
 </script>
@@ -47,6 +63,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 360px;
+  margin: 0 auto;
   padding: 30px 32px 10px;
   .page-title {
     margin-bottom: 100px;
@@ -62,8 +80,10 @@ main {
   display: flex;
   justify-content: center;
   .BaseButton {
-    width: 143px;
-    margin: 0 7px;
+    flex: 1 0 0;
+  }
+  .BaseButton + .BaseButton {
+    margin-left: 7px;
   }
 }
 </style>

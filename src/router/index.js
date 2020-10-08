@@ -113,7 +113,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "weight-record" */ "@/views/recording/WeightRecord.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       },
       {
         path: "water-record",

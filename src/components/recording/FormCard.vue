@@ -4,10 +4,10 @@
     <div class="record">
       <MinusIcon
         class="icon"
+        :class="{ disabled: quantity == 0 }"
         @click="$emit('minus:quantity')"
-        :class="{ disabled: quantity === 0 }"
       />
-      <h2 class="quantity">{{ quantity }} {{ unit }}</h2>
+      <h2 class="quantity">{{ quantity.toFixed(1) }} {{ unit }}</h2>
       <AddIcon class="icon" @click="$emit('add:quantity')" />
     </div>
     <slot name="footer"></slot>
