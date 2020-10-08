@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import BaseTitle from "@/components/common/BaseTitle";
 import RecordingCard from "@/components/recording/RecordingCard";
 import PenIcon from "@/assets/images/ic_pen.svg?inline";
@@ -245,6 +246,13 @@ export default {
           query: { date: this.$route.query.date }
         });
       }
+    }
+  },
+  computed: {
+    pageTitle() {
+      return this.$route.query.date
+        ? this.$route.query.date.split("-").join("/")
+        : `今天${dayjs(new Date()).format("YYYY/MM/DD")}`;
     }
   }
 };

@@ -3,14 +3,16 @@
     <main>
       <div class="user">
         <b-avatar :src="$store.getters.avatarUrl" size="130px"></b-avatar>
-        <h2 class="user-name">{{ $store.getters.userProfile[0].name }}</h2>
+        <h2 class="user-name">{{ $store.getters.userProfile.name }}</h2>
       </div>
       <BaseButton
         @click="$router.push({ name: 'UserProfileEdit' })"
         title="編輯個人檔案"
         buttonStyle="outline-default"
       ></BaseButton>
-      <UserProfileTable :items="$store.getters.userProfile"></UserProfileTable>
+      <UserProfileTable
+        :items="[$store.getters.userProfile]"
+      ></UserProfileTable>
     </main>
   </div>
 </template>

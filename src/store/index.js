@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import API from "@/api/service";
 import router from "../router";
 import UserProfile from "./userProfile";
+import Biology from "./biology";
 
 Vue.use(Vuex);
 
@@ -52,6 +53,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    UserProfile
+    UserProfile,
+    Biology
   }
 });
