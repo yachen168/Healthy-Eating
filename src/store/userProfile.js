@@ -19,14 +19,9 @@ export default {
         console.log(error);
       }
     },
-    async postUserProfile({ commit, dispatch }, userInfo) {
+    async postUserWeight({ dispatch }, data) {
       try {
-        const token = localStorage.getItem("token");
-        const userId = await dispatch("fetchUserId");
-        await API.post("/bioProfile", {
-          user_id: userId,
-          ...userInfo
-        }); // API_11_bioProfile_add
+        await API.post("/bioProfile", data); // API_11_bioProfile_add
         dispatch("fetchUserProfile");
       } catch (error) {
         console.log(error);
@@ -35,7 +30,7 @@ export default {
   },
   getters: {
     userProfile(state) {
-      return state.userProfile; // format for table of BootstrapVue
+      return state.userProfile;
     },
     avatarUrl(state) {
       const domainURL = "https://k88d02.ml";

@@ -51,7 +51,11 @@ export default {
   },
   methods: {
     confirmUpdateWeight() {
-      this.$store.dispatch("postUserProfile", this.$store.getters.userProfile);
+      this.$store.dispatch("postUserWeight", {
+        user_id: this.$store.getters.userProfile.id,
+        remember_token: localStorage.getItem("token"),
+        weight: this.$store.getters.userProfile.weight
+      });
       this.$router.push({ name: "RecordingStates" });
     }
   }
