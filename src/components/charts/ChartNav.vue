@@ -42,6 +42,7 @@ export default {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  z-index: 5; // over the charts
   &-item {
     cursor: pointer;
     text-align: center;
