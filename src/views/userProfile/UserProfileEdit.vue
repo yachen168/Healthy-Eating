@@ -85,7 +85,7 @@
           class="form-input birthday-input"
           type="date"
           placeholder=""
-          :value="$store.getters.userProfile[0].birthday"
+          :value="userProfile.birthday"
           @input="userProfile = { ...userProfile, birthday: $event }"
         ></b-form-input>
         <label for="height" class="label-title">身高</label>
@@ -96,7 +96,7 @@
             type="number"
             min="0"
             placeholder="未填寫"
-            :value="$store.getters.userProfile[0].height"
+            :value="userProfile.height"
             @input="userProfile = { ...userProfile, height: $event }"
           ></b-form-input>
           <b-input-group-prepend>
@@ -112,7 +112,7 @@
               type="number"
               min="0"
               :state="errors[0] ? false : null"
-              :value="$store.getters.userProfile[0].weight"
+              :value="userProfile.weight"
               @input="userProfile = { ...userProfile, weight: $event }"
             ></b-form-input>
             <b-input-group-prepend>
@@ -158,7 +158,7 @@ export default {
   data() {
     return {
       // ======== API 資料格式 =========
-      userProfile: this.$store.getters.userProfile[0]
+      userProfile: this.$store.getters.userProfile
     };
   },
   methods: {
