@@ -6,6 +6,9 @@ export default {
   mutations: {
     UserInfo(state, userProfile) {
       state.userProfile = userProfile;
+    },
+    changeGender(state, getGender) {
+      state.userProfile = { ...state.userProfile, gender: getGender };
     }
   },
   actions: {
@@ -42,6 +45,17 @@ export default {
       return state.userProfile.image_path
         ? `${domainURL}${state.userProfile.image_path}`
         : "";
+    },
+    translation(state) {
+      if (state.userProfile.gender === "female") {
+        return "女";
+      }
+      if (state.userProfile.gender === "male") {
+        return "男";
+      }
+      if (state.userProfile.gender === "others") {
+        return "其他";
+      }
     }
   }
 };
