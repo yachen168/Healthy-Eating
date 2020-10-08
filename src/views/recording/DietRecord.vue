@@ -13,11 +13,13 @@
             title="取消"
             buttonStyle="outline-default"
             :disabledState="false"
+            @click="$router.push({ name: 'RecordingStates' })"
           />
           <BaseButton
             title="確認"
             buttonStyle="primary"
             :disabledState="comfirmButtonState"
+            @click="$router.push({ name: 'RecordingStates' })"
           />
         </div>
       </form>
