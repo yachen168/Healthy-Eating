@@ -6,9 +6,6 @@ export default {
   mutations: {
     UserInfo(state, userProfile) {
       state.userProfile = userProfile;
-    },
-    changeGender(state, getGender) {
-      state.userProfile = { ...state.userProfile, gender: getGender };
     }
   },
   actions: {

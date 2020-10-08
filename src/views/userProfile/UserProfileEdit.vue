@@ -44,7 +44,7 @@
                 v-model="userProfile.gender"
                 value="male"
                 @change="
-                  $store.commit('changeGender', {
+                  $store.commit('UserInfo', {
                     ...userProfile,
                     gender: $event
                   })
@@ -57,7 +57,7 @@
                 v-model="userProfile.gender"
                 value="female"
                 @change="
-                  $store.commit('changeGender', {
+                  $store.commit('UserInfo', {
                     ...userProfile,
                     gender: $event
                   })
@@ -70,7 +70,7 @@
                 v-model="userProfile.gender"
                 value="others"
                 @change="
-                  $store.commit('changeGender', {
+                  $store.commit('UserInfo', {
                     ...userProfile,
                     gender: $event
                   })
