@@ -5,7 +5,7 @@ import {
   localize,
   ValidationObserver
 } from "vee-validate";
-import { email, alpha_num, required } from "vee-validate/dist/rules";
+import { email, alpha_num, required, regex } from "vee-validate/dist/rules";
 
 import TW from "vee-validate/dist/locale/zh_TW.json";
 
@@ -16,6 +16,8 @@ import TW from "vee-validate/dist/locale/zh_TW.json";
 extend("email", { ...email, message: "不符合帳號信箱格式" });
 extend("required", { ...required, message: "必填欄位" });
 extend("alpha_num", { ...alpha_num, message: "請填入英文或數字" });
+extend("regex", { ...regex, message: "test" });
+// extend("decimal", { ...decimal, message: "test" });
 
 extend("minmax", {
   validate(value, { min, max }) {

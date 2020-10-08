@@ -18,7 +18,7 @@
             id="user-name"
             class="form-input"
             type="text"
-            :placeholder="$store.getters.userProfile.name"
+            :placeholder="userProfile.name"
             :state="errors[0] ? false : null"
             :value="userProfile.name"
             @input="userProfile = { ...userProfile, name: $event }"
@@ -33,7 +33,7 @@
             id="gender"
             class="form-input"
             type="button"
-            :value="userProfile.gender ? userProfile.gender : '未選擇'"
+            :value="userProfile.gender ? $store.getters.translation : '未選擇'"
             v-b-modal.modal-gender
           />
           <ArrowDownIcon class="icon" />
@@ -43,6 +43,12 @@
               <b-form-radio
                 v-model="userProfile.gender"
                 value="male"
+                @change="
+                  $store.commit('changeGender', {
+                    ...userProfile,
+                    gender: $event
+                  })
+                "
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -50,6 +56,12 @@
               <b-form-radio
                 v-model="userProfile.gender"
                 value="female"
+                @change="
+                  $store.commit('changeGender', {
+                    ...userProfile,
+                    gender: $event
+                  })
+                "
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -57,6 +69,12 @@
               <b-form-radio
                 v-model="userProfile.gender"
                 value="others"
+                @change="
+                  $store.commit('changeGender', {
+                    ...userProfile,
+                    gender: $event
+                  })
+                "
               ></b-form-radio>
             </div>
           </b-modal>
@@ -67,7 +85,7 @@
           class="form-input birthday-input"
           type="date"
           placeholder=""
-          :value="userProfile.birthday"
+          :value="$store.getters.userProfile[0].birthday"
           @input="userProfile = { ...userProfile, birthday: $event }"
         ></b-form-input>
         <label for="height" class="label-title">身高</label>
@@ -78,7 +96,7 @@
             type="number"
             min="0"
             placeholder="未填寫"
-            :value="userProfile.height"
+            :value="$store.getters.userProfile[0].height"
             @input="userProfile = { ...userProfile, height: $event }"
           ></b-form-input>
           <b-input-group-prepend>
@@ -86,7 +104,7 @@
           </b-input-group-prepend>
         </b-input-group>
         <label for="weight" class="label-title">目前體重</label>
-        <ValidationProvider rules="required|alpha_num" v-slot="{ errors }">
+        <ValidationProvider rules="required" v-slot="{ errors }">
           <b-input-group>
             <b-form-input
               id="weight"
@@ -94,7 +112,7 @@
               type="number"
               min="0"
               :state="errors[0] ? false : null"
-              :value="userProfile.weight"
+              :value="$store.getters.userProfile[0].weight"
               @input="userProfile = { ...userProfile, weight: $event }"
             ></b-form-input>
             <b-input-group-prepend>
@@ -116,6 +134,7 @@
             class="login-button"
             buttonStyle="primary"
             :disabledState="invalid"
+            @click="updateProfile"
           ></BaseButton>
         </div>
       </ValidationObserver>
@@ -133,17 +152,19 @@ export default {
     ArrowDownIcon,
     CameraIcon
   },
+  // created() {
+  //   this.userProfile = this.$store.getters.userProfile[0];
+  // },
   data() {
     return {
       // ======== API 資料格式 =========
-      userProfile: {
-        name: "yachen",
-        height: null,
-        weight: 45,
-        gender: null,
-        birthday: "2020-12-12"
-      }
+      userProfile: this.$store.getters.userProfile[0]
     };
+  },
+  methods: {
+    updateProfile() {
+      console.log("test");
+    }
   }
 };
 </script>
