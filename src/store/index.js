@@ -3,6 +3,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import UserProfile from "./userProfile";
 import Biology from "./biology";
+import LoginRegister from "./LoginRegister";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     UserProfile,
-    Biology
+    Biology,
+    LoginRegister
   }
 });
