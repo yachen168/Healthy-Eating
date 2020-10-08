@@ -11,7 +11,11 @@
         <div slot="footer" class="target">每日目標：2公升</div></FormCard
       >
       <div class="button-wrapper">
-        <BaseButton title="取消" buttonStyle="outline-default"></BaseButton>
+        <BaseButton
+          title="取消"
+          buttonStyle="outline-default"
+          @click="$router.push({ name: 'RecordingStates' })"
+        ></BaseButton>
         <BaseButton
           title="確認"
           :disabledState="true"
