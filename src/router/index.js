@@ -100,7 +100,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       },
       {
         path: "diet-record/:dietType",
