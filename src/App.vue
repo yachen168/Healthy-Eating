@@ -8,7 +8,7 @@
 
 <style lang="scss">
 #app {
-  background-color: #e5e5e5;
+  background-color: #f5f5f5;
   &::before {
     content: "";
     position: fixed;
@@ -21,7 +21,7 @@
   .containter {
     max-width: 576px;
     min-height: 100vh;
-    background-color: #e5e5e5;
+    background-color: #f5f5f5;
     margin: 0 auto;
   }
 }
