@@ -156,12 +156,12 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "user-profile-edit" */ "@/views/userProfile/UserProfileEdit.vue"
-          ),
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchUserProfile");
-          next();
-          // console.log(to);
-        }
+          )
+        // beforeEnter: async (to, from, next) => {
+        //   await store.dispatch("fetchUserProfile");
+        //   next();
+        //   // console.log(to);
+        // }
       },
       {
         path: "modify-password",
