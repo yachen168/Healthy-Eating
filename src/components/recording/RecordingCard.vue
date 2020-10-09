@@ -1,5 +1,5 @@
 <template>
-  <div class="recording-card">
+  <div class="recording-card" :class="{ hasBorder: hasBorder }">
     <AddIcon class="add-icon" v-if="hasHeaderIcon" />
     <slot name="card-body" class="recording-card-body"></slot>
     <slot name="card-footer" class="recording-card-footer"></slot>
@@ -20,6 +20,10 @@ export default {
     hasBodyIcon: {
       type: Boolean,
       default: false
+    },
+    hasBorder: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -37,10 +41,9 @@ export default {
   min-height: 80px;
   border-radius: 6px;
   background-color: #fff;
-  border: 2px solid transparent;
   cursor: pointer;
-  &.empty {
-    border-color: #9cc2b0;
+  &.hasBorder {
+    border: 2px solid #9cc2b0;
   }
   &.recorded {
     border-color: #407d60;
