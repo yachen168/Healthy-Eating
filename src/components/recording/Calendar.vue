@@ -71,7 +71,7 @@ export default {
   header {
     height: 50px;
     margin-bottom: 15px;
-    background-color: #e5e5e5;
+    background-color: #f5f5f5;
     .day__month_btn {
       font-size: 24px;
       font-weight: 700;

@@ -21,7 +21,6 @@
   .containter {
     max-width: 576px;
     min-height: 100vh;
-    background-color: #f5f5f5;
     margin: 0 auto;
   }
 }
