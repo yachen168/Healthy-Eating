@@ -134,7 +134,7 @@
 
         <label for="weight" class="label-title">目前體重</label>
         <ValidationProvider
-          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.[1-9]{1})?$/ }"
+          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.\d)?$/ }"
           v-slot="{ errors }"
         >
           <b-input-group>
