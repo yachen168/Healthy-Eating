@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
+import dayjs from "dayjs";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
@@ -90,6 +91,7 @@ const routes = [
       ),
     beforeEnter: async (to, from, next) => {
       await store.dispatch("fetchUserProfile");
+      await store.dispatch("fetchToken");
       next();
     },
     children: [
@@ -124,7 +126,17 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "water-record" */ "@/views/recording/WaterRecord.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          await store.dispatch("fetchSumWaterIntake", {
+            remember_token: localStorage.getItem("token"),
+            user_id: store.getters.userProfile.id,
+            start_date: to.query.date ? to.query.date : today,
+            end_date: to.query.date ? to.query.date : today
+          });
+          next();
+        }
       },
       {
         path: "calendar",

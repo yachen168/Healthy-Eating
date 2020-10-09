@@ -4,9 +4,9 @@
       <BaseTitle title="飲水紀錄量"></BaseTitle>
       <FormCard
         unit="公升"
-        :quantity="waterIntake"
-        @minus:quantity="waterIntake -= 0.25"
-        @add:quantity="waterIntake += 0.25"
+        :quantity="sumWaterIntakeOneDay"
+        @minus:quantity="sumWaterIntakeOneDay -= 0.25"
+        @add:quantity="sumWaterIntakeOneDay += 0.25"
         ><WaterRecordIcon slot="image" />
         <div slot="footer" class="target">每日目標：2公升</div></FormCard
       >
@@ -18,8 +18,17 @@
         ></BaseButton>
         <BaseButton
           title="確認"
-          :disabledState="waterIntake === 0"
           buttonStyle="primary"
+          :disabledState="
+            sumWaterIntakeOneDay - $store.getters.sumWaterIntakeOneDay === 0
+          "
+          @click="
+            $store.dispatch('updateSumWaterIntake', {
+              remember_token: $store.getters.token,
+              user_id: `${$store.getters.userProfile.id}`,
+              water: sumWaterIntakeOneDay - $store.getters.sumWaterIntakeOneDay
+            })
+          "
         ></BaseButton>
       </div>
     </main>
@@ -41,7 +50,7 @@ export default {
   },
   data() {
     return {
-      waterIntake: 0
+      sumWaterIntakeOneDay: this.$store.getters.sumWaterIntakeOneDay
     };
   }
 };
