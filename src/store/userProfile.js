@@ -26,20 +26,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  },
-  getters: {
-    userProfile(state) {
-      return state.userProfile;
-    },
-    userWeight(state) {
-      return state.userProfile.weight;
-    },
-    avatarUrl(state) {
-      const domainURL = "https://k88d02.ml";
-      return state.userProfile.image_path
-        ? `${domainURL}${state.userProfile.image_path}`
-        : "";
     },
     translation(state) {
       if (state.userProfile.gender === "female") {
