@@ -51,6 +51,9 @@ export default {
       if (state.userProfile.gender === "others") {
         return "其他";
       }
+    },
+    dietaryStandard(state) {
+      return state.userProfile.diet_standard;
     }
   }
 };
