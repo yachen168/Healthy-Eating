@@ -1,17 +1,34 @@
-// import Axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-import UserProfile from "./userProfile";
 import LoginRegister from "./LoginRegister";
+import UserProfile from "./userProfile";
+import Water from "./water";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    token: ""
+  },
+  mutations: {
+    token(state, token) {
+      state.token = token;
+    }
+  },
+  actions: {
+    fetchToken({ commit }) {
+      const token = localStorage.getItem("token");
+      commit("token", token);
+    }
+  },
+  getters: {
+    token(state) {
+      return state.token;
+    }
+  },
   modules: {
     UserProfile,
-    LoginRegister
+    LoginRegister,
+    Water
   }
 });
