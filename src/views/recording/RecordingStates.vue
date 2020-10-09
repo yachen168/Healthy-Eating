@@ -78,7 +78,7 @@
             />
             <span slot="card-footer" class="description"
               >{{ sumNutritionOfDay[0][nutrition.type] }}/{{
-                targetNutritionOfDay[nutrition.type]
+                $store.getters.dietaryStandard[nutrition.type]
               }}</span
             ></RecordingCard
           >
@@ -221,17 +221,7 @@ export default {
           proteins: 5,
           dairy: 4
         }
-      ],
-      // ===== api 目標攝取資料格式 =====
-      targetNutritionOfDay: {
-        kind: "personal",
-        fruits: 4,
-        vegetables: 5,
-        grains: 5,
-        nuts: 5,
-        proteins: 5,
-        dairy: 5
-      }
+      ]
     };
   },
   methods: {
