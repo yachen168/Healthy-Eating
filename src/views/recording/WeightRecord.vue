@@ -6,13 +6,13 @@
         unit="kg"
         :quantity="+$store.getters.userProfile.weight"
         @minus:quantity="
-          $store.commit('UserInfo', {
+          $store.commit('userProfile', {
             ...$store.getters.userProfile,
             weight: +$store.getters.userProfile.weight - 0.1
           })
         "
         @add:quantity="
-          $store.commit('UserInfo', {
+          $store.commit('userProfile', {
             ...$store.getters.userProfile,
             weight: +$store.getters.userProfile.weight + 0.1
           })

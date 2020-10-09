@@ -4,7 +4,7 @@ export default {
     userProfile: {}
   },
   mutations: {
-    UserInfo(state, userProfile) {
+    userProfile(state, userProfile) {
       state.userProfile = userProfile;
     }
   },
@@ -14,7 +14,7 @@ export default {
         const response = await API.post("/info", {
           remember_token: localStorage.getItem("token")
         });
-        commit("UserInfo", response.data.data);
+        commit("userProfile", response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -31,6 +31,9 @@ export default {
   getters: {
     userProfile(state) {
       return state.userProfile;
+    },
+    userWeight(state) {
+      return state.userProfile.weight;
     },
     avatarUrl(state) {
       const domainURL = "https://k88d02.ml";
