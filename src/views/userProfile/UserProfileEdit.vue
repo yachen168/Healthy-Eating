@@ -40,7 +40,7 @@
             type="button"
             :value="
               $store.getters.userProfile.gender
-                ? $store.getters.translation
+                ? $store.getters.gender
                 : '未選擇'
             "
             v-b-modal.modal-gender

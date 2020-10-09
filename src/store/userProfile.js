@@ -41,7 +41,7 @@ export default {
         ? `${domainURL}${state.userProfile.image_path}`
         : "";
     },
-    translation(state) {
+    gender(state) {
       if (state.userProfile.gender === "female") {
         return "女";
       }
