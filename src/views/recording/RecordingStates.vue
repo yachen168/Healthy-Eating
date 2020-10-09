@@ -18,6 +18,7 @@
           <RecordingCard
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
+            :hasBorder="true"
             :class="{ recorded: mealsRecordingStates[index].detail }"
           >
             <img
@@ -45,7 +46,7 @@
             })
           "
         >
-          <RecordingCard :class="{ recorded: true }">
+          <RecordingCard :hasBorder="true" :class="{ recorded: true }">
             <p slot="card-body" class="title">
               {{ Math.round($store.getters.userProfile.weight * 100) / 100
               }}<PenIcon class="icon-pen" />
