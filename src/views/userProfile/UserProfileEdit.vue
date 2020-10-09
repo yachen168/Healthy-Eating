@@ -18,10 +18,15 @@
             id="user-name"
             class="form-input"
             type="text"
-            :placeholder="userProfile.name"
+            :placeholder="$store.getters.userProfile.name"
             :state="errors[0] ? false : null"
-            :value="userProfile.name"
-            @input="userProfile = { ...userProfile, name: $event }"
+            :value="$store.getters.userProfile.name"
+            @input="
+              $store.commit('userProfile', {
+                ...$store.getters.userProfile,
+                name: $event
+              })
+            "
           ></b-form-input>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
             {{ errors[0] }}
@@ -33,7 +38,11 @@
             id="gender"
             class="form-input"
             type="button"
-            :value="userProfile.gender ? $store.getters.translation : '未選擇'"
+            :value="
+              $store.getters.userProfile.gender
+                ? $store.getters.translation
+                : '未選擇'
+            "
             v-b-modal.modal-gender
           />
           <ArrowDownIcon class="icon" />
@@ -41,11 +50,11 @@
             <div class="radio-wrapper">
               <span>男</span>
               <b-form-radio
-                v-model="userProfile.gender"
+                v-model="$store.getters.userProfile.gender"
                 value="male"
                 @change="
                   $store.commit('userProfile', {
-                    ...userProfile,
+                    ...$store.getters.userProfile,
                     gender: $event
                   })
                 "
@@ -54,11 +63,11 @@
             <div class="radio-wrapper">
               <span>女</span>
               <b-form-radio
-                v-model="userProfile.gender"
+                v-model="$store.getters.userProfile.gender"
                 value="female"
                 @change="
                   $store.commit('userProfile', {
-                    ...userProfile,
+                    ...$store.getters.userProfile,
                     gender: $event
                   })
                 "
@@ -67,11 +76,11 @@
             <div class="radio-wrapper">
               <span>其他</span>
               <b-form-radio
-                v-model="userProfile.gender"
+                v-model="$store.getters.userProfile.gender"
                 value="others"
                 @change="
                   $store.commit('userProfile', {
-                    ...userProfile,
+                    ...$store.getters.userProfile,
                     gender: $event
                   })
                 "
@@ -85,26 +94,49 @@
           class="form-input birthday-input"
           type="date"
           placeholder=""
-          :value="userProfile.birthday"
-          @input="userProfile = { ...userProfile, birthday: $event }"
+          :value="$store.getters.userProfile.birthday"
+          @input="
+            $store.commit('userProfile', {
+              ...$store.getters.userProfile,
+              birthday: $event
+            })
+          "
         ></b-form-input>
         <label for="height" class="label-title">身高</label>
-        <b-input-group>
-          <b-form-input
-            id="height"
-            class="form-input height-input"
-            type="number"
-            min="0"
-            placeholder="未填寫"
-            :value="userProfile.height"
-            @input="userProfile = { ...userProfile, height: $event }"
-          ></b-form-input>
-          <b-input-group-prepend>
-            <span>公分/cm</span>
-          </b-input-group-prepend>
-        </b-input-group>
+        <ValidationProvider
+          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.[1-9]{1})?$/ }"
+          v-slot="{ errors }"
+        >
+          <b-input-group>
+            <b-form-input
+              id="height"
+              class="form-input height-input"
+              type="number"
+              min="0"
+              :state="errors[0] ? false : null"
+              placeholder="未填寫"
+              :value="$store.getters.userProfile.height"
+              @input="
+                $store.commit('userProfile', {
+                  ...$store.getters.userProfile,
+                  height: $event
+                })
+              "
+            ></b-form-input>
+            <b-input-group-prepend>
+              <span>公分/cm</span>
+            </b-input-group-prepend>
+          </b-input-group>
+          <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
+            {{ errors[0] }}
+          </p>
+        </ValidationProvider>
+
         <label for="weight" class="label-title">目前體重</label>
-        <ValidationProvider rules="required" v-slot="{ errors }">
+        <ValidationProvider
+          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.[1-9]{1})?$/ }"
+          v-slot="{ errors }"
+        >
           <b-input-group>
             <b-form-input
               id="weight"
@@ -112,8 +144,13 @@
               type="number"
               min="0"
               :state="errors[0] ? false : null"
-              :value="userProfile.weight"
-              @input="userProfile = { ...userProfile, weight: $event }"
+              :value="$store.getters.userProfile.weight"
+              @input="
+                $store.commit('userProfile', {
+                  ...$store.getters.userProfile,
+                  weight: $event
+                })
+              "
             ></b-form-input>
             <b-input-group-prepend>
               <span>公斤/kg</span>
@@ -128,6 +165,7 @@
             title="取消"
             class="login-button"
             buttonStyle="outline-default"
+            @click="$router.push({ name: 'UserProfileView' })"
           ></BaseButton>
           <BaseButton
             title="更新"
@@ -152,18 +190,17 @@ export default {
     ArrowDownIcon,
     CameraIcon
   },
-  // created() {
-  //   this.userProfile = this.$store.getters.userProfile[0];
-  // },
   data() {
     return {
       // ======== API 資料格式 =========
-      userProfile: this.$store.getters.userProfile
+      // userProfile: this.$store.getters.userProfile
     };
   },
   methods: {
     updateProfile() {
-      console.log("test");
+      this.$store.dispatch("postUserProfile", {
+        weight: this.$store.getters.userProfile.weight
+      });
     }
   }
 };
@@ -291,6 +328,10 @@ main {
 
 .radio-wrapper + .radio-wrapper {
   border-top: 1px solid rgba(33, 33, 33, 0.08);
+}
+
+::v-deep .is-invalid {
+  background-image: none;
 }
 
 ::v-deep input[type="radio"] {

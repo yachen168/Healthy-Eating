@@ -16,7 +16,7 @@ import TW from "vee-validate/dist/locale/zh_TW.json";
 extend("email", { ...email, message: "不符合帳號信箱格式" });
 extend("required", { ...required, message: "必填欄位" });
 extend("alpha_num", { ...alpha_num, message: "請填入英文或數字" });
-extend("regex", { ...regex, message: "test" });
+extend("regex", { ...regex, message: "請輸入 2 ~ 3 位整數或小數至第 1 位" });
 // extend("decimal", { ...decimal, message: "test" });
 
 extend("minmax", {
