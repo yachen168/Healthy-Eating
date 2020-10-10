@@ -4,19 +4,9 @@
       <BaseTitle title="體重紀錄"></BaseTitle>
       <FormCard
         unit="kg"
-        :quantity="+$store.getters.userProfile.weight"
-        @minus:quantity="
-          $store.commit('userProfile', {
-            ...$store.getters.userProfile,
-            weight: +$store.getters.userProfile.weight - 0.1
-          })
-        "
-        @add:quantity="
-          $store.commit('userProfile', {
-            ...$store.getters.userProfile,
-            weight: +$store.getters.userProfile.weight + 0.1
-          })
-        "
+        :quantity="userWeight"
+        @minus:quantity="userWeight -= 0.1"
+        @add:quantity="userWeight += 0.1"
         ><WaterRecordIcon slot="image" />
       </FormCard>
       <div class="button-wrapper">
@@ -28,7 +18,7 @@
         <BaseButton
           title="確認"
           buttonStyle="primary"
-          :disabledState="+$store.getters.userProfile.weight === 0"
+          :disabledState="userWeight === 0"
           @click="confirmUpdateWeight"
         ></BaseButton>
       </div>
@@ -49,12 +39,17 @@ export default {
     FormCard,
     WaterRecordIcon
   },
+  data() {
+    return {
+      userWeight: this.$store.getters.userWeight
+    };
+  },
   methods: {
     confirmUpdateWeight() {
       this.$store.dispatch("postUserWeight", {
         user_id: this.$store.getters.userProfile.id,
         remember_token: localStorage.getItem("token"),
-        weight: this.$store.getters.userProfile.weight
+        weight: this.userWeight
       });
       this.$router.push({ name: "RecordingStates" });
     }

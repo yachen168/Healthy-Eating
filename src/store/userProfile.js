@@ -33,7 +33,7 @@ export default {
       return state.userProfile;
     },
     userWeight(state) {
-      return state.userProfile.weight;
+      return +state.userProfile.weight;
     },
     avatarUrl(state) {
       const domainURL = "https://k88d02.ml";
