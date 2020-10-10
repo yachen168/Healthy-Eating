@@ -77,9 +77,11 @@
               :alt="nutritions.type"
             />
             <span slot="card-footer" class="description"
-              >{{ sumNutritionOfDay[0][nutrition.type] }}/{{
-                $store.getters.dietaryStandard[nutrition.type]
-              }}</span
+              >{{
+                $store.getters.sumDietaryIntake
+                  ? $store.getters.sumDietaryIntake[nutrition.type]
+                  : 0
+              }}/{{ $store.getters.dietaryStandard[nutrition.type] }}</span
             ></RecordingCard
           >
         </b-col>

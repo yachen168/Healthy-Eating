@@ -102,7 +102,17 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const searchedDate = to.query.date ? to.query.date : today;
+          await store.dispatch("fecthDietaryDeficiency", {
+            user_id: store.getters.userProfile.id,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
+          next();
+        }
       },
       {
         path: "diet-record/:dietType",
@@ -129,11 +139,12 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const searchedDate = to.query.date ? to.query.date : today;
           await store.dispatch("fetchSumWaterIntake", {
-            remember_token: localStorage.getItem("token"),
+            remember_token: store.getters.token,
             user_id: store.getters.userProfile.id,
-            start_date: to.query.date ? to.query.date : today,
-            end_date: to.query.date ? to.query.date : today
+            start_date: searchedDate,
+            end_date: searchedDate
           });
           next();
         }
