@@ -91,9 +91,6 @@ export default {
     RecordingCard,
     PenIcon
   },
-  created() {
-    console.log(this.$store.getters.dietaryRecordingState);
-  },
   data() {
     return {
       meals: [
