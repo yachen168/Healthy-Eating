@@ -17,11 +17,11 @@ export default {
         console.log(error);
       }
     },
-    async updateSumWaterIntake({}, data) {
+    async updateSumWaterIntake({ dispatch }, data) {
       try {
-        const response = await API.post("/userWater", data);
+        await API.post("/userWater", data);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     }
   },
