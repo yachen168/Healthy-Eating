@@ -44,7 +44,7 @@ const routes = [
           )
       },
       {
-        path: "forget-Password",
+        path: "forget-password",
         name: "ForgetPassword",
         component: () =>
           import(
@@ -52,7 +52,7 @@ const routes = [
           )
       },
       {
-        path: "reset-Password",
+        path: "reset-password",
         name: "ResetPassword",
         component: () =>
           import(
@@ -60,7 +60,7 @@ const routes = [
           )
       },
       {
-        path: "setting-Weight",
+        path: "setting-weight",
         name: "SettingWeight",
         component: () =>
           import(
@@ -71,7 +71,7 @@ const routes = [
         }
       },
       {
-        path: "password-Success",
+        path: "password-success",
         name: "PasswordSuccess",
         component: () =>
           import(
