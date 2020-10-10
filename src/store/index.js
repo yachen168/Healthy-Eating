@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import LoginRegister from "./LoginRegister";
 import UserProfile from "./userProfile";
 import Water from "./water";
+import Diet from "./diet";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,7 @@ export default new Vuex.Store({
   modules: {
     UserProfile,
     LoginRegister,
-    Water
+    Water,
+    Diet
   }
 });
