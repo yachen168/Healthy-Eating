@@ -48,7 +48,7 @@ const routes = [
         name: "ForgetPassword",
         component: () =>
           import(
-            /* webpackChunkName: "forget-Password" */ "@/views/member/ForgetPassword.vue"
+            /* webpackChunkName: "forget-password" */ "@/views/member/ForgetPassword.vue"
           )
       },
       {
@@ -56,7 +56,7 @@ const routes = [
         name: "ResetPassword",
         component: () =>
           import(
-            /* webpackChunkName: "reset-Password" */ "@/views/member/ResetPassword.vue"
+            /* webpackChunkName: "reset-password" */ "@/views/member/ResetPassword.vue"
           )
       },
       {
@@ -64,7 +64,7 @@ const routes = [
         name: "SettingWeight",
         component: () =>
           import(
-            /* webpackChunkName: "setting-Weight" */ "@/views/member/SettingWeight.vue"
+            /* webpackChunkName: "setting-weight" */ "@/views/member/SettingWeight.vue"
           ),
         meta: {
           requiredAuth: true
@@ -75,7 +75,7 @@ const routes = [
         name: "PasswordSuccess",
         component: () =>
           import(
-            /* webpackChunkName: "password-Success" */ "@/views/member/PasswordSuccess"
+            /* webpackChunkName: "password-success" */ "@/views/member/PasswordSuccess"
           )
       }
     ]
