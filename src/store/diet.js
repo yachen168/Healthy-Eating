@@ -36,7 +36,7 @@ export default {
       if (state.dietaryDeficiency.length) {
         const dietaryDeficiency = state.dietaryDeficiency[0].deficiency;
         return Object.keys(dietaryDeficiency).reduce((obj, key) => {
-          obj[key] = dietaryDeficiency[key] + dietStandard[key]; // 攝取目標 - 攝取不足 = 已攝取
+          obj[key] = dietStandard[key] - dietaryDeficiency[key]; // 攝取目標 - 攝取不足 = 已攝取
           return obj;
         }, {});
       }
