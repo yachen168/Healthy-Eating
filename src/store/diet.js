@@ -1,12 +1,12 @@
 import API from "../api/service";
 export default {
   state: {
-    dietaryRecording: [],
+    dietaryRecordingState: [],
     dietaryDeficiency: []
   },
   mutations: {
-    dietaryRecording(state, dietaryRecording) {
-      state.dietaryRecording = dietaryRecording;
+    dietaryRecording(state, dietaryRecordingState) {
+      state.dietaryRecordingState = dietaryRecordingState;
     },
     dietaryDeficiency(state, dietaryDeficiency) {
       state.dietaryDeficiency = dietaryDeficiency;
@@ -40,7 +40,21 @@ export default {
           return obj;
         }, {});
       }
-      return;
+    },
+    dietaryRecordingState(state) {
+      let dietSet = new Set();
+      if (state.dietaryRecordingState.length) {
+        state.dietaryRecordingState.map(item => {
+          dietSet.add(item.diet_type);
+        });
+      }
+      return {
+        breakfast: dietSet.has("breakfast"),
+        lunch: dietSet.has("lunch"),
+        snack: dietSet.has("snack"),
+        dinner: dietSet.has("dinner"),
+        supper: dietSet.has("supper")
+      };
     }
   }
 };

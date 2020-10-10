@@ -106,6 +106,12 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           const today = dayjs(new Date()).format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
           await store.dispatch("fecthDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
