@@ -7,7 +7,7 @@
         <b-col
           cols="6"
           class="card-wrapper"
-          v-for="(meal, index) in meals"
+          v-for="meal in meals"
           :key="meal.type"
           @click="toDietRecordingPage(meal.type)"
         >
@@ -15,12 +15,14 @@
             :hasHeaderIcon="true"
             :hasBodyIcon="true"
             :hasBorder="true"
-            :class="{ recorded: mealsRecordingStates[index].detail }"
+            :class="{
+              recorded: $store.getters.dietaryRecordingState[meal.type]
+            }"
           >
             <img
               slot="card-body"
               :src="
-                mealsRecordingStates[index].detail
+                $store.getters.dietaryRecordingState[meal.type]
                   ? meal.imgUrl_filled
                   : meal.imgUrl_empty
               "
@@ -89,6 +91,9 @@ export default {
     RecordingCard,
     PenIcon
   },
+  created() {
+    console.log(this.$store.getters.dietaryRecordingState);
+  },
   data() {
     return {
       meals: [
@@ -148,53 +153,6 @@ export default {
           imgUrl: require("@/assets/images/ic_fruit.svg")
         },
         { type: "nuts", imgUrl: require("@/assets/images/ic_oil.svg") }
-      ],
-      // ====== api 每餐紀錄狀態資料格式 ======
-      mealsRecordingStates: [
-        {
-          diet_type: "water", // 水格式待轉
-          detail: null
-        },
-        {
-          diet_type: "breakfast",
-          detail: null
-        },
-        {
-          diet_type: "lunch",
-          detail: {
-            id: 3, //diet_id
-            updated_at: "2020-09-13 00:39:50",
-            user_id: 5,
-            fruits: 3,
-            vegetables: 3,
-            grains: 5,
-            nuts: 5,
-            proteins: 6,
-            dairy: null
-          }
-        },
-        {
-          diet_type: "snack",
-          detail: null // 未紀錄
-        },
-        {
-          diet_type: "dinner",
-          detail: null
-        },
-        {
-          diet_type: "supper",
-          detail: {
-            id: 3, //diet_id
-            updated_at: "2020-09-13 00:39:50",
-            user_id: 5,
-            fruits: 2,
-            vegetables: 2.1,
-            grains: 55,
-            nuts: 5,
-            proteins: 6,
-            dairy: null
-          }
-        }
       ]
     };
   },
