@@ -1,11 +1,7 @@
 <template>
   <div>
     <main>
-      <BaseTitle
-        :title="
-          $route.query.date ? $route.query.date.split('-').join('/') : '今天'
-        "
-      ></BaseTitle>
+      <BaseTitle :title="pageTitle"></BaseTitle>
       <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
       <b-row class="meals" no-gutters>
         <b-col
@@ -52,11 +48,7 @@
               }}<PenIcon class="icon-pen" />
             </p>
             <span slot="card-footer" class="description"
-              >{{
-                $route.query.date
-                  ? $route.query.date.split("-").join("/")
-                  : "今天"
-              }}體重
+              >{{ sectionTitle }}體重
             </span>
           </RecordingCard>
         </b-col>
@@ -64,11 +56,7 @@
       <hr class="divid" />
       <!-- ====== 營養總攝取量 ====== -->
       <b-row class="sum-nutrition" no-gutters>
-        <h2>
-          {{
-            $route.query.date ? $route.query.date.split("-").join("/") : "今天"
-          }}營養總攝取量
-        </h2>
+        <h2>{{ sectionTitle }}營養總攝取量</h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
           <RecordingCard :hasBodyIcon="true">
             <img
@@ -207,22 +195,6 @@ export default {
             dairy: null
           }
         }
-      ],
-      // ===== api 當日攝取總量資料格式 =====
-      sumNutritionOfDay: [
-        {
-          id: 9,
-          updated_at: "2020-09-28 01:00:50",
-          user_id: 15,
-          kind: "daily",
-          diet_type: "launch",
-          fruits: 2,
-          vegetables: 3,
-          grains: 6,
-          nuts: 1,
-          proteins: 5,
-          dairy: 4
-        }
       ]
     };
   },
@@ -245,8 +217,13 @@ export default {
   computed: {
     pageTitle() {
       return this.$route.query.date
-        ? this.$route.query.date.split("-").join("/")
-        : `今天${dayjs(new Date()).format("YYYY/MM/DD")}`;
+        ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
+        : `今天 ${dayjs(new Date()).format("YYYY/MM/DD")}`;
+    },
+    sectionTitle() {
+      return this.$route.query.date
+        ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
+        : `今天`;
     }
   }
 };
