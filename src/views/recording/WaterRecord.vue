@@ -20,15 +20,9 @@
           title="確認"
           buttonStyle="primary"
           :disabledState="
-            sumWaterIntakeOneDay - $store.getters.sumWaterIntakeOneDay === 0
+            sumWaterIntakeOneDay === $store.getters.sumWaterIntakeOneDay
           "
-          @click="
-            $store.dispatch('updateSumWaterIntake', {
-              remember_token: $store.getters.token,
-              user_id: `${$store.getters.userProfile.id}`,
-              water: sumWaterIntakeOneDay - $store.getters.sumWaterIntakeOneDay
-            })
-          "
+          @click="updateSumWaterIntake"
         ></BaseButton>
       </div>
     </main>
@@ -52,6 +46,17 @@ export default {
     return {
       sumWaterIntakeOneDay: this.$store.getters.sumWaterIntakeOneDay
     };
+  },
+  methods: {
+    updateSumWaterIntake() {
+      this.$store.dispatch("updateSumWaterIntake", {
+        remember_token: this.$store.getters.token,
+        user_id: `${this.$store.getters.userProfile.id}`,
+        water:
+          this.sumWaterIntakeOneDay - this.$store.getters.sumWaterIntakeOneDay
+      });
+      this.$router.push({ name: "RecordingStates" });
+    }
   }
 };
 </script>

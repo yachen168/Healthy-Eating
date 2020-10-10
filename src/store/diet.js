@@ -21,7 +21,7 @@ export default {
         console.log(error.response);
       }
     },
-    async fecthDietaryDeficiency({ commit }, data) {
+    async fetchDietaryDeficiency({ commit }, data) {
       try {
         const response = await API.post("/diet/day", data);
         commit("dietaryDeficiency", response.data.data);
@@ -31,8 +31,8 @@ export default {
     }
   },
   getters: {
-    sumDietaryIntake(state, getters, rootGetters) {
-      const dietStandard = rootGetters.UserProfile.userProfile.diet_standard;
+    sumDietaryIntake(state, getters, rootState) {
+      const dietStandard = rootState.UserProfile.userProfile.diet_standard;
       if (state.dietaryDeficiency.length) {
         const dietaryDeficiency = state.dietaryDeficiency[0].deficiency;
         return Object.keys(dietaryDeficiency).reduce((obj, key) => {
@@ -41,7 +41,7 @@ export default {
         }, {});
       }
     },
-    dietaryRecordingState(state) {
+    dietaryRecordingState(state, getters, rootState, rootGetters) {
       let dietSet = new Set();
       if (state.dietaryRecordingState.length) {
         state.dietaryRecordingState.map(item => {
@@ -49,6 +49,7 @@ export default {
         });
       }
       return {
+        water: !!rootGetters.sumWaterIntakeOneDay,
         breakfast: dietSet.has("breakfast"),
         lunch: dietSet.has("lunch"),
         snack: dietSet.has("snack"),

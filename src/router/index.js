@@ -106,13 +106,20 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           const today = dayjs(new Date()).format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
+          // 待重構
           await store.dispatch("fetchDietaryRecording", {
             user_id: store.getters.userProfile.id,
             kind: 0,
             start_date: searchedDate,
             end_date: searchedDate
           });
-          await store.dispatch("fecthDietaryDeficiency", {
+          await store.dispatch("fetchDietaryDeficiency", {
+            user_id: store.getters.userProfile.id,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
+          await store.dispatch("fetchSumWaterIntake", {
+            remember_token: store.getters.token,
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
             end_date: searchedDate
