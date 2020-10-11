@@ -5,10 +5,8 @@
       calendar-class="calendarStyle"
       :inline="true"
       :language="language"
-      :format="DatePickerFormat"
       :highlighted="highlighted"
-      :value="selectedDate"
-      @input="$emit('update:date', $event)"
+      @input="$emit('input', $event)"
     >
     </Datepicker>
   </div>
@@ -25,16 +23,11 @@ export default {
     highlighted: {
       type: Object,
       required: true
-    },
-    selectedDate: {
-      type: String,
-      defualt: ""
     }
   },
   data() {
     return {
       date: "",
-      DatePickerFormat: "yyyy-MM-dd",
       language: {
         language: "Chinese",
         days: ["日", "一", "二", "三", "四", "五", "六"],
@@ -97,6 +90,7 @@ export default {
   .cell.today {
     position: relative;
     color: #fff;
+    line-height: 2.5;
     background-image: radial-gradient(
       circle at 50% 50%,
       #407d60 14px,
@@ -117,7 +111,7 @@ export default {
       content: "";
       display: block;
       position: absolute;
-      bottom: 0;
+      bottom: -4px;
       left: 0;
       right: 0;
       margin: auto;
