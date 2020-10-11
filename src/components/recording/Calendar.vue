@@ -1,14 +1,13 @@
 <template>
   <div>
     <Datepicker
+      maximum-view="day"
+      calendar-class="calendarStyle"
       :inline="true"
       :language="language"
       :format="DatePickerFormat"
       :highlighted="highlighted"
       :value="selectedDate"
-      maximum-view="day"
-      calendar-button-icon="fa fa-calendar"
-      calendar-class="calendarStyle"
       @input="$emit('update:date', $event)"
     >
     </Datepicker>
