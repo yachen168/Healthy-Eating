@@ -133,7 +133,24 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "diet-record" */ "@/views/recording/DietRecord.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const searchedDate = to.query.date ? to.query.date : today;
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
+          await store.commit("historyOfAMealRecording", to.params.dietType);
+          await store.dispatch("fetchDietaryDeficiency", {
+            user_id: store.getters.userProfile.id,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
+          next();
+        }
       },
       {
         path: "weight-record",
