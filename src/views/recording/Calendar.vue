@@ -1,15 +1,12 @@
 <template>
-  <div class="calendar-page">
-    <main>
-      <div class="calendar-wrapper">
-        <Calendar
-          :highlighted="$store.getters.datesHaveBeenRecorded"
-          :selectedDate="selectedDate"
-          @update:date="printSelectedDate"
-        ></Calendar>
-      </div>
-    </main>
-  </div>
+  <main>
+    <div class="calendar-wrapper">
+      <Calendar
+        :highlighted="$store.getters.datesHaveBeenRecorded"
+        @input="toRecordingStatePage($event)"
+      ></Calendar>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -19,16 +16,13 @@ export default {
   components: {
     Calendar
   },
-  data() {
-    return {
-      selectedDate: ""
-    };
-  },
   methods: {
-    // 成功接收 selected date
-    printSelectedDate(date) {
-      // day.js 測試
-      console.log(dayjs(date).format("YYYY/MM/DD"));
+    toRecordingStatePage($event) {
+      const date = dayjs($event).format("YYYY-MM-DD");
+      this.$router.push({
+        name: "RecordingStates",
+        query: { date: date }
+      });
     }
   }
 };
