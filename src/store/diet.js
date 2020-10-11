@@ -1,9 +1,10 @@
 import API from "../api/service";
+import dayjs from "dayjs";
 export default {
   state: {
     dietaryRecordingState: [],
     dietaryDeficiency: [],
-    historyOfAMealRecording: {}
+    historyOfAMealRecording: []
   },
   mutations: {
     dietaryRecordingState(state, dietaryRecordingState) {
@@ -118,6 +119,13 @@ export default {
           }
         ];
       }
+    },
+    datesHaveBeenRecorded(state) {
+      return {
+        dates: state.dietaryRecordingState.map(
+          item => new Date(item.updated_at)
+        )
+      };
     }
   }
 };

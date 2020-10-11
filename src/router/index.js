@@ -185,7 +185,14 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0
+          });
+          next();
+        }
       },
       {
         path: "user-profile-view",

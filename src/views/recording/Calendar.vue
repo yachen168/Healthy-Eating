@@ -3,7 +3,7 @@
     <main>
       <div class="calendar-wrapper">
         <Calendar
-          :highlighted="highlighted"
+          :highlighted="$store.getters.datesHaveBeenRecorded"
           :selectedDate="selectedDate"
           @update:date="printSelectedDate"
         ></Calendar>
@@ -21,14 +21,6 @@ export default {
   },
   data() {
     return {
-      highlighted: {
-        dates: [
-          new Date(2020, 9, 23),
-          new Date(2020, 9, 26),
-          new Date(2020, 9, 27),
-          new Date(2020, 9, 30)
-        ]
-      },
       selectedDate: ""
     };
   },
