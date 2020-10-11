@@ -1,10 +1,10 @@
 <template>
   <div>
     <main>
-      <Title :title="$route.params.dietType + '的營養攝取記錄'" />
+      <Title :title="`${diets[$route.params.dietType].name}的營養攝取記錄`" />
       <form @submit.prevent>
         <RecordingTable
-          :items="userDiet"
+          :items="$store.getters.historyOfAMealRecording"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
         />
@@ -19,7 +19,7 @@
             title="確認"
             buttonStyle="primary"
             :disabledState="comfirmButtonState"
-            @click="$router.push({ name: 'RecordingStates' })"
+            @click="confirmUpdate"
           />
         </div>
       </form>
@@ -49,34 +49,43 @@ export default {
   },
   data() {
     return {
+      pageTitle: "",
       dataOfConversionTable: {},
       comfirmButtonState: true,
-      // ===== Api 資料格式=====
-      userDiet: [
-        {
-          kind: "doctor",
-          fruits: 0,
-          vegetables: 0,
-          grains: 0,
-          nuts: 0,
-          proteins: 0,
-          dairy: 0,
-          created_at: "2020-09-14 00:36:32"
+      diets: {
+        breakfast: {
+          name: "早餐",
+          symbol: 1
+        },
+        lunch: {
+          name: "午餐",
+          symbol: 2
+        },
+        snack: {
+          name: "午茶點心",
+          symbol: 3
+        },
+        dinner: {
+          name: "晚餐",
+          symbol: 4
+        },
+        supper: {
+          name: "宵夜",
+          symbol: 5
         }
-      ]
+      }
     };
   },
   methods: {
     updateQuantity(data, num) {
       let total = data.item[data.field.key];
-      // 數量只能介於 0~10
       if (total === 0 && num < 0) return;
       if (total === 10 && num > 0) return;
       data.item[data.field.key] += num;
       this.checkComfirmButtonState();
     },
     checkComfirmButtonState() {
-      const obj = this.userDiet[0];
+      const obj = this.$store.getters.historyOfAMealRecording[0];
       obj.fruits ||
       obj.vegetables ||
       obj.grains ||
@@ -85,6 +94,29 @@ export default {
       obj.dairy
         ? (this.comfirmButtonState = false)
         : (this.comfirmButtonState = true);
+    },
+    async confirmUpdate() {
+      const diet_type = this.diets[this.$route.params.dietType].symbol;
+      const historyOfAMealRecording = this.$store.getters;
+      const diet_id = this.$store.getters.historyOfAMealRecordingID;
+
+      // 先前有紀錄則編輯該筆歷史資料，無紀錄過則直接新增
+      if (diet_id) {
+        await this.$store.dispatch("updateDiet", {
+          diet_id: diet_id,
+          data: {
+            ...this.$store.getters.historyOfAMealRecording[0],
+            _method: "put",
+            diet_type: diet_type
+          }
+        });
+      } else {
+        await this.$store.dispatch("addNewDiet", {
+          ...this.$store.getters.historyOfAMealRecording[0],
+          diet_type: diet_type
+        });
+      }
+      this.$router.push({ name: "RecordingStates" });
     }
   },
   computed: {
