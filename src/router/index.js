@@ -71,6 +71,14 @@ const routes = [
         }
       },
       {
+        path: "setting-plan",
+        name: "SettingPlan",
+        component: () =>
+          import(
+            /* webpackChunkName: "setting-plan" */ "@/views/member/SettingPlan.vue"
+          )
+      },
+      {
         path: "password-success",
         name: "PasswordSuccess",
         component: () =>
