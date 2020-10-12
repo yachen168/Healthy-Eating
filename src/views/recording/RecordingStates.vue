@@ -46,7 +46,7 @@
         >
           <RecordingCard :hasBorder="true" :class="{ recorded: true }">
             <p slot="card-body" class="title">
-              {{ Math.round($store.getters.userProfile.weight * 100) / 100
+              {{ Math.round($store.getters.weightOfSpecificDate * 100) / 100
               }}<PenIcon class="icon-pen" />
             </p>
             <span slot="card-footer" class="description"
@@ -85,6 +85,7 @@ import dayjs from "dayjs";
 import BaseTitle from "@/components/common/BaseTitle";
 import RecordingCard from "@/components/recording/RecordingCard";
 import PenIcon from "@/assets/images/ic_pen.svg?inline";
+
 export default {
   components: {
     BaseTitle,

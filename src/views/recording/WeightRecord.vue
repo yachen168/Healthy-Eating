@@ -41,16 +41,29 @@ export default {
   },
   data() {
     return {
-      userWeight: this.$store.getters.userWeight
+      userWeight: this.$store.getters.weightOfSpecificDate
     };
   },
   methods: {
-    confirmUpdateWeight() {
-      this.$store.dispatch("postUserWeight", {
-        user_id: this.$store.getters.userProfile.id,
-        remember_token: localStorage.getItem("token"),
-        weight: this.userWeight
-      });
+    async confirmUpdateWeight() {
+      const weightId = this.$store.getters.weightIdOfSpecificDate;
+
+      /* 已有紀錄則更新該筆歷史紀錄，無歷史紀錄則直接新增 */
+      if (weightId) {
+        await this.$store.dispatch("updateUserWeight", {
+          weightId: weightId,
+          data: {
+            _method: "put",
+            weight: +this.userWeight.toFixed(1)
+          }
+        });
+      } else {
+        await this.$store.dispatch("setUserWeight", {
+          user_id: this.$store.getters.userProfile.id,
+          remember_token: localStorage.getItem("token"),
+          weight: +this.userWeight.toFixed(1)
+        });
+      }
       this.$router.push({ name: "RecordingStates" });
     }
   }

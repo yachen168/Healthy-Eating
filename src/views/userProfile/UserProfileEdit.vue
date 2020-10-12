@@ -198,9 +198,9 @@ export default {
   },
   methods: {
     updateProfile() {
-      this.$store.dispatch("postUserWeight", {
-        weight: this.$store.getters.userProfile.weight
-      });
+      // this.$store.dispatch("updateUserWeight", {
+      //   weight: this.$store.getters.userProfile.weight
+      // });
     }
   }
 };
