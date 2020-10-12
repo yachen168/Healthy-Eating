@@ -184,12 +184,17 @@
 import BaseButton from "@/components/common/BaseButton";
 import ArrowDownIcon from "@/assets/images/mdi_arrow_down.svg?inline";
 import CameraIcon from "@/assets/images/ic_camera.svg?inline";
+import dayjs from "dayjs";
 export default {
   components: {
     BaseButton,
     ArrowDownIcon,
     CameraIcon
   },
+  // created() {
+  //   const date = dayjs().format("YYYY/MM/DD");
+  //   console.log(date);
+  // },
   data() {
     return {
       // ======== API 資料格式 =========
@@ -197,10 +202,34 @@ export default {
     };
   },
   methods: {
-    updateProfile() {
-      // this.$store.dispatch("updateUserWeight", {
-      //   weight: this.$store.getters.userProfile.weight
-      // });
+    async updateProfile() {
+      const token = localStorage.getItem("token");
+      const today = dayjs().format("YYYY-MM-DD");
+      await this.$store.dispatch(
+        "fetchAllWeights",
+        this.$store.getters.userProfile.id
+      );
+      // console.log(this.$store.getters.allWeights);
+      const length = this.$store.getters.allWeights.length;
+      const lastData = this.$store.getters.allWeights[length - 1];
+      const lastUpdateTime = lastData.created_at.split(" ")[0];
+
+      if (lastUpdateTime === today) {
+        await this.$store.dispatch("updateUserWeight", {
+          weightId: lastData.id,
+          data: {
+            _method: "put",
+            weight: this.$store.getters.userProfile.weight
+          }
+        });
+      } else {
+        await this.$store.dispatch("setUserWeight", {
+          remember_token: token,
+          user_id: this.$store.getters.userProfile.id,
+          weight: this.$store.getters.userProfile.weight
+        });
+      }
+      this.$router.push({ name: "UserProfileView" });
     },
     updateAvatar(event) {
       const formData = new FormData();

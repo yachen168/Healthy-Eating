@@ -57,6 +57,9 @@ export default {
     },
     weightIdOfSpecificDate(state) {
       return state.weightOfSpecificDate.id;
+    },
+    allWeights(state) {
+      return state.allWeights;
     }
   }
 };
