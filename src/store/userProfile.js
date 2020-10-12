@@ -18,15 +18,15 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    async postUserWeight({ dispatch }, data) {
-      try {
-        await API.post("/bioProfile", data); // API_11_bioProfile_add
-        dispatch("fetchUserProfile");
-      } catch (error) {
-        console.log(error);
-      }
     }
+    // async updateUserWeight({ dispatch }, data) {
+    //   try {
+    //     await API.post("/bioProfile", data);
+    //     dispatch("fetchUserProfile");
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   },
   getters: {
     userProfile(state) {

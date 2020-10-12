@@ -124,6 +124,8 @@ const routes = [
             start_date: searchedDate,
             end_date: searchedDate
           });
+          await store.dispatch("fetchAllWeights", store.getters.userProfile.id);
+          await store.commit("weightOfSpecificDate", searchedDate);
           next();
         }
       },
@@ -158,7 +160,16 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "weight-record" */ "@/views/recording/WeightRecord.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const searchedDate = to.query.date ? to.query.date : today;
+          const userId = store.getters.userProfile.id;
+
+          await store.dispatch("fetchAllWeights", userId);
+          await store.commit("weightOfSpecificDate", searchedDate);
+          next();
+        }
       },
       {
         path: "water-record",
