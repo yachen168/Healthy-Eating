@@ -52,19 +52,11 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    fields: {
+      type: Array,
+      required: true
     }
-  },
-  data() {
-    return {
-      fields: [
-        { key: "grains", label: "全穀雜糧類" },
-        { key: "proteins", label: "豆魚蛋肉類" },
-        { key: "dairy", label: "奶品類" },
-        { key: "vegetables", label: "蔬菜類" },
-        { key: "fruits", label: "水果類" },
-        { key: "nuts", label: "油脂及堅果種子類" }
-      ]
-    };
   }
 };
 </script>
