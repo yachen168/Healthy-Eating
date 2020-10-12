@@ -127,6 +127,9 @@ export default {
   > [data-label]:nth-of-type(6)::before {
     background-image: url("~@/assets/images/ic_oil.svg");
   }
+  > [data-label]:nth-of-type(7)::before {
+    background-image: url("~@/assets/images/settingfood_ic_water.svg");
+  }
 }
 
 .recording {
