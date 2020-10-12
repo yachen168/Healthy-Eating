@@ -4,6 +4,7 @@
       <Title :title="`${diets[$route.params.dietType].name}的營養攝取記錄`" />
       <form @submit.prevent>
         <RecordingTable
+          :fields="fields"
           :items="$store.getters.historyOfAMealRecording"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
@@ -73,7 +74,15 @@ export default {
           name: "宵夜",
           symbol: 5
         }
-      }
+      },
+      fields: [
+        { key: "grains", label: "全穀雜糧類" },
+        { key: "proteins", label: "豆魚蛋肉類" },
+        { key: "dairy", label: "奶品類" },
+        { key: "vegetables", label: "蔬菜類" },
+        { key: "fruits", label: "水果類" },
+        { key: "nuts", label: "油脂及堅果種子類" }
+      ]
     };
   },
   methods: {
