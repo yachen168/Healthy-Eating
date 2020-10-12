@@ -6,6 +6,9 @@ export default {
   mutations: {
     userProfile(state, userProfile) {
       state.userProfile = userProfile;
+    },
+    avatar(state, avatarUrl) {
+      // console.log(data);
     }
   },
   actions: {
@@ -17,6 +20,19 @@ export default {
         commit("userProfile", response.data.data);
       } catch (error) {
         console.log(error);
+      }
+    },
+    async uploadAvatar({ dispatch }, data) {
+      try {
+        const response = await API.post("/uploadImageAPI", data, {
+          headers: {
+            "Content-Type": "image/png",
+            Accept: "application/json"
+          }
+        });
+        dispatch("fetchUserProfile");
+      } catch (error) {
+        console.log(error.response);
       }
     }
     // async updateUserWeight({ dispatch }, data) {
