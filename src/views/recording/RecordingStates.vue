@@ -44,7 +44,10 @@
             })
           "
         >
-          <RecordingCard :hasBorder="true" :class="{ recorded: true }">
+          <RecordingCard
+            :hasBorder="true"
+            :class="{ recorded: !!$store.getters.weightIdOfSpecificDate }"
+          >
             <p slot="card-body" class="title">
               {{ Math.round($store.getters.weightOfSpecificDate * 100) / 100
               }}<PenIcon class="icon-pen" />
