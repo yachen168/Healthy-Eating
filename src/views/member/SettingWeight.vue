@@ -3,23 +3,27 @@
     <section class="main">
       <BaseTitle title="請問您目前的體重？" class="base-title" />
       <ValidationObserver ref="form" v-slot="{ invalid }">
+        <!-- 正則要修改 -->
         <ValidationProvider
-          rules="required|email"
+          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.\d)?$/ }"
           mode="lazy"
           v-slot="{ errors }"
         >
           <div class="input-container">
             <b-form-input
-              id="register-email"
+              id="weight"
+              type="number"
+              min="0"
               placeholder="xx.x"
-              type="email"
-              :state="errors[0] ? false : null"
-              :value="register.email"
-              @input="register = { ...register, email: $event }"
+              :value="register.weight"
+              @input="register = { ...register, weight: $event }"
               class="form-input weight"
             ></b-form-input>
             <div class="icon">公斤/Kg</div>
           </div>
+          <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
+            {{ errors[0] }}
+          </p>
         </ValidationProvider>
         <BaseButton
           title="下一步"
@@ -48,7 +52,7 @@ export default {
     return {
       register: {},
       isSlash: true,
-      type: "password",
+      type: "number",
       firstPassword: ""
     };
   }
