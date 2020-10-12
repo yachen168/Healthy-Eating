@@ -3,7 +3,7 @@
     <div class="avatar-wrapper">
       <div class="avatar">
         <b-avatar :src="$store.getters.avatarUrl" size="130"></b-avatar>
-        <b-form-file accept=".png"></b-form-file>
+        <b-form-file accept=".png" @input="updateAvatar"></b-form-file>
       </div>
       <CameraIcon class="icon" />
     </div>
@@ -201,6 +201,13 @@ export default {
       // this.$store.dispatch("updateUserWeight", {
       //   weight: this.$store.getters.userProfile.weight
       // });
+    },
+    updateAvatar(event) {
+      const formData = new FormData();
+      const token = localStorage.getItem("token");
+      formData.append("photo", event);
+      formData.append("remember_token", token);
+      this.$store.dispatch("uploadAvatar", formData);
     }
   }
 };
