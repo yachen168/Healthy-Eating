@@ -104,7 +104,7 @@ const routes = [
             /* webpackChunkName: "recording-states" */ "@/views/recording/RecordingStates.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
           // 待重構
           await store.dispatch("fetchDietaryRecording", {
@@ -137,7 +137,7 @@ const routes = [
             /* webpackChunkName: "diet-record" */ "@/views/recording/DietRecord.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
           await store.dispatch("fetchDietaryRecording", {
             user_id: store.getters.userProfile.id,
@@ -162,7 +162,7 @@ const routes = [
             /* webpackChunkName: "weight-record" */ "@/views/recording/WeightRecord.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
           const userId = store.getters.userProfile.id;
 
@@ -179,7 +179,7 @@ const routes = [
             /* webpackChunkName: "water-record" */ "@/views/recording/WaterRecord.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          const today = dayjs(new Date()).format("YYYY-MM-DD");
+          const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: store.getters.token,

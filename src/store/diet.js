@@ -1,5 +1,5 @@
 import API from "../api/service";
-import dayjs from "dayjs";
+
 export default {
   state: {
     dietaryRecordingState: [],
@@ -24,7 +24,6 @@ export default {
       try {
         const response = await API.post("/diet", data);
         commit("dietaryRecordingState", response.data.data);
-        // commit("historyOfAMealRecording", response.data.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -58,6 +57,7 @@ export default {
 
       if (state.dietaryDeficiency.length) {
         const dietaryDeficiency = state.dietaryDeficiency[0].deficiency;
+
         return Object.keys(dietaryDeficiency).reduce((obj, key) => {
           obj[key] = dietStandard[key] - dietaryDeficiency[key]; // 攝取目標 - 攝取不足 = 已攝取
           return obj;
@@ -67,11 +67,9 @@ export default {
     dietaryRecordingState(state, getters, rootState, rootGetters) {
       let dietSet = new Set();
 
-      if (state.dietaryRecordingState.length) {
-        state.dietaryRecordingState.map(item => {
-          dietSet.add(item.diet_type);
-        });
-      }
+      state.dietaryRecordingState.map(item => {
+        dietSet.add(item.diet_type);
+      });
 
       return {
         water: !!rootGetters.sumWaterIntakeOneDay,
@@ -88,7 +86,7 @@ export default {
         : "";
     },
     historyOfAMealRecording(state, getters, rootState, rootGetters) {
-      // format for BootstrapVue table
+      /* format for BootstrapVue table */
       const keys = [
         "fruits",
         "vegetables",

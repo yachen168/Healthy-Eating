@@ -174,7 +174,7 @@ export default {
     pageTitle() {
       return this.$route.query.date
         ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
-        : `今天 ${dayjs(new Date()).format("YYYY/MM/DD")}`;
+        : `今天 ${dayjs().format("YYYY/MM/DD")}`;
     },
     sectionTitle() {
       return this.$route.query.date
