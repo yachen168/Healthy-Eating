@@ -219,7 +219,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "user-profile-view" */ "@/views/userProfile/UserProfileView.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       },
       {
         path: "user-profile-edit",
