@@ -1,10 +1,10 @@
 <template>
-  <div class="date-controllar">
+  <div class="date-controller">
     <PreviousIcon class="icon" @click="$emit('toPreviosWeek')" />
     <span class="period"
       >{{ datePeriodOfChart.startDate }}~{{ datePeriodOfChart.endDate }}</span
     >
-    <NextIcon class="icon" @click="$emit('nextWeek')" />
+    <NextIcon class="icon" @click="$emit('toNextWeek')" />
   </div>
 </template>
 
@@ -27,9 +27,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.date-controllar {
+.date-controller {
   width: fit-content;
-  margin: 0 auto;
+  margin: 0 auto 25px;
   .period {
     margin: 0 16px;
     vertical-align: middle;

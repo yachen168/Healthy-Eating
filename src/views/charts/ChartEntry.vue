@@ -1,10 +1,10 @@
 <template>
   <div class="chart-entry-container">
-    <DateControllar
+    <DateController
       :datePeriodOfChart="$store.getters.datePeriodOfChart"
       @toPreviosWeek="$store.commit('previousWeek')"
-      @nextWeek="$store.commit('nextWeek')"
-    ></DateControllar>
+      @toNextWeek="$store.commit('nextWeek')"
+    ></DateController>
     <ChartNav></ChartNav>
     <div class="main">
       <router-view />
@@ -14,12 +14,12 @@
 
 <script>
 import ChartNav from "@/components/charts/ChartNav";
-import DateControllar from "@/components/charts/DateControllar";
+import DateController from "@/components/charts/DateController";
 
 export default {
   components: {
     ChartNav,
-    DateControllar
+    DateController
   }
 };
 </script>
@@ -27,8 +27,5 @@ export default {
 <style lang="scss" scoped>
 .chart-entry-container {
   padding: 34px 16px;
-}
-.date-controllar {
-  margin-bottom: 25px;
 }
 </style>
