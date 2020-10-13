@@ -19,13 +19,14 @@
             :value="register.email"
             @input="register = { ...register, email: $event }"
             class="form-input"
-          ></b-form-input>
+          />
         </ValidationProvider>
         <BaseButton
           title="下一步"
           :disabledState="invalid"
           class="nextStep-button"
           buttonStyle="primary"
+          @click="toResetPassword"
         />
       </ValidationObserver>
     </section>
@@ -42,11 +43,14 @@ export default {
   },
   data() {
     return {
-      register: {},
-      isSlash: true,
-      type: "password",
-      firstPassword: ""
+      register: {}
     };
+  },
+  methods: {
+    toResetPassword() {
+      this.$store.commit("setAccount", this.register.email);
+      this.$router.push({ name: "ResetPassword" });
+    }
   }
 };
 </script>
