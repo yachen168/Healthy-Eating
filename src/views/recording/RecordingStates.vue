@@ -49,8 +49,9 @@
             :class="{ recorded: !!$store.getters.weightIdOfSpecificDate }"
           >
             <p slot="card-body" class="title">
-              {{ Math.round($store.getters.weightOfSpecificDate * 100) / 100
-              }}<PenIcon class="icon-pen" />
+              {{
+                Math.round($store.getters.weightOfSpecificDate * 100) / 100
+              }}kg<PenIcon class="icon-pen" />
             </p>
             <span slot="card-footer" class="description"
               >{{ sectionTitle }}體重
