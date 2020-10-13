@@ -4,7 +4,7 @@ export default {
   state: {
     datePeriodOfChart: {
       startDate: dayjs()
-        .subtract(7, "day")
+        .subtract(6, "day")
         .format("YYYY/MM/DD"),
       endDate: dayjs().format("YYYY/MM/DD")
     }
