@@ -6,6 +6,7 @@
         <RecordingTable
           :fields="fields"
           :items="$store.getters.historyOfAMealRecording"
+          :range="0.5"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
         />

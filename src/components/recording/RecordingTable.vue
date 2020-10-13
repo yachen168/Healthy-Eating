@@ -6,7 +6,7 @@
           <MinusIcon
             class="icon"
             :class="{ disabled: data.value === 0 }"
-            @click="$emit('update:quantity', data, -0.5)"
+            @click="$emit('update:quantity', data, -range)"
           />
           <span class="quantity">{{
             data.value ? data.value.toFixed(1) : data.value
@@ -14,7 +14,7 @@
           <AddIcon
             class="icon"
             :class="{ disabled: data.value === 10 }"
-            @click="$emit('update:quantity', data, 0.5)"
+            @click="$emit('update:quantity', data, range)"
           />
           <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
           <span class="unit">{{
@@ -55,6 +55,10 @@ export default {
     },
     fields: {
       type: Array,
+      required: true
+    },
+    range: {
+      type: Number,
       required: true
     }
   }
