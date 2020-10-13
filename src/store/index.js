@@ -5,6 +5,7 @@ import UserProfile from "./userProfile";
 import Water from "./water";
 import Diet from "./diet";
 import Weight from "./weight";
+import Charts from "./charts";
 
 Vue.use(Vuex);
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     LoginRegister,
     Water,
     Diet,
-    Weight
+    Weight,
+    Charts
   }
 });
