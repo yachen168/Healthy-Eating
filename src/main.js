@@ -6,6 +6,7 @@ import store from "./store";
 import "./plugins/ant-design";
 import "./plugins/bootstrap-vue";
 import "./plugins/vee-validate";
+import "./plugins/vue-cropper";
 import "./assets/main.scss";
 
 Vue.config.productionTip = false;
