@@ -4,17 +4,23 @@
       <template v-slot:cell()="data">
         <div class="recording">
           <MinusIcon
+            v-if="canBeModify"
             class="icon"
             :class="{ disabled: data.value === 0 }"
-            @click="$emit('update:quantity', data, -range)"
+            @click="updateQuantity(data, -1)"
           />
           <span class="quantity">{{
-            data.value ? data.value.toFixed(1) : data.value
+            data.value > 0
+              ? data.field.key === "water"
+                ? data.value.toFixed(2)
+                : data.value.toFixed(1)
+              : data.value
           }}</span>
           <AddIcon
+            v-if="canBeModify"
             class="icon"
             :class="{ disabled: data.value === 10 }"
-            @click="$emit('update:quantity', data, range)"
+            @click="updateQuantity(data, 1)"
           />
           <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
           <span class="unit">{{
@@ -57,9 +63,32 @@ export default {
       type: Array,
       required: true
     },
-    range: {
-      type: Number,
+    hasWater: {
+      type: Boolean,
+      default: false
+    },
+    canBeModify: {
+      type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    updateQuantity(data, positiveOrNagtive) {
+      let sum = data.item[data.field.key];
+      if (sum === 0 && positiveOrNagtive < 0) return;
+      if (sum === 10 && positiveOrNagtive > 0) return;
+
+      if (data.field.key !== "water") {
+        this.$emit("update:quantity", {
+          data,
+          addAndSubtractRange: 0.5 * positiveOrNagtive
+        });
+      } else {
+        this.$emit("update:quantity", {
+          data,
+          addAndSubtractRange: 0.25 * positiveOrNagtive
+        });
+      }
     }
   }
 };
