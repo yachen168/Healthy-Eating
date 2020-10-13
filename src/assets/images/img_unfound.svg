@@ -1,0 +1,19 @@
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-inside-1" fill="white">
+<rect x="19" y="25" width="82.7586" height="99.3103" rx="2"/>
+</mask>
+<rect x="19" y="25" width="82.7586" height="99.3103" rx="2" stroke="#407D60" stroke-width="10" mask="url(#path-1-inside-1)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M93.3595 89.0375C93.2652 88.4444 92.9095 87.9251 92.3904 87.623L75.0876 77.551L75.0875 77.5512L64.8293 75.8074C64.0114 75.6684 63.193 76.0513 62.7756 76.7683C62.3582 77.4853 62.4294 78.3861 62.9543 79.0286L69.5364 87.0875L69.5365 87.0877L69.5366 87.0876L87.6594 97.6368L90.154 94.4139L94.1139 93.7841L93.3595 89.0375Z" fill="#407D60"/>
+<path d="M127.057 78.4956C128.128 78.2219 129.217 78.8675 129.491 79.9376L131.234 86.7527C131.508 87.8228 130.862 88.9122 129.792 89.1859L107.032 95.0073L105.879 91.7414L107.267 87.8979L104.297 84.317L127.057 78.4956Z" fill="#407D60"/>
+<rect x="34" y="45" width="48" height="4.14" rx="1" fill="#407D60"/>
+<rect x="34" y="75" width="25" height="4" rx="1" fill="#407D60"/>
+<rect x="34" y="103" width="38" height="4" rx="1" fill="#407D60"/>
+<rect x="34" y="65" width="48" height="4.14" rx="1" fill="#407D60"/>
+<rect x="34" y="55" width="48" height="4.14" rx="1" fill="#407D60"/>
+<rect x="34" y="91.1213" width="3" height="11" rx="1" transform="rotate(-45 34 91.1213)" fill="#407D60"/>
+<rect x="34" y="96.7782" width="11" height="3" rx="1" transform="rotate(-45 34 96.7782)" fill="#407D60"/>
+<rect x="53" y="91.1213" width="3" height="11" rx="1" transform="rotate(-45 53 91.1213)" fill="#407D60"/>
+<rect x="53" y="96.7782" width="11" height="3" rx="1" transform="rotate(-45 53 96.7782)" fill="#407D60"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M57 107H41V109C41 111.209 42.7909 113 45 113H53C55.2091 113 57 111.209 57 109V107ZM37 103V109C37 113.418 40.5817 117 45 117H53C57.4183 117 61 113.418 61 109V103H37Z" fill="#407D60"/>
+<path d="M47 107H51V110C51 110.552 50.5523 111 50 111H48C47.4477 111 47 110.552 47 110V107Z" fill="#407D60"/>
+</svg>
