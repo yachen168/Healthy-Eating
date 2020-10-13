@@ -1,17 +1,24 @@
 <template>
-  <div class="setDaliyPlan-page">
-    <section class="main">
-      <BaseTitle title="請設定您一天的營養規劃" class="base-title" />
+  <div>
+    <main>
+      <BaseTitle title="請設定您一天的營養規劃" />
       <!-- 查詢中 -->
       <RecordingTable
-        :items="$store.getters.historyOfAMealRecording"
+        :items="plan"
+        :canBeModify="true"
+        :fields="fields"
         @update:quantity="updateQuantity"
         @showModal="dataOfConversionTable = $event"
       />
-    </section>
+      <BaseButton
+        title="設定完成"
+        buttonStyle="primary"
+        :disabledState="isConfirmButtonPass"
+      ></BaseButton>
+    </main>
     <footer>
-      <div class="state-before"></div>
-      <div class="state-now"></div>
+      <div class="state"></div>
+      <div class="state"></div>
     </footer>
   </div>
 </template>
@@ -23,69 +30,90 @@ import RecordingTable from "@/components/recording/RecordingTable";
 export default {
   components: {
     BaseTitle,
+    BaseButton,
     RecordingTable
   },
   data() {
-    return {};
+    return {
+      isConfirmButtonPass: true,
+      fields: [
+        { key: "grains", label: "全穀雜糧類" },
+        { key: "proteins", label: "豆魚蛋肉類" },
+        { key: "dairy", label: "奶品類" },
+        { key: "vegetables", label: "蔬菜類" },
+        { key: "fruits", label: "水果類" },
+        { key: "nuts", label: "油脂及堅果種子類" },
+        { key: "water", label: "水" }
+      ],
+      // ===== 測試資料 =====
+      plan: [
+        {
+          fruits: 0,
+          vegetables: 0,
+          grains: 0,
+          nuts: 0,
+          proteins: 0,
+          dairy: 0,
+          water: 0
+        }
+      ]
+    };
+  },
+  methods: {
+    updateQuantity(e) {
+      const key = e.data.field.key;
+
+      this.plan[0][key] += e.addAndSubtractRange;
+      this.checkConfirmButtonPass(e.data.item);
+    },
+    checkConfirmButtonPass(items) {
+      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.setDaliyPlan-page {
-  position: relative;
-}
-
-.main {
+main {
   padding: 0 32px;
+  .base-title {
+    margin-top: 31px;
+    margin-bottom: 23px;
+  }
+  .BaseButton {
+    margin-top: 14px;
+  }
 }
 
-.base-title {
-  margin-top: 31px;
-  margin-bottom: 53px;
-}
-.nextStep-button {
-  margin-top: 22px;
-}
-.font-error {
-  color: #e36e6e;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  margin-top: 5px;
-}
-.weight {
-  text-align: center;
-}
-.input-container {
-  position: relative;
-}
-.icon {
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 28px;
-  color: #407d60;
-}
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  // margin-top: 312px;
-  > div {
+  padding: 17px 0;
+  .state {
     width: 70px;
     height: 8px;
     border-radius: 4px;
-    margin: 0 10px;
+  }
+  .state:first-child {
+    background: #407d60;
+  }
+  .state:last-child {
+    margin-left: 10px;
+    background: #9cc2b0;
   }
 }
-.state-now {
-  background: #407d60;
-}
-.state-before {
-  background: #9cc2b0;
+
+::v-deep
+  .table.b-table.b-table-stacked
+  > tbody
+  > tr
+  > [data-label]:last-of-type {
+  &::before {
+    width: 40%;
+  }
+  > div {
+    width: 60%;
+  }
 }
 </style>
