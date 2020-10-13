@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="chart-container">
     <div class="chart">
       <Chart :height="500" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel y-scalelabel-0">未攝取營養(份)</span>
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.chart-container {
   position: relative;
 }
 
@@ -123,7 +123,7 @@ export default {
   max-width: 800px;
   padding: 25px 10px 10px;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 0 auto;
   border-radius: 6px;
   .y-scalelabel {
     position: absolute;
