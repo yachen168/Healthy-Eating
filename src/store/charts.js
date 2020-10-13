@@ -11,26 +11,26 @@ export default {
   },
   mutations: {
     previousWeek(state) {
-      state.datePeriodOfChart.startDate = dayjs(
-        state.datePeriodOfChart.startDate
-      )
-        .subtract(7, "day")
-        .format("YYYY/MM/DD");
-
-      state.datePeriodOfChart.endDate = dayjs(state.datePeriodOfChart.endDate)
-        .subtract(7, "day")
-        .format("YYYY/MM/DD");
+      state.datePeriodOfChart = Object.keys(state.datePeriodOfChart).reduce(
+        (obj, key) => {
+          obj[key] = dayjs(state.datePeriodOfChart[key])
+            .subtract(7, "day")
+            .format("YYYY/MM/DD");
+          return obj;
+        },
+        {}
+      );
     },
     nextWeek(state) {
-      state.datePeriodOfChart.startDate = dayjs(
-        state.datePeriodOfChart.startDate
-      )
-        .add(7, "day")
-        .format("YYYY/MM/DD");
-
-      state.datePeriodOfChart.endDate = dayjs(state.datePeriodOfChart.endDate)
-        .add(7, "day")
-        .format("YYYY/MM/DD");
+      state.datePeriodOfChart = Object.keys(state.datePeriodOfChart).reduce(
+        (obj, key) => {
+          obj[key] = dayjs(state.datePeriodOfChart[key])
+            .add(7, "day")
+            .format("YYYY/MM/DD");
+          return obj;
+        },
+        {}
+      );
     }
   },
   actions: {},
