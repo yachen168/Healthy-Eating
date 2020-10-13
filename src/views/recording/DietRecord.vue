@@ -4,27 +4,27 @@
       <Title :title="`${diets[$route.params.dietType].name}的營養攝取記錄`" />
       <form @submit.prevent>
         <RecordingTable
-          :fields="fields"
           :items="$store.getters.historyOfAMealRecording"
-          :range="0.5"
+          :canBeModify="true"
+          :fields="fields"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
         />
-        <div class="button-wrapper">
-          <BaseButton
-            title="取消"
-            buttonStyle="outline-default"
-            :disabledState="false"
-            @click="$router.push({ name: 'RecordingStates' })"
-          />
-          <BaseButton
-            title="確認"
-            buttonStyle="primary"
-            :disabledState="comfirmButtonState"
-            @click="confirmUpdate"
-          />
-        </div>
       </form>
+      <div class="button-wrapper">
+        <BaseButton
+          title="取消"
+          buttonStyle="outline-default"
+          :disabledState="false"
+          @click="$router.push({ name: 'RecordingStates' })"
+        />
+        <BaseButton
+          title="確認"
+          buttonStyle="primary"
+          :disabledState="isConfirmButtonPass"
+          @click="$emit('confirmUpdate')"
+        />
+      </div>
     </main>
     <b-modal id="modal-scrollable" scrollable hide-footer>
       <div slot="modal-title">
@@ -37,8 +37,8 @@
 
 <script>
 import Title from "@/components/common/BaseTitle";
-import RecordingTable from "@/components/recording/RecordingTable";
 import BaseButton from "@/components/common/BaseButton";
+import RecordingTable from "@/components/recording/RecordingTable";
 import ConversionTable from "@/components/recording/ConversionTable";
 import nutritionalInformation from "@/NutritionalConversion.js"; // 六大食物資料
 
@@ -46,14 +46,14 @@ export default {
   components: {
     Title,
     RecordingTable,
-    BaseButton,
-    ConversionTable
+    ConversionTable,
+    BaseButton
   },
   data() {
     return {
       pageTitle: "",
+      isConfirmButtonPass: true,
       dataOfConversionTable: {},
-      comfirmButtonState: true,
       diets: {
         breakfast: {
           name: "早餐",
@@ -87,23 +87,15 @@ export default {
     };
   },
   methods: {
-    updateQuantity(data, num) {
-      let total = data.item[data.field.key];
-      if (total === 0 && num < 0) return;
-      if (total === 10 && num > 0) return;
-      data.item[data.field.key] += num;
-      this.checkComfirmButtonState();
+    updateQuantity(e) {
+      const key = e.data.field.key;
+
+      this.$store.getters.historyOfAMealRecording[0][key] +=
+        e.addAndSubtractRange;
+      this.checkConfirmButtonPass(e.data.item);
     },
-    checkComfirmButtonState() {
-      const obj = this.$store.getters.historyOfAMealRecording[0];
-      obj.fruits ||
-      obj.vegetables ||
-      obj.grains ||
-      obj.nuts ||
-      obj.proteins ||
-      obj.dairy
-        ? (this.comfirmButtonState = false)
-        : (this.comfirmButtonState = true);
+    checkConfirmButtonPass(items) {
+      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
     },
     async confirmUpdate() {
       const diet_type = this.diets[this.$route.params.dietType].symbol;
