@@ -22,7 +22,7 @@
           title="確認"
           buttonStyle="primary"
           :disabledState="isConfirmButtonPass"
-          @click="$emit('confirmUpdate')"
+          @click="confirmUpdate"
         />
       </div>
     </main>
@@ -99,7 +99,6 @@ export default {
     },
     async confirmUpdate() {
       const diet_type = this.diets[this.$route.params.dietType].symbol;
-      const historyOfAMealRecording = this.$store.getters;
       const diet_id = this.$store.getters.historyOfAMealRecordingID;
 
       // 先前有紀錄則編輯該筆歷史資料，無紀錄過則直接新增
