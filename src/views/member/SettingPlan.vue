@@ -96,11 +96,11 @@ footer {
     border-radius: 4px;
   }
   .state:first-child {
-    background: #407d60;
+    background: #9cc2b0;
   }
   .state:last-child {
     margin-left: 10px;
-    background: #9cc2b0;
+    background: #407d60;
   }
 }
 
