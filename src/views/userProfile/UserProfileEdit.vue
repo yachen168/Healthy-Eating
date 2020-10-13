@@ -177,6 +177,8 @@
         </div>
       </ValidationObserver>
     </form>
+    {{ $store.getters.avatarUrl }}
+    <Crop :imgURL="$store.getters.avatarUrl" @test="use"></Crop>
   </main>
 </template>
 
@@ -185,11 +187,13 @@ import BaseButton from "@/components/common/BaseButton";
 import ArrowDownIcon from "@/assets/images/mdi_arrow_down.svg?inline";
 import CameraIcon from "@/assets/images/ic_camera.svg?inline";
 import dayjs from "dayjs";
+import Crop from "@/components/common/Crop";
 export default {
   components: {
     BaseButton,
     ArrowDownIcon,
-    CameraIcon
+    CameraIcon,
+    Crop
   },
   // created() {
   //   const date = dayjs().format("YYYY/MM/DD");
@@ -202,6 +206,9 @@ export default {
     };
   },
   methods: {
+    use() {
+      console.log("qwwdwd");
+    },
     async updateProfile() {
       const token = localStorage.getItem("token");
       const today = dayjs().format("YYYY-MM-DD");
