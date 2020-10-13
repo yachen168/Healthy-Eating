@@ -1,12 +1,22 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import API from "../api/service";
-import router from "../router";
-Vue.use(Vuex);
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+export default {
+  state: {
+    account: "",
+    newPassword: ""
+  },
+  mutations: {
+    setAccount(state, account) {
+      console.log("33333");
+      console.log(account);
+      state.account = account;
+    },
+    setNewPassword() {
+      state.newPassword = newPassword;
+    }
+  },
+  actions: {
+    //   post Api 07
+  },
   getters: {},
   modules: {}
-});
+};
