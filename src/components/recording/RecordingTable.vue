@@ -63,10 +63,6 @@ export default {
       type: Array,
       required: true
     },
-    hasWater: {
-      type: Boolean,
-      default: false
-    },
     canBeModify: {
       type: Boolean,
       required: true
