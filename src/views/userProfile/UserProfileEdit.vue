@@ -21,12 +21,7 @@
             :placeholder="$store.getters.userProfile.name"
             :state="errors[0] ? false : null"
             :value="$store.getters.userProfile.name"
-            @input="
-              $store.commit('userProfile', {
-                ...$store.getters.userProfile,
-                name: $event
-              })
-            "
+            @input="userProfile = { ...userProfile, name: $event }"
           ></b-form-input>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
             {{ errors[0] }}
@@ -177,8 +172,9 @@
         </div>
       </ValidationObserver>
     </form>
-    {{ $store.getters.avatarUrl }}
-    <Crop :imgURL="$store.getters.avatarUrl" @test="use"></Crop>
+    <div class="crop-area" v-if="isShow">
+      <Crop :imgURL="imgData" @cancelCrop="isShow = false"></Crop>
+    </div>
   </main>
 </template>
 
@@ -195,20 +191,17 @@ export default {
     CameraIcon,
     Crop
   },
-  // created() {
-  //   const date = dayjs().format("YYYY/MM/DD");
-  //   console.log(date);
-  // },
   data() {
     return {
+      isShow: false,
+      imgData: {},
+      // url:
+      //   "https://cors-anywhere.herokuapp.com/https://k88d02.ml/storage/user/54_picture.png"
       // ======== API 資料格式 =========
-      // userProfile: this.$store.getters.userProfile
+      userProfile: this.$store.getters.userProfile
     };
   },
   methods: {
-    use() {
-      console.log("qwwdwd");
-    },
     async updateProfile() {
       const token = localStorage.getItem("token");
       const today = dayjs().format("YYYY-MM-DD");
@@ -239,17 +232,23 @@ export default {
       this.$router.push({ name: "UserProfileView" });
     },
     updateAvatar(event) {
-      const formData = new FormData();
-      const token = localStorage.getItem("token");
-      formData.append("photo", event);
-      formData.append("remember_token", token);
-      this.$store.dispatch("uploadAvatar", formData);
+      this.imgData = event;
+      if (event) this.isShow = true;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.crop-area {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 31px;
+  background-color: #f5f5f5;
+}
 main {
   padding: 31px 32px 20px;
 }
