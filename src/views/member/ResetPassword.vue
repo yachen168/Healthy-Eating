@@ -102,16 +102,10 @@ export default {
       this.isSlash = !this.isSlash;
     },
     async confirmEdit() {
-      // this.$store.commit("setAccount", this.register.password);
-      // this.$store.dispatch("resetPassword", {
-      //   email: this.$store.getters.email,
-      //   password: this.$store.getters.password
-      // });
       const response = await this.$store.dispatch(
         "resetPassword",
         this.$store.getters.infoOfForgetPassword
       );
-      console.log(response);
       if (response.status !== 400) {
         this.$router.push({ name: "PasswordSuccess" });
       }
