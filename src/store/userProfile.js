@@ -34,12 +34,7 @@ export default {
     },
     async updateUserProfile({ dispatch }, data) {
       try {
-        await API.post("/profile", data, {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
-        });
+        await API.post("/profile", data);
         dispatch("fetchUserProfile");
       } catch (error) {
         console.log(error);
