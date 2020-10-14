@@ -66,6 +66,10 @@ const routes = [
           import(
             /* webpackChunkName: "setting-weight" */ "@/views/member/SettingWeight.vue"
           ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        },
         meta: {
           requiredAuth: true
         }
@@ -76,7 +80,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "setting-plan" */ "@/views/member/SettingPlan.vue"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       },
       {
         path: "password-success",
@@ -84,7 +92,11 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "password-success" */ "@/views/member/PasswordSuccess"
-          )
+          ),
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("fetchUserProfile");
+          next();
+        }
       }
     ]
   },
