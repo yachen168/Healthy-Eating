@@ -98,9 +98,9 @@ export default {
 
       if (state.historyOfAMealRecording.length) {
         return [
-          keys.reduce((a, key) => {
-            a[key] = state.historyOfAMealRecording[0][key];
-            return a;
+          keys.reduce((obj, key) => {
+            obj[key] = state.historyOfAMealRecording[0][key];
+            return obj;
           }, {})
         ];
       } else {

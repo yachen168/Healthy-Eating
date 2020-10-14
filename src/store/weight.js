@@ -15,7 +15,7 @@ export default {
     weightOfSpecificDate(state, specificDate) {
       /* 若查詢日無歷史紀錄，則回朔到距離查詢日最近的一次歷史紀錄，至多回朔至首次紀錄體重日 */
       const reverseAllWeights = state.allWeights.reduce(
-        (acc, e) => [e, ...acc],
+        (accumulator, currentValue) => [currentValue, ...accumulator],
         []
       );
 
@@ -24,7 +24,7 @@ export default {
           specificDate
         );
       });
-      console.log(objFoundedWeight);
+
       if (objFoundedWeight) {
         state.weightOfSpecificDate = objFoundedWeight;
       } else {
