@@ -1,22 +1,33 @@
 import API from "../api/service";
 export default {
   state: {
-    account: "",
-    newPassword: ""
+    infoOfForgetPassword: {
+      email: "",
+      password: ""
+    }
   },
   mutations: {
-    setAccount(state, account) {
-      console.log("33333");
-      console.log(account);
-      state.account = account;
-    },
-    setNewPassword() {
-      state.newPassword = newPassword;
+    updateInfoOfForgetPassword(state, infoOfForgetPassword) {
+      console.log(infoOfForgetPassword);
+      state.infoOfForgetPassword = infoOfForgetPassword;
     }
   },
   actions: {
     //   post Api 07
+    async resetPassword({}, data) {
+      console.log(data);
+      try {
+        const response = await API.post("/forget", data);
+        console.log(response.data);
+      } catch (error) {
+        return error.response;
+      }
+    }
   },
-  getters: {},
+  getters: {
+    infoOfForgetPassword(state) {
+      return state.infoOfForgetPassword;
+    }
+  },
   modules: {}
 };

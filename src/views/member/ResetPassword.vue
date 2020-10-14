@@ -19,8 +19,13 @@
               placeholder="6個以上英數字，不可使用特殊符號"
               :type="type"
               :state="errors[0] ? false : null"
-              :value="firstPassword"
-              @input="firstPassword = $event"
+              :value="$store.getters.infoOfForgetPassword.password"
+              @input="
+                $store.commit('updateInfoOfForgetPassword', {
+                  ...$store.getters.infoOfForgetPassword,
+                  password: $event
+                })
+              "
               class="form-input"
             ></b-form-input>
             <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
@@ -62,6 +67,7 @@
           :disabledState="invalid"
           class="editCompleted-button"
           buttonStyle="primary"
+          @click="confirmEdit"
         />
       </ValidationObserver>
     </section>
@@ -94,6 +100,21 @@ export default {
         ? (this.type = "text")
         : (this.type = "password");
       this.isSlash = !this.isSlash;
+    },
+    async confirmEdit() {
+      // this.$store.commit("setAccount", this.register.password);
+      // this.$store.dispatch("resetPassword", {
+      //   email: this.$store.getters.email,
+      //   password: this.$store.getters.password
+      // });
+      const response = await this.$store.dispatch(
+        "resetPassword",
+        this.$store.getters.infoOfForgetPassword
+      );
+      console.log(response);
+      if (response.status !== 400) {
+        this.$router.push({ name: "PasswordSuccess" });
+      }
     }
   }
 };
