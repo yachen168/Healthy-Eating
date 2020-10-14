@@ -16,9 +16,9 @@
               min="0"
               placeholder="xx.x"
               :value="register.weight"
-              @input="register = { ...register, weight: $event }"
+              @input="register.weight = $event"
               class="form-input weight"
-            ></b-form-input>
+            />
             <div class="icon">公斤/Kg</div>
           </div>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
@@ -30,6 +30,7 @@
           :disabledState="invalid"
           class="nextStep-button"
           buttonStyle="primary"
+          @click="confirmWeight"
         />
       </ValidationObserver>
     </section>
@@ -50,11 +51,27 @@ export default {
   },
   data() {
     return {
-      register: {},
-      isSlash: true,
-      type: "number",
-      firstPassword: ""
+      register: {
+        user_id: "",
+        weight: ""
+      }
     };
+  },
+  methods: {
+    async confirmWeight() {
+      console.log("weight");
+      console.log(this.register.weight);
+      this.register.user_id = this.$store.getters.userProfile.id;
+      console.log(this.$store.getters.userProfile.id);
+      const response = await this.$store.dispatch(
+        "setUserWeight",
+        this.register
+      );
+      console.log(response.data);
+      if (response.status !== 400) {
+        this.$router.push({ name: "SettingPlan" });
+      }
+    }
   }
 };
 </script>
