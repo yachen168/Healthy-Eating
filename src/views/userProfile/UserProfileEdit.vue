@@ -18,9 +18,9 @@
             id="user-name"
             class="form-input"
             type="text"
-            :placeholder="$store.getters.userProfile.name"
+            :placeholder="userProfile.name"
             :state="errors[0] ? false : null"
-            :value="$store.getters.userProfile.name"
+            :value="userProfile.name"
             @input="userProfile = { ...userProfile, name: $event }"
           ></b-form-input>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
@@ -33,11 +33,7 @@
             id="gender"
             class="form-input"
             type="button"
-            :value="
-              $store.getters.userProfile.gender
-                ? $store.getters.gender
-                : '未選擇'
-            "
+            :value="userProfile.gender ? $store.getters.gender : '未選擇'"
             v-b-modal.modal-gender
           />
           <ArrowDownIcon class="icon" />
@@ -47,12 +43,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="male"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="userProfile = { ...userProfile, gender: $event }"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -60,12 +51,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="female"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="userProfile = { ...userProfile, gender: $event }"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -73,12 +59,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="others"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="userProfile = { ...userProfile, gender: $event }"
               ></b-form-radio>
             </div>
           </b-modal>
@@ -89,34 +70,27 @@
           class="form-input birthday-input"
           type="date"
           placeholder=""
-          :value="$store.getters.userProfile.birthday"
-          @input="
-            $store.commit('userProfile', {
-              ...$store.getters.userProfile,
-              birthday: $event
-            })
-          "
+          :value="userProfile.birthday"
+          @input="userProfile = { ...userProfile, birthday: $event }"
         ></b-form-input>
         <label for="height" class="label-title">身高</label>
         <ValidationProvider
-          :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.\d?)?$/ }"
+          :rules="{
+            required: true,
+            regex: /^[1-9]{1}\d{0,2}(\.\d)?$/
+          }"
           v-slot="{ errors }"
         >
           <b-input-group>
             <b-form-input
               id="height"
               class="form-input height-input"
-              type="number"
+              type="text"
               min="0"
               :state="errors[0] ? false : null"
               placeholder="未填寫"
-              :value="$store.getters.userProfile.height"
-              @input="
-                $store.commit('userProfile', {
-                  ...$store.getters.userProfile,
-                  height: $event
-                })
-              "
+              :value="userProfile.height"
+              @input="userProfile = { ...userProfile, height: $event }"
             ></b-form-input>
             <b-input-group-prepend>
               <span>公分/cm</span>
@@ -139,13 +113,8 @@
               type="number"
               min="0"
               :state="errors[0] ? false : null"
-              :value="$store.getters.userProfile.weight"
-              @input="
-                $store.commit('userProfile', {
-                  ...$store.getters.userProfile,
-                  weight: $event
-                })
-              "
+              :value="userProfile.weight"
+              @input="userProfile = { ...userProfile, weight: $event }"
             ></b-form-input>
             <b-input-group-prepend>
               <span>公斤/kg</span>
@@ -209,6 +178,13 @@ export default {
         "fetchAllWeights",
         this.$store.getters.userProfile.id
       );
+      await this.$store.dispatch("updateUserProfile", {
+        height: this.userProfile.height,
+        name: this.userProfile.name,
+        gender: this.userProfile.gender,
+        birthday: this.userProfile.birthday,
+        remember_token: token
+      });
       // console.log(this.$store.getters.allWeights);
       const length = this.$store.getters.allWeights.length;
       const lastData = this.$store.getters.allWeights[length - 1];
