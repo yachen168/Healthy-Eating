@@ -281,6 +281,18 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path: "/404",
+    name: "404",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "404" */ "@/views/404NotFound.vue")
+  },
+  {
+    path: "*",
+    name: "404NotFound",
+    redirect: { name: 404 }
   }
 ];
 
