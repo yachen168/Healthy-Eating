@@ -16,8 +16,13 @@
             placeholder="healthy1234@healthy.com"
             type="email"
             :state="errors[0] ? false : null"
-            :value="register.email"
-            @input="register = { ...register, email: $event }"
+            :value="$store.getters.infoOfForgetPassword.email"
+            @input="
+              $store.commit('updateInfoOfForgetPassword', {
+                ...$store.getters.infoOfForgetPassword,
+                email: $event
+              })
+            "
             class="form-input"
           />
         </ValidationProvider>
@@ -26,7 +31,11 @@
           :disabledState="invalid"
           class="nextStep-button"
           buttonStyle="primary"
-          @click="toResetPassword"
+          @click="
+            $router.push({
+              name: 'ResetPassword'
+            })
+          "
         />
       </ValidationObserver>
     </section>
@@ -40,18 +49,18 @@ export default {
   components: {
     BaseTitle,
     BaseButton
-  },
-  data() {
-    return {
-      register: {}
-    };
-  },
-  methods: {
-    toResetPassword() {
-      this.$store.commit("setAccount", this.register.email);
-      this.$router.push({ name: "ResetPassword" });
-    }
   }
+  // data() {
+  //   return {
+  //     register: {}
+  //   };
+  // },
+  // methods: {
+  //   toResetPassword() {
+  //     this.$store.commit("setAccount", this.register.email);
+  //     this.$router.push({ name: "ResetPassword" });
+  //   }
+  // }
 };
 </script>
 
