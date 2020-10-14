@@ -50,7 +50,7 @@ export default {
   methods: {
     updateSumWaterIntake() {
       this.$store.dispatch("updateSumWaterIntake", {
-        remember_token: this.$store.getters.token,
+        remember_token: localStorage.getItem("token"),
         user_id: `${this.$store.getters.userProfile.id}`,
         water:
           this.sumWaterIntakeOneDay - this.$store.getters.sumWaterIntakeOneDay
