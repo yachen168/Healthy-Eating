@@ -1,20 +1,33 @@
 <template>
   <div class="crop">
-    <!-- <div class="outer"> -->
+    <p class="title">上傳編輯圖片</p>
     <VueCropper
       autoCrop
-      centerBox
       :outputSize="option.size"
       :outputType="option.type"
-      :img="option.img"
+      :img="blob"
       :autoCropWidth="option.autoCropWidth"
       :autoCropHeight="option.autoCropHeight"
       :fixedBox="option.fixedBox"
       :high="option.high"
+      :info="option.info"
+      :mode="option.mode"
+      :maxImgSize="option.maxImgSize"
       ref="cropper"
     ></VueCropper>
-    <BaseButton title="裁切" buttonStyle="primary" @click="finish"></BaseButton>
-    <!-- </div> -->
+    <div class="upload-avatar-footer">
+      <BaseButton
+        title="取消"
+        class="login-button"
+        buttonStyle="outline-default"
+        @click="$emit('cancelCrop')"
+      ></BaseButton>
+      <BaseButton
+        title="上傳大頭貼"
+        buttonStyle="primary"
+        @click="uploadAvatar"
+      ></BaseButton>
+    </div>
   </div>
 </template>
 
@@ -26,34 +39,43 @@ export default {
     VueCropper,
     BaseButton
   },
+  async created() {
+    const blob_url = URL.createObjectURL(this.imgURL);
+    this.blob = blob_url;
+  },
   data() {
     return {
       option: {
         size: 1,
         type: "png",
+        img: this.blob,
         autoCropWidth: 260,
         autoCropHeight: 260,
         high: true,
-        img: "https://shnhz.github.io/shn-ui/img/Koala.jpg",
-        fixedBox: true
-      }
+        info: false,
+        maxImgSize: 360,
+        fixedBox: true,
+        mode: "100%"
+      },
+      blob: ""
     };
   },
   props: {
     imgURL: {
-      type: String,
+      type: File,
       required: true
     }
   },
   methods: {
-    finish() {
-      this.$refs.cropper.getCropBlob(data => {
+    async uploadAvatar() {
+      await this.$refs.cropper.getCropBlob(data => {
         const formData = new FormData();
         const token = localStorage.getItem("token");
-        formData.append("photo", data);
+        formData.append("photo", data, Date.now());
         formData.append("remember_token", token);
         this.$store.dispatch("uploadAvatar", formData);
       });
+      this.$emit("cancelCrop");
     }
   }
 };
@@ -62,7 +84,28 @@ export default {
 <style lang="scss" scoped>
 .crop {
   width: 100%;
-  height: 500px;
+  height: 360px;
+}
+
+.title {
+  color: #407d60;
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 31px;
+  margin-bottom: 36px;
+}
+
+.upload-avatar-footer {
+  display: flex;
+  margin: 61px 28px 0;
+  .BaseButton {
+    flex: 1 0 0;
+  }
+  .BaseButton + .BaseButton {
+    margin-left: 14px;
+  }
 }
 
 ::v-deep .cropper-crop-box {

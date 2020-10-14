@@ -6,12 +6,10 @@ export default {
   mutations: {
     userProfile(state, userProfile) {
       state.userProfile = userProfile;
-    },
-    avatar(state, avatarUrl) {
-      // console.log(data);
     }
   },
   actions: {
+    updateUserProfile({}) {},
     async fetchUserProfile({ commit }) {
       try {
         const response = await API.post("/info", {
@@ -35,14 +33,6 @@ export default {
         console.log(error.response);
       }
     }
-    // async updateUserWeight({ dispatch }, data) {
-    //   try {
-    //     await API.post("/bioProfile", data);
-    //     dispatch("fetchUserProfile");
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
   },
   getters: {
     userProfile(state) {
