@@ -9,7 +9,6 @@ export default {
     }
   },
   actions: {
-    updateUserProfile({}) {},
     async fetchUserProfile({ commit }) {
       try {
         const response = await API.post("/info", {
@@ -31,6 +30,19 @@ export default {
         dispatch("fetchUserProfile");
       } catch (error) {
         console.log(error.response);
+      }
+    },
+    async updateUserProfile({ dispatch }, data) {
+      try {
+        await API.post("/profile", data, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          }
+        });
+        dispatch("fetchUserProfile");
+      } catch (error) {
+        console.log(error);
       }
     }
   },
