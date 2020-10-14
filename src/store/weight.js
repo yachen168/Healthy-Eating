@@ -1,7 +1,7 @@
 import API from "../api/service";
 import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-dayjs.extend(isSameOrAfter);
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+dayjs.extend(isSameOrBefore);
 
 export default {
   state: {
@@ -14,12 +14,17 @@ export default {
     },
     weightOfSpecificDate(state, specificDate) {
       /* 若查詢日無歷史紀錄，則回朔到距離查詢日最近的一次歷史紀錄，至多回朔至首次紀錄體重日 */
-      const objFoundedWeight = state.allWeights.find(item => {
-        return dayjs(new Date(specificDate)).isSameOrAfter(
-          dayjs(item.created_at.split(" ")[0])
+      const reverseAllWeights = state.allWeights.reduce(
+        (acc, e) => [e, ...acc],
+        []
+      );
+
+      const objFoundedWeight = reverseAllWeights.find(item => {
+        return dayjs(item.created_at.split(" ")[0]).isSameOrBefore(
+          specificDate
         );
       });
-
+      console.log(objFoundedWeight);
       if (objFoundedWeight) {
         state.weightOfSpecificDate = objFoundedWeight;
       } else {
