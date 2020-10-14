@@ -1,7 +1,7 @@
 <template>
   <div class="settingWeight-page">
     <section class="main">
-      <BaseTitle title="請問您目前的體重？" class="base-title" />
+      <BaseTitle title="請問您目前的體重？" />
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <!-- 正則要修改 -->
         <ValidationProvider
@@ -34,8 +34,8 @@
       </ValidationObserver>
     </section>
     <footer>
-      <div class="state-now"></div>
-      <div class="state-next"></div>
+      <div class="state"></div>
+      <div class="state"></div>
     </footer>
   </div>
 </template>
@@ -98,22 +98,24 @@ export default {
   line-height: 28px;
   color: #407d60;
 }
+
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 17px 0;
   margin-top: 312px;
-  > div {
+  .state {
     width: 70px;
     height: 8px;
     border-radius: 4px;
-    margin: 0 10px;
   }
-}
-.state-now {
-  background: #407d60;
-}
-.state-next {
-  background: #9cc2b0;
+  .state:first-child {
+    background: #407d60;
+  }
+  .state:last-child {
+    margin-left: 10px;
+    background: #9cc2b0;
+  }
 }
 </style>
