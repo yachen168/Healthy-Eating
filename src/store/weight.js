@@ -44,9 +44,11 @@ export default {
     async setUserWeight({}, data) {
       try {
         console.log(data);
-        await API.post("/bioProfile", data);
+        const response = await API.post("/bioProfile", data);
+        console.log(response.status);
+        return response;
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     },
     async updateUserWeight({}, { weightId, data }) {

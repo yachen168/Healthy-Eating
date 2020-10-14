@@ -106,8 +106,9 @@ export default {
         "resetPassword",
         this.$store.getters.infoOfForgetPassword
       );
-      if (response.status !== 400) {
+      if (response !== 400) {
         this.$router.push({ name: "PasswordSuccess" });
+      } else {
       }
     }
   }

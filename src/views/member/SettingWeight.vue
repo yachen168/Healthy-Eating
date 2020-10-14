@@ -16,7 +16,7 @@
               min="0"
               placeholder="xx.x"
               :value="register.weight"
-              @input="register.weight = $event"
+              @input="register.weight = parseFloat($event)"
               class="form-input weight"
             />
             <div class="icon">公斤/Kg</div>
@@ -52,23 +52,20 @@ export default {
   data() {
     return {
       register: {
-        user_id: "",
+        remember_token: localStorage.getItem("token"),
+        user_id: `${this.$store.getters.userProfile.id}`,
         weight: ""
       }
     };
   },
   methods: {
     async confirmWeight() {
-      console.log("weight");
-      console.log(this.register.weight);
-      this.register.user_id = this.$store.getters.userProfile.id;
-      console.log(this.$store.getters.userProfile.id);
       const response = await this.$store.dispatch(
         "setUserWeight",
         this.register
       );
-      console.log(response.data);
-      if (response.status !== 400) {
+      console.log(response.status);
+      if (response.status === 200) {
         this.$router.push({ name: "SettingPlan" });
       }
     }
