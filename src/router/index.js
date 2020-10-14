@@ -99,7 +99,6 @@ const routes = [
       ),
     beforeEnter: async (to, from, next) => {
       await store.dispatch("fetchUserProfile");
-      await store.dispatch("fetchToken");
       next();
     },
     children: [
@@ -127,7 +126,7 @@ const routes = [
             end_date: searchedDate
           });
           await store.dispatch("fetchSumWaterIntake", {
-            remember_token: store.getters.token,
+            remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
             end_date: searchedDate
@@ -190,7 +189,7 @@ const routes = [
           const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
           await store.dispatch("fetchSumWaterIntake", {
-            remember_token: store.getters.token,
+            remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
             end_date: searchedDate
