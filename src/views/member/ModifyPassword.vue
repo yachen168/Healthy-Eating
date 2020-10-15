@@ -1,7 +1,7 @@
 <template>
   <div class="resetPassword-page">
     <section class="main">
-      <BaseTitle title="設定新密碼" class="base-title" />
+      <BaseTitle title="修改密碼" class="base-title" />
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <label for="login-password" class="label-title">請輸入原密碼</label>
         <div class="input-area">
