@@ -74,7 +74,7 @@
               type="password"
               :state="errors[0] ? false : null"
               :value="register.password"
-              @input="register = { ...register, password: $event }"
+              @input="register.password = $event"
               class="form-input"
             ></b-form-input>
             <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
@@ -87,6 +87,7 @@
           :disabledState="invalid"
           class="editCompleted-button"
           buttonStyle="primary"
+          @click="confirmModifyPassword"
         />
       </ValidationObserver>
     </section>
@@ -108,7 +109,10 @@ export default {
   data() {
     return {
       loginData: {},
-      register: {},
+      register: {
+        remember_token: localStorage.getItem("token"),
+        password: ""
+      },
       originalPassword: {
         isSlash: true,
         type: "password"
@@ -132,16 +136,18 @@ export default {
         ? (this.newPassword.type = "text")
         : (this.newPassword.type = "password");
       this.newPassword.isSlash = !this.newPassword.isSlash;
+    },
+    async confirmModifyPassword() {
+      const response = await this.$store.dispatch(
+        "modifyPassword",
+        this.register
+      );
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.forgetPassword-page {
-  position: relative;
-}
-
 .main {
   padding: 0 32px;
 }
