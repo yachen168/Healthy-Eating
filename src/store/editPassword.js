@@ -22,6 +22,14 @@ export default {
       } catch (error) {
         return error.response;
       }
+    },
+    async modifyPassword({}, data) {
+      try {
+        const response = await API.post("/reset", data);
+        console.log(response.data);
+      } catch (error) {
+        return error.response;
+      }
     }
   },
   getters: {
