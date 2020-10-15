@@ -85,7 +85,7 @@
             <b-form-input
               id="height"
               class="form-input height-input"
-              type="text"
+              type="number"
               :state="errors[0] ? false : null"
               placeholder="未填寫"
               :value="userProfile.height"
@@ -190,20 +190,18 @@ export default {
       const lastUpdateTime = lastData.created_at.split(" ")[0];
 
       if (lastUpdateTime === today) {
-        console.log("update");
         await this.$store.dispatch("updateUserWeight", {
           weightId: lastData.id,
           data: {
             _method: "put",
-            weight: this.userProfile.weight
+            weight: +this.userProfile.weight
           }
         });
       } else {
-        console.log("set");
         await this.$store.dispatch("setUserWeight", {
           remember_token: token,
           user_id: this.userProfile.id,
-          weight: this.userProfile.weight
+          weight: +this.userProfile.weight
         });
       }
       this.$router.push({ name: "UserProfileView" });
