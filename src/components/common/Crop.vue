@@ -25,7 +25,7 @@
       <BaseButton
         title="上傳大頭貼"
         buttonStyle="primary"
-        @click="uploadAvatar"
+        @click="$emit('updateAvatar')"
       ></BaseButton>
     </div>
   </div>
@@ -67,15 +67,8 @@ export default {
     }
   },
   methods: {
-    async uploadAvatar() {
-      await this.$refs.cropper.getCropBlob(data => {
-        const formData = new FormData();
-        const token = localStorage.getItem("token");
-        formData.append("photo", data, Date.now());
-        formData.append("remember_token", token);
-        this.$store.dispatch("uploadAvatar", formData);
-      });
-      this.$emit("cancelCrop");
+    updateAvatar(data) {
+      this.$refs.cropper.getCropBlob(data);
     }
   }
 };
