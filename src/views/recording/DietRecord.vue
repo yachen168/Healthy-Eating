@@ -16,7 +16,12 @@
           title="取消"
           buttonStyle="outline-default"
           :disabledState="false"
-          @click="$router.push({ name: 'RecordingStates' })"
+          @click="
+            $router.push({
+              name: 'RecordingStates',
+              query: { date: $route.query.date }
+            })
+          "
         />
         <BaseButton
           title="確認"
@@ -29,7 +34,12 @@
         <BaseButton
           title="回首頁"
           buttonStyle="primary"
-          @click="confirmUpdate"
+          @click="
+            $router.push({
+              name: 'RecordingStates',
+              query: { date: $route.query.date }
+            })
+          "
         />
       </div>
     </main>
