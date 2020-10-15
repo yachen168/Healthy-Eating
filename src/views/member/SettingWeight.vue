@@ -64,10 +64,7 @@ export default {
         "setUserWeight",
         this.register
       );
-      console.log(response.status);
-      if (response.status === 200) {
-        this.$router.push({ name: "SettingPlan" });
-      }
+      this.$router.push({ name: "SettingPlan" });
     }
   }
 };

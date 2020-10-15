@@ -2,7 +2,6 @@
   <div>
     <main>
       <BaseTitle title="請設定您一天的營養規劃" />
-      <!-- 查詢中 -->
       <RecordingTable
         :items="plan"
         :canBeModify="true"
@@ -14,6 +13,7 @@
         title="設定完成"
         buttonStyle="primary"
         :disabledState="isConfirmButtonPass"
+        @click="confirmSettingPlan"
       ></BaseButton>
     </main>
     <footer>
@@ -45,9 +45,11 @@ export default {
         { key: "nuts", label: "油脂及堅果種子類" },
         { key: "water", label: "水" }
       ],
-      // ===== 測試資料 =====
       plan: [
         {
+          user_id: this.$store.getters.userProfile.id,
+          kind: 1,
+          diet_type: 0,
           fruits: 0,
           vegetables: 0,
           grains: 0,
@@ -68,6 +70,10 @@ export default {
     },
     checkConfirmButtonPass(items) {
       this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+    },
+    confirmSettingPlan() {
+      this.$store.dispatch("addNewDiet", this.plan[0]);
+      this.$router.push({ name: "RecordingStates" });
     }
   }
 };
