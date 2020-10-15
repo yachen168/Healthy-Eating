@@ -15,7 +15,12 @@
         <BaseButton
           title="取消"
           buttonStyle="outline-default"
-          @click="$router.push({ name: 'RecordingStates' })"
+          @click="
+            $router.push({
+              name: 'RecordingStates',
+              query: { date: $route.query.date }
+            })
+          "
         ></BaseButton>
         <BaseButton
           title="確認"
@@ -30,7 +35,12 @@
         <BaseButton
           title="回首頁"
           buttonStyle="primary"
-          @click="$router.push({ name: 'RecordingStates' })"
+          @click="
+            $router.push({
+              name: 'RecordingStates',
+              query: { date: $route.query.date }
+            })
+          "
         ></BaseButton>
       </div>
     </main>
