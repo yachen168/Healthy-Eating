@@ -6,20 +6,19 @@
         <!-- 正則要修改 -->
         <ValidationProvider
           :rules="{ required: true, regex: /^[1-9]{1}\d{0,2}(\.\d)?$/ }"
-          mode="lazy"
           v-slot="{ errors }"
         >
           <div class="input-container">
             <b-form-input
               id="weight"
+              class="form-input weight"
               type="number"
               min="0"
               placeholder="xx.x"
               :value="register.weight"
               @input="register.weight = parseFloat($event)"
-              class="form-input weight"
             />
-            <div class="icon">公斤/Kg</div>
+            <div class="icon">公斤/kg</div>
           </div>
           <p :class="{ 'font-error': errors[0] }" v-show="errors[0]">
             {{ errors[0] }}
@@ -27,9 +26,9 @@
         </ValidationProvider>
         <BaseButton
           title="下一步"
-          :disabledState="invalid"
           class="nextStep-button"
           buttonStyle="primary"
+          :disabledState="invalid"
           @click="confirmWeight"
         />
       </ValidationObserver>
@@ -81,7 +80,7 @@ export default {
 
 .base-title {
   margin-top: 31px;
-  margin-bottom: 53px;
+  margin-bottom: 80px;
 }
 .nextStep-button {
   margin-top: 22px;
