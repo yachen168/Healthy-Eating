@@ -67,4 +67,8 @@ export default {
     top: 7px;
   }
 }
+
+.recording-card.disabled {
+  cursor: not-allowed;
+}
 </style>

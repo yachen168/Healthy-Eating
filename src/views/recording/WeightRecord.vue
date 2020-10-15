@@ -5,11 +5,12 @@
       <FormCard
         unit="kg"
         :quantity="userWeight"
+        :canBeModified="canBeModified"
         @minus:quantity="userWeight -= 0.1"
         @add:quantity="userWeight += 0.1"
         ><WaterRecordIcon slot="image" />
       </FormCard>
-      <div class="button-wrapper">
+      <div class="button-wrapper" v-if="canBeModified">
         <BaseButton
           title="取消"
           buttonStyle="outline-default"
@@ -22,6 +23,13 @@
           @click="confirmUpdateWeight"
         ></BaseButton>
       </div>
+      <div class="button-wrapper" v-else>
+        <BaseButton
+          title="回首頁"
+          buttonStyle="primary"
+          @click="$router.push({ name: 'RecordingStates' })"
+        ></BaseButton>
+      </div>
     </main>
   </div>
 </template>
@@ -31,6 +39,7 @@ import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 import FormCard from "@/components/recording/FormCard";
 import WaterRecordIcon from "@/assets/images/ic_weight_record.svg?inline";
+import utilities from "@/utilities/utilities";
 
 export default {
   components: {
@@ -65,6 +74,11 @@ export default {
         });
       }
       this.$router.push({ name: "RecordingStates" });
+    }
+  },
+  computed: {
+    canBeModified() {
+      return !utilities.isSearchedDateExpired(this.$route.query.date);
     }
   }
 };
