@@ -2,7 +2,9 @@
   <div>
     <Navbar
       @click="
-        $router.history.current.name !== 'RecordingStates'
+        $router.history.current.name !== 'RecordingStates' ||
+        ($router.history.current.name === 'RecordingStates' &&
+          $route.query.date !== today)
           ? $router.push({ name: 'RecordingStates' })
           : ''
       "
@@ -27,6 +29,7 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import Navbar from "@/components/common/Navbar";
 import Sidebar from "@/components/common/Sidebar";
 import ChartIcon from "@/assets/images/ic_chart.svg?inline";
@@ -38,6 +41,11 @@ export default {
     Sidebar,
     ChartIcon,
     CalendarIcon
+  },
+  computed: {
+    today() {
+      return dayjs().format("YYYY-MM-DD");
+    }
   }
 };
 </script>
