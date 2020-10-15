@@ -4,7 +4,7 @@
       <BaseTitle title="請設定您一天的營養規劃" />
       <RecordingTable
         :items="plan"
-        :canBeModify="true"
+        :canBeModified="true"
         :fields="fields"
         @update:quantity="updateQuantity"
         @showModal="dataOfConversionTable = $event"

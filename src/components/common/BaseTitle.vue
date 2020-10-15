@@ -3,6 +3,7 @@
     <h1 class="page-title">
       {{ title }}
     </h1>
+    <slot></slot>
   </div>
 </template>
 
@@ -18,10 +19,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-title {
-  font-size: 24px;
-  text-align: center;
-  color: #407d60;
-  font-weight: bold;
+.base-title {
+  position: relative;
+  .page-title {
+    font-size: 24px;
+    text-align: center;
+    color: #407d60;
+    font-weight: bold;
+  }
 }
 </style>

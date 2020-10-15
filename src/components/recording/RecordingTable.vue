@@ -4,7 +4,7 @@
       <template v-slot:cell()="data">
         <div class="recording">
           <MinusIcon
-            v-if="canBeModify"
+            v-if="canBeModified"
             class="icon"
             :class="{ disabled: data.value === 0 }"
             @click="updateQuantity(data, -1)"
@@ -17,7 +17,7 @@
               : data.value
           }}</span>
           <AddIcon
-            v-if="canBeModify"
+            v-if="canBeModified"
             class="icon"
             :class="{ disabled: data.value === 10 }"
             @click="updateQuantity(data, 1)"
@@ -63,7 +63,7 @@ export default {
       type: Array,
       required: true
     },
-    canBeModify: {
+    canBeModified: {
       type: Boolean,
       required: true
     }

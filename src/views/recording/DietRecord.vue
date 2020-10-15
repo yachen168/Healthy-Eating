@@ -5,13 +5,13 @@
       <form @submit.prevent>
         <RecordingTable
           :items="$store.getters.historyOfAMealRecording"
-          :canBeModify="true"
+          :canBeModified="canBeModified"
           :fields="fields"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
         />
       </form>
-      <div class="button-wrapper">
+      <div class="button-wrapper" v-if="canBeModified">
         <BaseButton
           title="取消"
           buttonStyle="outline-default"
@@ -22,6 +22,13 @@
           title="確認"
           buttonStyle="primary"
           :disabledState="isConfirmButtonPass"
+          @click="confirmUpdate"
+        />
+      </div>
+      <div class="button-wrapper" v-else>
+        <BaseButton
+          title="回首頁"
+          buttonStyle="primary"
           @click="confirmUpdate"
         />
       </div>
@@ -40,7 +47,8 @@ import Title from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 import RecordingTable from "@/components/recording/RecordingTable";
 import ConversionTable from "@/components/recording/ConversionTable";
-import nutritionalInformation from "@/NutritionalConversion.js"; // 六大食物資料
+import nutritionalInformation from "@/NutritionalConversion.js";
+import utilities from "@/utilities/utilities";
 
 export default {
   components: {
@@ -125,6 +133,9 @@ export default {
       return this.dataOfConversionTable.key
         ? nutritionalInformation[this.dataOfConversionTable.key].items
         : "";
+    },
+    canBeModified() {
+      return !utilities.isSearchedDateExpired(this.$route.query.date);
     }
   }
 };

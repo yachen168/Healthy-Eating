@@ -5,12 +5,13 @@
       <FormCard
         unit="公升"
         :quantity="sumWaterIntakeOneDay"
+        :canBeModified="canBeModified"
         @minus:quantity="sumWaterIntakeOneDay -= 0.25"
         @add:quantity="sumWaterIntakeOneDay += 0.25"
         ><WaterRecordIcon slot="image" />
         <div slot="footer" class="target">每日目標：2公升</div></FormCard
       >
-      <div class="button-wrapper">
+      <div class="button-wrapper" v-if="canBeModified">
         <BaseButton
           title="取消"
           buttonStyle="outline-default"
@@ -25,6 +26,13 @@
           @click="updateSumWaterIntake"
         ></BaseButton>
       </div>
+      <div class="button-wrapper" v-else>
+        <BaseButton
+          title="回首頁"
+          buttonStyle="primary"
+          @click="$router.push({ name: 'RecordingStates' })"
+        ></BaseButton>
+      </div>
     </main>
   </div>
 </template>
@@ -34,6 +42,7 @@ import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 import FormCard from "@/components/recording/FormCard";
 import WaterRecordIcon from "@/assets/images/ic_water_record.svg?inline";
+import utilities from "@/utilities/utilities";
 
 export default {
   components: {
@@ -51,11 +60,16 @@ export default {
     updateSumWaterIntake() {
       this.$store.dispatch("updateSumWaterIntake", {
         remember_token: localStorage.getItem("token"),
-        user_id: `${this.$store.getters.userProfile.id}`,
+        user_id: this.$store.getters.userProfile.id,
         water:
           this.sumWaterIntakeOneDay - this.$store.getters.sumWaterIntakeOneDay
       });
       this.$router.push({ name: "RecordingStates" });
+    }
+  },
+  computed: {
+    canBeModified() {
+      return !utilities.isSearchedDateExpired(this.$route.query.date);
     }
   }
 };
@@ -81,8 +95,10 @@ main {
   display: flex;
   justify-content: center;
   .BaseButton {
-    width: 143px;
-    margin: 0 7px;
+    flex: 1 0 0;
+  }
+  .BaseButton + .BaseButton {
+    margin-left: 7px;
   }
 }
 </style>

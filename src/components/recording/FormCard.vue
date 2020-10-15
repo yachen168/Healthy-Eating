@@ -3,6 +3,7 @@
     <slot name="image"></slot>
     <div class="record">
       <MinusIcon
+        v-if="canBeModified"
         class="icon"
         :class="{ disabled: quantity == 0 }"
         @click="$emit('minus:quantity')"
@@ -10,7 +11,11 @@
       <h2 class="quantity">
         {{ Math.round(quantity * 100) / 100 }} {{ unit }}
       </h2>
-      <AddIcon class="icon" @click="$emit('add:quantity')" />
+      <AddIcon
+        v-if="canBeModified"
+        class="icon"
+        @click="$emit('add:quantity')"
+      />
     </div>
     <slot name="footer"></slot>
   </div>
@@ -31,6 +36,10 @@ export default {
     },
     unit: {
       type: String,
+      required: true
+    },
+    canBeModified: {
+      type: Boolean,
       required: true
     }
   }

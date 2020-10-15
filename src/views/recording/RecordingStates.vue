@@ -1,7 +1,11 @@
 <template>
   <div>
     <main>
-      <BaseTitle :title="pageTitle"></BaseTitle>
+      <BaseTitle :title="pageTitle">
+        <h2 class="sub-title" v-if="!canBeModified">
+          僅供瀏覽，無法修改非 2 日內記錄
+        </h2></BaseTitle
+      >
       <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
       <b-row class="meals" no-gutters>
         <b-col
@@ -12,7 +16,7 @@
           @click="toDietRecordingPage(meal.type)"
         >
           <RecordingCard
-            :hasHeaderIcon="true"
+            :hasHeaderIcon="canBeModified"
             :hasBodyIcon="true"
             :hasBorder="true"
             :class="{
@@ -37,25 +41,23 @@
         <b-col
           cols="12"
           class="card-wrapper"
-          @click="
-            $router.push({
-              name: 'WeightRecord',
-              query: { date: $route.query.date }
-            })
-          "
+          @click="weightCardClickEventHandler"
         >
           <RecordingCard
             :hasBorder="true"
-            :class="{ recorded: !!$store.getters.weightIdOfSpecificDate }"
+            :class="{
+              recorded: !!$store.getters.weightIdOfSpecificDate,
+              disabled: !canBeModified
+            }"
           >
             <p slot="card-body" class="title">
               {{
                 Math.round($store.getters.weightOfSpecificDate * 100) / 100
-              }}kg<PenIcon class="icon-pen" />
+              }}kg<PenIcon class="icon-pen" v-if="canBeModified" />
             </p>
-            <span slot="card-footer" class="description"
-              >{{ sectionTitle }}體重
-            </span>
+            <span slot="card-footer" class="description">{{
+              sectionTitle
+            }}</span>
           </RecordingCard>
         </b-col>
       </b-row>
@@ -89,6 +91,7 @@ import dayjs from "dayjs";
 import BaseTitle from "@/components/common/BaseTitle";
 import RecordingCard from "@/components/recording/RecordingCard";
 import PenIcon from "@/assets/images/ic_pen.svg?inline";
+import utilities from "@/utilities/utilities";
 
 export default {
   components: {
@@ -172,6 +175,15 @@ export default {
           query: { date: this.$route.query.date }
         });
       }
+    },
+    weightCardClickEventHandler() {
+      console.log(this.canBeModified);
+      if (this.canBeModified) {
+        this.$router.push({
+          name: "WeightRecord",
+          query: { date: this.$route.query.date }
+        });
+      }
     }
   },
   computed: {
@@ -181,9 +193,14 @@ export default {
         : `今天 ${dayjs().format("YYYY/MM/DD")}`;
     },
     sectionTitle() {
-      return this.$route.query.date
-        ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
-        : `今天`;
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = this.$route.query.date || today;
+      return searchedDate === today
+        ? "今天的體重"
+        : `${dayjs(searchedDate).format("YYYY/MM/DD")} 的體重`;
+    },
+    canBeModified() {
+      return !utilities.isSearchedDateExpired(this.$route.query.date);
     }
   }
 };
@@ -195,7 +212,18 @@ main {
   margin: 0 auto 32px;
   padding: 31px 32px 20px;
   .base-title {
-    margin-bottom: 20px;
+    margin-bottom: 23px;
+  }
+  .sub-title {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -17px;
+    margin: 0 auto;
+    color: #407d60;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
   }
 }
 .meals {
