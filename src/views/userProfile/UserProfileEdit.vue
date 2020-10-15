@@ -3,7 +3,7 @@
     <div class="avatar-wrapper">
       <div class="avatar">
         <b-avatar :src="$store.getters.avatarUrl" size="130"></b-avatar>
-        <b-form-file accept=".png" @input="updateAvatar"></b-form-file>
+        <b-form-file accept=".png" @input="getAvatarData"></b-form-file>
       </div>
       <CameraIcon class="icon" />
     </div>
@@ -141,7 +141,12 @@
       </ValidationObserver>
     </form>
     <div class="crop-area" v-if="isShow">
-      <Crop :imgURL="imgData" @cancelCrop="isShow = false"></Crop>
+      <Crop
+        ref="cropUpdate"
+        :imgURL="imgData"
+        @updateAvatar="updateAvatar"
+        @cancelCrop="isShow = false"
+      ></Crop>
     </div>
   </main>
 </template>
@@ -163,8 +168,6 @@ export default {
     return {
       isShow: false,
       imgData: {},
-      // url:
-      //   "https://cors-anywhere.herokuapp.com/https://k88d02.ml/storage/user/54_picture.png"
       // ======== API 資料格式 =========
       userProfile: this.$store.getters.userProfile
     };
@@ -206,9 +209,19 @@ export default {
       }
       this.$router.push({ name: "UserProfileView" });
     },
-    updateAvatar(event) {
-      this.imgData = event;
+    getAvatarData(event) {
       if (event) this.isShow = true;
+      this.imgData = event;
+    },
+    async updateAvatar() {
+      const formData = new FormData();
+      const token = localStorage.getItem("token");
+      await this.$refs.cropUpdate.updateAvatar(data => {
+        formData.append("photo", data, this.imgData.name);
+        formData.append("remember_token", token);
+        this.$store.dispatch("uploadAvatar", formData);
+      });
+      this.isShow = false;
     }
   }
 };
