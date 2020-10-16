@@ -69,9 +69,6 @@ export default {
     ConversionTable,
     BaseButton
   },
-  created() {
-    console.log(this.$store.getters.historyOfAMealRecording);
-  },
   data() {
     return {
       pageTitle: "",
@@ -113,7 +110,13 @@ export default {
     updateQuantity(e) {
       const key = e.data.field.key;
 
-      this.$store.getters.historyOfAMealRecording[key] += e.addAndSubtractRange;
+      this.$store.commit("updateHistoryOfAMealRecording", {
+        ...this.$store.getters.historyOfAMealRecording,
+        [key]:
+          this.$store.getters.historyOfAMealRecording[key] +
+          e.addAndSubtractRange
+      });
+
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
@@ -122,6 +125,7 @@ export default {
     async confirmUpdate() {
       const diet_type = this.diets[this.$route.params.dietType].symbol;
       const diet_id = this.$store.getters.historyOfAMealRecordingID;
+      const user_id = this.$store.getters.userProfile.id;
 
       // 先前有紀錄則編輯該筆歷史資料，無紀錄過則直接新增
       if (diet_id) {
@@ -136,7 +140,9 @@ export default {
       } else {
         await this.$store.dispatch("addNewDiet", {
           ...this.$store.getters.historyOfAMealRecording,
-          diet_type: diet_type
+          diet_type: diet_type,
+          kind: 0,
+          user_id: user_id
         });
       }
       this.$router.push({ name: "RecordingStates" });

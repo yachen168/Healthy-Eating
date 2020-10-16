@@ -4,7 +4,7 @@ export default {
   state: {
     dietaryRecordingState: [],
     dietaryDeficiency: [],
-    historyOfAMealRecording: []
+    historyOfAMealRecording: {}
   },
   mutations: {
     dietaryRecordingState(state, dietaryRecordingState) {
@@ -13,10 +13,38 @@ export default {
     dietaryDeficiency(state, dietaryDeficiency) {
       state.dietaryDeficiency = dietaryDeficiency;
     },
-    historyOfAMealRecording(state, dietType) {
-      state.historyOfAMealRecording = state.dietaryRecordingState.filter(
+    initHistoryOfAMealRecording(state, dietType) {
+      const historyOfAMealRecording = state.dietaryRecordingState.filter(
         item => item.diet_type === dietType
       );
+
+      const keys = [
+        "fruits",
+        "vegetables",
+        "grains",
+        "nuts",
+        "proteins",
+        "dairy"
+      ];
+
+      if (historyOfAMealRecording.length) {
+        return (state.historyOfAMealRecording = keys.reduce((obj, key) => {
+          obj[key] = historyOfAMealRecording[0][key];
+          return obj;
+        }, {}));
+      } else {
+        state.historyOfAMealRecording = {
+          fruits: 0,
+          vegetables: 0,
+          grains: 0,
+          nuts: 0,
+          proteins: 0,
+          dairy: 0
+        };
+      }
+    },
+    updateHistoryOfAMealRecording(state, data) {
+      state.historyOfAMealRecording = data;
     }
   },
   actions: {
@@ -85,33 +113,8 @@ export default {
         ? state.historyOfAMealRecording[0].id
         : "";
     },
-    historyOfAMealRecording(state, getters, rootState, rootGetters) {
-      const keys = [
-        "fruits",
-        "vegetables",
-        "grains",
-        "nuts",
-        "proteins",
-        "dairy"
-      ];
-
-      if (state.historyOfAMealRecording.length) {
-        return keys.reduce((obj, key) => {
-          obj[key] = state.historyOfAMealRecording[0][key];
-          return obj;
-        }, {});
-      } else {
-        return {
-          user_id: rootGetters.userProfile.id,
-          kind: 0,
-          fruits: 0,
-          vegetables: 0,
-          grains: 0,
-          nuts: 0,
-          proteins: 0,
-          dairy: 0
-        };
-      }
+    historyOfAMealRecording(state) {
+      return state.historyOfAMealRecording;
     },
     datesHaveBeenRecorded(state) {
       return {
