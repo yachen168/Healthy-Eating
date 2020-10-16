@@ -9,9 +9,7 @@
       width="180px"
     >
       <div class="sidebar-header">
-        <!-- ===== 使用者大頭照 ===== -->
         <b-avatar :src="avatarUrl" size="42px"></b-avatar>
-        <!-- ======== -->
         <div class="user-info">
           <h2 class="user-name">{{ $store.getters.userProfile.name }}</h2>
           <router-link class="details" :to="{ name: 'UserProfileView' }">
@@ -20,10 +18,16 @@
         </div>
       </div>
       <nav class="sidebar-body">
-        <div class="nav-item">
+        <div class="nav-item" @click="$router.push({ name: 'ModifyPassword' })">
           <PasswordIcon class="icon" /><span>修改密碼</span>
         </div>
-        <div class="nav-item"><LogoutIcon class="icon" /><span>登出</span></div>
+        <div
+          class="nav-item"
+          v-b-modal.modal-logout
+          @click="$emit('showModal')"
+        >
+          <LogoutIcon class="icon" /><span>登出</span>
+        </div>
       </nav>
     </b-sidebar>
   </div>
@@ -104,5 +108,22 @@ export default {
 }
 ::v-deep .b-sidebar.b-sidebar-right {
   top: 64px;
+}
+</style>
+
+<style lang="scss">
+.modal-content {
+  width: 296px;
+  margin: 0 auto;
+  border-radius: 10px;
+  .message {
+    margin-bottom: 26px;
+    color: #383838;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+.modal-body {
+  padding: 20px 14px 14px;
 }
 </style>
