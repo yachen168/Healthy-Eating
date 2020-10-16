@@ -7,6 +7,8 @@
           :items="$store.getters.historyOfAMealRecording"
           :canBeModified="canBeModified"
           :fields="fields"
+          :min="0"
+          :max="10"
           @update:quantity="updateQuantity"
           @showModal="dataOfConversionTable = $event"
         />
