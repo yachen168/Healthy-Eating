@@ -164,7 +164,7 @@ const routes = [
             start_date: searchedDate,
             end_date: searchedDate
           });
-          await store.commit("historyOfAMealRecording", to.params.dietType);
+          await store.commit("initHistoryOfAMealRecording", to.params.dietType);
           await store.dispatch("fetchDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
