@@ -74,8 +74,8 @@ export default {
       return {
         water: !!rootGetters.sumWaterIntakeOneDay,
         breakfast: dietSet.has("breakfast"),
-        lunch: dietSet.has("launch"),
-        snack: dietSet.has("dessert"),
+        lunch: dietSet.has("lunch"),
+        dessert: dietSet.has("dessert"),
         dinner: dietSet.has("dinner"),
         supper: dietSet.has("supper")
       };
@@ -86,7 +86,6 @@ export default {
         : "";
     },
     historyOfAMealRecording(state, getters, rootState, rootGetters) {
-      /* format for BootstrapVue table */
       const keys = [
         "fruits",
         "vegetables",
@@ -97,25 +96,21 @@ export default {
       ];
 
       if (state.historyOfAMealRecording.length) {
-        return [
-          keys.reduce((obj, key) => {
-            obj[key] = state.historyOfAMealRecording[0][key];
-            return obj;
-          }, {})
-        ];
+        return keys.reduce((obj, key) => {
+          obj[key] = state.historyOfAMealRecording[0][key];
+          return obj;
+        }, {});
       } else {
-        return [
-          {
-            user_id: rootGetters.userProfile.id,
-            kind: 0,
-            fruits: 0,
-            vegetables: 0,
-            grains: 0,
-            nuts: 0,
-            proteins: 0,
-            dairy: 0
-          }
-        ];
+        return {
+          user_id: rootGetters.userProfile.id,
+          kind: 0,
+          fruits: 0,
+          vegetables: 0,
+          grains: 0,
+          nuts: 0,
+          proteins: 0,
+          dairy: 0
+        };
       }
     },
     datesHaveBeenRecorded(state) {

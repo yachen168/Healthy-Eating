@@ -4,7 +4,7 @@
       <Title :title="`${diets[$route.params.dietType].name}的營養攝取記錄`" />
       <form @submit.prevent>
         <RecordingTable
-          :items="$store.getters.historyOfAMealRecording"
+          :items="[$store.getters.historyOfAMealRecording]"
           :canBeModified="canBeModified"
           :fields="fields"
           :min="0"
@@ -69,6 +69,9 @@ export default {
     ConversionTable,
     BaseButton
   },
+  created() {
+    console.log(this.$store.getters.historyOfAMealRecording);
+  },
   data() {
     return {
       pageTitle: "",
@@ -83,7 +86,7 @@ export default {
           name: "午餐",
           symbol: 2
         },
-        snack: {
+        dessert: {
           name: "午茶點心",
           symbol: 3
         },
@@ -110,8 +113,7 @@ export default {
     updateQuantity(e) {
       const key = e.data.field.key;
 
-      this.$store.getters.historyOfAMealRecording[0][key] +=
-        e.addAndSubtractRange;
+      this.$store.getters.historyOfAMealRecording[key] += e.addAndSubtractRange;
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
@@ -126,14 +128,14 @@ export default {
         await this.$store.dispatch("updateDiet", {
           diet_id: diet_id,
           data: {
-            ...this.$store.getters.historyOfAMealRecording[0],
+            ...this.$store.getters.historyOfAMealRecording,
             _method: "put",
             diet_type: diet_type
           }
         });
       } else {
         await this.$store.dispatch("addNewDiet", {
-          ...this.$store.getters.historyOfAMealRecording[0],
+          ...this.$store.getters.historyOfAMealRecording,
           diet_type: diet_type
         });
       }

@@ -121,7 +121,7 @@ export default {
           imgUrl_filled: require("@/assets/images/ic_lunch_selected.svg")
         },
         {
-          type: "snack",
+          type: "dessert",
           name: "午茶點心",
           imgUrl_empty: require("@/assets/images/ic_afternoon.svg"),
           imgUrl_filled: require("@/assets/images/ic_afternoon_selected.svg")
@@ -177,7 +177,6 @@ export default {
       }
     },
     weightCardClickEventHandler() {
-      console.log(this.canBeModified);
       if (this.canBeModified) {
         this.$router.push({
           name: "WeightRecord",
