@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+
+import Authorization from "./authorization";
 import LoginRegister from "./LoginRegister";
 import UserProfile from "./userProfile";
 import Water from "./water";
@@ -13,6 +15,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    Authorization,
     UserProfile,
     LoginRegister,
     Water,

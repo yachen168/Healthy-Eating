@@ -24,6 +24,17 @@
         <Sidebar :avatarUrl="$store.getters.avatarUrl"></Sidebar>
       </div>
     </Navbar>
+    <b-modal id="modal-logout" hide-header hide-footer centered>
+      <h3 class="message">確定要登出嗎</h3>
+      <div class="button-wrapper">
+        <BaseButton
+          title="取消"
+          buttonStyle="outline-default"
+          @click="$bvModal.hide('modal-logout')"
+        />
+        <BaseButton title="確認" buttonStyle="primary" @click="confirmLogout" />
+      </div>
+    </b-modal>
     <router-view />
   </div>
 </template>
@@ -34,17 +45,28 @@ import Navbar from "@/components/common/Navbar";
 import Sidebar from "@/components/common/Sidebar";
 import ChartIcon from "@/assets/images/ic_chart.svg?inline";
 import CalendarIcon from "@/assets/images/ic_calendar.svg?inline";
+import BaseButton from "@/components/common/BaseButton";
 
 export default {
   components: {
     Navbar,
     Sidebar,
+    BaseButton,
     ChartIcon,
     CalendarIcon
   },
   computed: {
     today() {
       return dayjs().format("YYYY-MM-DD");
+    }
+  },
+  methods: {
+    confirmLogout() {
+      this.$store.dispatch("logout", {
+        remember_token: localStorage.getItem("token")
+      });
+      this.$bvModal.hide("modal-logout");
+      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -55,6 +77,18 @@ export default {
   .icon {
     margin-right: 20px;
     cursor: pointer;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 11px;
+  .BaseButton {
+    flex: 1 0 0;
+  }
+  .BaseButton + .BaseButton {
+    margin-left: 14px;
   }
 }
 
