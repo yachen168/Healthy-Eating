@@ -13,6 +13,7 @@
       :info="option.info"
       :mode="option.mode"
       :maxImgSize="option.maxImgSize"
+      :canMoveBox="option.canMoveBox"
       ref="cropper"
     ></VueCropper>
     <div class="upload-avatar-footer">
@@ -55,7 +56,8 @@ export default {
         info: false,
         maxImgSize: 360,
         fixedBox: true,
-        mode: "100%"
+        mode: "100%",
+        canMoveBox: false
       },
       blob: ""
     };
