@@ -6,6 +6,8 @@
         :items="plan"
         :canBeModified="true"
         :fields="fields"
+        :min="0"
+        :max="10"
         @update:quantity="updateQuantity"
         @showModal="dataOfConversionTable = $event"
       />
@@ -20,6 +22,10 @@
       <div class="state"></div>
       <div class="state"></div>
     </footer>
+    <SettingPlanSuccessModal
+      v-if="isSettingSuccessModalShow"
+      @closeSettingSuccessModal="isSettingSuccessModalShow = false"
+    />
   </div>
 </template>
 
@@ -27,14 +33,18 @@
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 import RecordingTable from "@/components/recording/RecordingTable";
+import SettingPlanSuccessModal from "@/components/recording/SettingPlanSuccessModal";
+
 export default {
   components: {
     BaseTitle,
     BaseButton,
-    RecordingTable
+    RecordingTable,
+    SettingPlanSuccessModal
   },
   data() {
     return {
+      isSettingSuccessModalShow: false,
       isConfirmButtonPass: true,
       fields: [
         { key: "grains", label: "全穀雜糧類" },
@@ -73,7 +83,7 @@ export default {
     },
     confirmSettingPlan() {
       this.$store.dispatch("addNewDiet", this.plan[0]);
-      this.$router.push({ name: "RecordingStates" });
+      this.isSettingSuccessModalShow = true;
     }
   }
 };

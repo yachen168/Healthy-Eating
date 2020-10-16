@@ -6,11 +6,11 @@
           <MinusIcon
             v-if="canBeModified"
             class="icon"
-            :class="{ disabled: data.value === 0 }"
+            :class="{ disabled: data.value === min }"
             @click="updateQuantity(data, -1)"
           />
           <span class="quantity">{{
-            data.value > 0
+            data.value > min
               ? data.field.key === "water"
                 ? data.value.toFixed(2)
                 : data.value.toFixed(1)
@@ -19,7 +19,7 @@
           <AddIcon
             v-if="canBeModified"
             class="icon"
-            :class="{ disabled: data.value === 10 }"
+            :class="{ disabled: data.value === max }"
             @click="updateQuantity(data, 1)"
           />
           <!-- 奶品類的單位：杯，水的單位：公升，其餘的單位：份 -->
@@ -65,6 +65,14 @@ export default {
     },
     canBeModified: {
       type: Boolean,
+      required: true
+    },
+    min: {
+      type: Number,
+      required: true
+    },
+    max: {
+      type: Number,
       required: true
     }
   },
