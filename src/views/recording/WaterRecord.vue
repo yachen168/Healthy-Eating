@@ -9,7 +9,9 @@
         @minus:quantity="$store.commit('updateSumWaterIntakeOneDay', -0.25)"
         @add:quantity="$store.commit('updateSumWaterIntakeOneDay', 0.25)"
         ><WaterRecordIcon slot="image" />
-        <div slot="footer" class="target">每日目標：2公升</div></FormCard
+        <div slot="footer" class="target">
+          每日目標：{{ $store.getters.userProfile.diet_standard.water }}公升
+        </div></FormCard
       >
       <div class="button-wrapper" v-if="canBeModified">
         <BaseButton
