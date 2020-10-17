@@ -4,10 +4,10 @@
       <BaseTitle title="體重紀錄"></BaseTitle>
       <FormCard
         unit="kg"
-        :quantity="userWeight"
+        :quantity="$store.getters.weightOfSpecificDate.weight"
         :canBeModified="canBeModified"
-        @minus:quantity="userWeight -= 0.1"
-        @add:quantity="userWeight += 0.1"
+        @minus:quantity="$store.commit('updateWeightOfSpecificDate', -0.1)"
+        @add:quantity="$store.commit('updateWeightOfSpecificDate', 0.1)"
         ><WaterRecordIcon slot="image" />
       </FormCard>
       <div class="button-wrapper" v-if="canBeModified">
@@ -24,7 +24,7 @@
         <BaseButton
           title="確認"
           buttonStyle="primary"
-          :disabledState="userWeight === 0"
+          :disabledState="$store.getters.weightOfSpecificDate.weight === 0"
           @click="confirmUpdateWeight"
         ></BaseButton>
       </div>
@@ -58,11 +58,6 @@ export default {
     FormCard,
     WaterRecordIcon
   },
-  data() {
-    return {
-      userWeight: this.$store.getters.weightOfSpecificDate
-    };
-  },
   methods: {
     async confirmUpdateWeight() {
       const weightId = this.$store.getters.weightIdOfSpecificDate;
@@ -74,15 +69,15 @@ export default {
         await this.$store.dispatch("updateUserWeight", {
           weightId: weightId,
           data: {
-            _method: "put",
-            weight: +this.userWeight.toFixed(1)
+            ...this.$store.getters.weightOfSpecificDate,
+            _method: "put"
           }
         });
       } else {
         await this.$store.dispatch("setUserWeight", {
           user_id: this.$store.getters.userProfile.id,
           remember_token: localStorage.getItem("token"),
-          weight: +this.userWeight.toFixed(1)
+          weight: this.$store.getters.weightOfSpecificDate.weight
         });
       }
       this.$router.push({ name: "RecordingStates" });

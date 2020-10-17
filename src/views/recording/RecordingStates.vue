@@ -51,9 +51,10 @@
             }"
           >
             <p slot="card-body" class="title">
-              {{
-                Math.round($store.getters.weightOfSpecificDate * 100) / 100
-              }}kg<PenIcon class="icon-pen" v-if="canBeModified" />
+              {{ $store.getters.weightOfSpecificDate.weight }}kg<PenIcon
+                class="icon-pen"
+                v-if="canBeModified"
+              />
             </p>
             <span slot="card-footer" class="description">{{
               sectionTitle
