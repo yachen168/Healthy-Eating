@@ -6,7 +6,8 @@ dayjs.extend(isSameOrBefore);
 export default {
   state: {
     allWeights: [],
-    weightOfSpecificDate: {}
+    weightOfSpecificDate: {},
+    isWeightOfSpecificDateRecorded: null
   },
   mutations: {
     allWeights(state, allWeights) {
@@ -29,6 +30,15 @@ export default {
         state.weightOfSpecificDate = objFoundedWeight;
       } else {
         state.weightOfSpecificDate = { weight: 0 };
+      }
+    },
+    isWeightOfSpecificDateRecorded(state, specificDate) {
+      if (state.weightOfSpecificDate.created_at) {
+        const isDatesEqual =
+          state.weightOfSpecificDate.created_at.split(" ")[0] === specificDate;
+        state.isWeightOfSpecificDateRecorded = isDatesEqual;
+      } else {
+        state.isWeightOfSpecificDateRecorded = false;
       }
     }
   },
@@ -65,6 +75,9 @@ export default {
     },
     allWeights(state) {
       return state.allWeights;
+    },
+    isWeightOfSpecificDateRecorded(state) {
+      return state.isWeightOfSpecificDateRecorded;
     }
   }
 };
