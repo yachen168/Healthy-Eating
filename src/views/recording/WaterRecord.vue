@@ -4,10 +4,10 @@
       <BaseTitle title="飲水紀錄量"></BaseTitle>
       <FormCard
         unit="公升"
-        :quantity="sumWaterIntakeOneDay"
+        :quantity="$store.getters.sumWaterIntakeOneDay"
         :canBeModified="canBeModified"
-        @minus:quantity="sumWaterIntakeOneDay -= 0.25"
-        @add:quantity="sumWaterIntakeOneDay += 0.25"
+        @minus:quantity="$store.commit('updateSumWaterIntakeOneDay', -0.25)"
+        @add:quantity="$store.commit('updateSumWaterIntakeOneDay', 0.25)"
         ><WaterRecordIcon slot="image" />
         <div slot="footer" class="target">每日目標：2公升</div></FormCard
       >
@@ -25,9 +25,7 @@
         <BaseButton
           title="確認"
           buttonStyle="primary"
-          :disabledState="
-            sumWaterIntakeOneDay === $store.getters.sumWaterIntakeOneDay
-          "
+          :disabledState="$store.getters.sumWaterIntakeOneDay === 0"
           @click="updateSumWaterIntake"
         ></BaseButton>
       </div>
@@ -61,19 +59,23 @@ export default {
     FormCard,
     WaterRecordIcon
   },
-  data() {
-    return {
-      sumWaterIntakeOneDay: this.$store.getters.sumWaterIntakeOneDay
-    };
-  },
   methods: {
     updateSumWaterIntake() {
-      this.$store.dispatch("updateSumWaterIntake", {
-        remember_token: localStorage.getItem("token"),
-        user_id: `${this.$store.getters.userProfile.id}`,
-        water:
-          this.sumWaterIntakeOneDay - this.$store.getters.sumWaterIntakeOneDay
-      });
+      if (this.$store.getters.sumWaterIntake.length) {
+        this.$store.dispatch("updateWaterIntake", {
+          water_id: this.$store.getters.idOfWaterIntake,
+          data: {
+            _method: "PUT",
+            water: this.$store.getters.sumWaterIntakeOneDay
+          }
+        });
+      } else {
+        this.$store.dispatch("addNewWaterIntake", {
+          remember_token: localStorage.getItem("token"),
+          user_id: `${this.$store.getters.userProfile.id}`,
+          water: this.$store.getters.sumWaterIntakeOneDay
+        });
+      }
       this.$router.push({ name: "RecordingStates" });
     }
   },

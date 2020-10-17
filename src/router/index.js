@@ -206,6 +206,10 @@ const routes = [
             start_date: searchedDate,
             end_date: searchedDate
           });
+          await store.dispatch("fetchUserAllRecordingsOfWaterIntake", {
+            user_id: store.getters.userProfile.id,
+            date: searchedDate
+          });
           next();
         }
       },
