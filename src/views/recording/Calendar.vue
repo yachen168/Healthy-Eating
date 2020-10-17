@@ -2,7 +2,7 @@
   <main>
     <div class="calendar-wrapper">
       <Calendar
-        :highlighted="$store.getters.datesHaveBeenRecorded"
+        :highlighted="highlighted"
         @input="toRecordingStatePage($event)"
       ></Calendar>
     </div>
@@ -23,6 +23,15 @@ export default {
         name: "RecordingStates",
         query: { date: date }
       });
+    }
+  },
+  computed: {
+    highlighted() {
+      const dates_diet = this.$store.getters.datesHaveBeenRecorded_diet;
+      const dates_water = this.$store.getters.datesHaveBeenRecorded_water;
+      const dates_weight = this.$store.getters.datesHaveBeenRecorded_weight;
+      const all_dates = dates_diet.concat(dates_water).concat(dates_weight);
+      return { dates: all_dates };
     }
   }
 };
