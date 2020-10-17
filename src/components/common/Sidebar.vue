@@ -89,6 +89,7 @@ export default {
     color: #383838;
     font-size: 14px;
     font-weight: 700;
+    outline: none;
     cursor: pointer;
     .icon {
       vertical-align: middle;
@@ -108,22 +109,5 @@ export default {
 }
 ::v-deep .b-sidebar.b-sidebar-right {
   top: 64px;
-}
-</style>
-
-<style lang="scss">
-.modal-content {
-  width: 296px;
-  margin: 0 auto;
-  border-radius: 10px;
-  .message {
-    margin-bottom: 26px;
-    color: #383838;
-    font-size: 18px;
-    text-align: center;
-  }
-}
-.modal-body {
-  padding: 20px 14px 14px;
 }
 </style>
