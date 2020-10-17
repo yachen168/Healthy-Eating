@@ -40,6 +40,9 @@ export default {
       } else {
         state.isWeightOfSpecificDateRecorded = false;
       }
+    },
+    updateWeightOfSpecificDate(state, num) {
+      state.weightOfSpecificDate.weight += num;
     }
   },
   actions: {
@@ -68,7 +71,7 @@ export default {
   },
   getters: {
     weightOfSpecificDate(state) {
-      return +state.weightOfSpecificDate.weight;
+      return state.weightOfSpecificDate;
     },
     weightIdOfSpecificDate(state) {
       return state.weightOfSpecificDate.id;
