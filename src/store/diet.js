@@ -14,24 +14,13 @@ export default {
       state.dietaryDeficiency = dietaryDeficiency;
     },
     initHistoryOfAMealRecording(state, dietType) {
-      const historyOfAMealRecording = state.dietaryRecordingState.filter(
+      const historyOfAMealRecording = state.dietaryRecordingState.find(
         item => item.diet_type === dietType
       );
 
-      const keys = [
-        "fruits",
-        "vegetables",
-        "grains",
-        "nuts",
-        "proteins",
-        "dairy"
-      ];
-
-      if (historyOfAMealRecording.length) {
-        return (state.historyOfAMealRecording = keys.reduce((obj, key) => {
-          obj[key] = historyOfAMealRecording[0][key];
-          return obj;
-        }, {}));
+      if (historyOfAMealRecording) {
+        delete historyOfAMealRecording.water;
+        state.historyOfAMealRecording = historyOfAMealRecording;
       } else {
         state.historyOfAMealRecording = {
           fruits: 0,
@@ -109,8 +98,9 @@ export default {
       };
     },
     historyOfAMealRecordingID(state) {
-      return state.historyOfAMealRecording.length
-        ? state.historyOfAMealRecording[0].id
+      console.log(state.historyOfAMealRecording);
+      return state.historyOfAMealRecording.id
+        ? state.historyOfAMealRecording.id
         : "";
     },
     historyOfAMealRecording(state) {
