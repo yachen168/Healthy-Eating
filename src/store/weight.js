@@ -81,6 +81,9 @@ export default {
     },
     isWeightOfSpecificDateRecorded(state) {
       return state.isWeightOfSpecificDateRecorded;
+    },
+    datesHaveBeenRecorded_weight(state) {
+      return state.allWeights.map(item => new Date(item.created_at));
     }
   }
 };

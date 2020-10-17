@@ -106,12 +106,10 @@ export default {
     historyOfAMealRecording(state) {
       return state.historyOfAMealRecording;
     },
-    datesHaveBeenRecorded(state) {
-      return {
-        dates: state.dietaryRecordingState.map(
-          item => new Date(item.updated_at)
-        )
-      };
+    datesHaveBeenRecorded_diet(state) {
+      return state.dietaryRecordingState.map(
+        item => new Date(item.updated_at) // 等待後端修正
+      );
     }
   }
 };

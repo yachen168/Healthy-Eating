@@ -72,6 +72,9 @@ export default {
     },
     idOfWaterIntake(state) {
       return state.idOfWaterIntake;
+    },
+    datesHaveBeenRecorded_water(state) {
+      return state.sumWaterIntake.map(item => new Date(item.created_at));
     }
   }
 };
