@@ -145,6 +145,7 @@ const routes = [
           });
           await store.dispatch("fetchAllWeights", store.getters.userProfile.id);
           await store.commit("weightOfSpecificDate", searchedDate);
+          await store.commit("isWeightOfSpecificDateRecorded", searchedDate);
           next();
         }
       },

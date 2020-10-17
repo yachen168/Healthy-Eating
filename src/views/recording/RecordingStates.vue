@@ -46,7 +46,7 @@
           <RecordingCard
             :hasBorder="true"
             :class="{
-              recorded: !!$store.getters.weightIdOfSpecificDate,
+              recorded: $store.getters.isWeightOfSpecificDateRecorded,
               disabled: !canBeModified
             }"
           >

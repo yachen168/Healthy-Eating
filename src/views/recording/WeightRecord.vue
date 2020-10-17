@@ -66,9 +66,11 @@ export default {
   methods: {
     async confirmUpdateWeight() {
       const weightId = this.$store.getters.weightIdOfSpecificDate;
+      const isWeightOfSpecificDateRecorded = this.$store.getters
+        .isWeightOfSpecificDateRecorded;
 
-      /* 已有紀錄則更新該筆歷史紀錄，無歷史紀錄則直接新增 */
-      if (weightId) {
+      /* 該日已紀錄則更新該筆紀錄，無紀錄則直接新增 */
+      if (isWeightOfSpecificDateRecorded) {
         await this.$store.dispatch("updateUserWeight", {
           weightId: weightId,
           data: {
