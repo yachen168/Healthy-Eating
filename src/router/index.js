@@ -227,6 +227,10 @@ const routes = [
             user_id: store.getters.userProfile.id,
             kind: 0
           });
+          await store.dispatch("fetchSumWaterIntake", {
+            remember_token: localStorage.getItem("token"),
+            user_id: store.getters.userProfile.id
+          });
           next();
         }
       },
