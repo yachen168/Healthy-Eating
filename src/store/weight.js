@@ -84,6 +84,25 @@ export default {
     },
     datesHaveBeenRecorded_weight(state) {
       return state.allWeights.map(item => new Date(item.created_at));
+    },
+    weightsInSearchedPeriod(state, getters, rootState, rootGetters) {
+      const datesInSearchedPeriod = rootGetters.datesInSearchedPeriod;
+      const datesHaveBeenRecorded = state.allWeights.reduce(
+        (obj, currentValue) => {
+          const date = currentValue.created_at.split(" ")[0];
+          obj[date] = currentValue.weight;
+          return obj;
+        },
+        {}
+      );
+
+      return datesInSearchedPeriod.map(item => {
+        if (item in datesHaveBeenRecorded) {
+          return datesHaveBeenRecorded[item];
+        } else {
+          return null;
+        }
+      });
     }
   }
 };

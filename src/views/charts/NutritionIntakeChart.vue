@@ -1,64 +1,74 @@
 <template>
   <div class="chart-container">
+    <DateController
+      :datePeriodOfChart="$store.getters.datePeriodOfChart"
+      @toPreviosWeek="
+        $store.commit('previousWeek');
+        fillData();
+      "
+      @toNextWeek="
+        $store.commit('nextWeek');
+        fillData();
+      "
+    ></DateController>
     <div class="chart">
-      <Chart :height="500" :chart-data="chartdata" :options="options" />
-      <span class="y-scalelabel y-scalelabel-0">未攝取營養(份)</span>
+      <Chart :height="465" :chart-data="chartdata" :options="options" />
+      <span class="y-scalelabel">未攝取營養(份)</span>
     </div>
+    <Message />
   </div>
 </template>
 
 <script>
+import DateController from "@/components/charts/DateController";
 import Chart from "@/components/charts/Chart";
+import Message from "@/components/charts/Message";
 
 export default {
   components: {
-    Chart
+    DateController,
+    Chart,
+    Message
   },
   data() {
     return {
       chartdata: {
-        labels: ["日", "一", "二", "三", "四", "五", "六"],
+        labels: this.$store.getters.labelDatesOfChart,
         datasets: [
           {
             type: "bar",
             label: "全穀雜糧類",
-            id: "y-axis-0",
-            backgroundColor: "#E88E07",
+            backgroundColor: "#CBA368",
             data: [1, 2, 4, 5, 2, 2, 2]
           },
           {
             type: "bar",
             label: "豆魚蛋肉類",
-            yAxisID: "y-axis-0",
             backgroundColor: "#E97979",
             data: [0, 0, 1, 2, 4, 5, 0]
           },
           {
             type: "bar",
-            label: "奶品類",
-            yAxisID: "y-axis-0",
-            backgroundColor: "#F7E68E",
+            label: "奶品類       ",
+            backgroundColor: "#FFC52F",
             data: [5, 0, 2, 2, 2, 3, 0]
           },
           {
             type: "bar",
             label: "蔬菜類",
-            yAxisID: "y-axis-0",
-            backgroundColor: "#9CC2B0",
+            backgroundColor: "#98D59B",
             data: [5, 1, 0, 3, 0, 2, 1]
           },
           {
             type: "bar",
-            label: "水果類",
-            yAxisID: "y-axis-0",
-            backgroundColor: "#A48ACE",
+            label: "水果類       ",
+            backgroundColor: "#A171B3",
             data: [3, 0, 1, 4, 1, 1, 0]
           },
           {
             type: "bar",
             label: "油脂及堅果種子類",
-            yAxisID: "y-axis-0",
-            backgroundColor: "#4B7CC7",
+            backgroundColor: "#83A7DD",
             data: [2, 4, 2, 3, 4, 0, 1]
           }
         ]
@@ -73,7 +83,7 @@ export default {
             usePointStyle: true,
             boxWidth: 22,
             fontSize: 14,
-            padding: 35,
+            padding: 25,
             fontColor: "#383838"
           }
         },
@@ -93,12 +103,11 @@ export default {
             {
               stacked: true,
               position: "left",
-              id: "y-axis-0",
               ticks: {
                 max: 40,
                 min: 0,
                 fontColor: "black",
-                padding: 8
+                padding: 6
               },
               gridLines: {
                 color: "#ccc",
@@ -121,14 +130,14 @@ export default {
 .chart {
   position: relative;
   max-width: 800px;
-  padding: 25px 10px 10px;
+  padding: 45px 10px 5px;
   background-color: #fff;
   margin: 0 auto;
   border-radius: 6px;
   .y-scalelabel {
     position: absolute;
     font-size: 12px;
-    top: 12px;
+    top: 31px;
     left: 48px;
   }
 }
