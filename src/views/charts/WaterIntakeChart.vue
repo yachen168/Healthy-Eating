@@ -80,7 +80,17 @@ export default {
   },
   methods: {
     async fillData() {
-      await this.$store.dispatch("fetchWaterIntakeInSearchedPeriod");
+      await this.$store.dispatch("fetchWaterIntakeInSearchedPeriod", {
+        remember_token: localStorage.getItem("token"),
+        user_id: this.$store.getters.userProfile.id,
+        start_date: this.$store.getters.datePeriodOfChart.startDate
+          .split("/")
+          .join("-"),
+        end_date: this.$store.getters.datePeriodOfChart.endDate
+          .split("/")
+          .join("-")
+      });
+
       this.chartdata = {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [

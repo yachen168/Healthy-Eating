@@ -10,7 +10,6 @@ export default {
   },
   mutations: {
     sumWaterIntake(state, sumWaterIntake) {
-      console.log(sumWaterIntake);
       state.sumWaterIntake = sumWaterIntake;
     },
     initSumWaterIntakeOneDay(state) {
