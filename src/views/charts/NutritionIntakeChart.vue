@@ -96,7 +96,8 @@ export default {
                 fontColor: "black"
               },
               gridLines: {
-                color: "#ccc"
+                color: "#ccc",
+                offsetGridLines: false
               }
             }
           ],
