@@ -15,7 +15,7 @@
       <Chart :height="465" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">未攝取營養(份)</span>
     </div>
-    <Message />
+    <Message v-if="false" />
   </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
     return {
       chartdata: {
         labels: this.$store.getters.labelDatesOfChart,
+        /* ====== 等待後端修改 API 資料====== */
         datasets: [
           {
             type: "bar",
@@ -83,7 +84,7 @@ export default {
             usePointStyle: true,
             boxWidth: 22,
             fontSize: 14,
-            padding: 25,
+            padding: 24,
             fontColor: "#383838"
           }
         },

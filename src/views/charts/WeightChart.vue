@@ -112,9 +112,9 @@ export default {
   },
   computed: {
     isShowNoDataMessage() {
-      return this.$store.getters.weightsInSearchedPeriod.every(item => {
-        return item === null;
-      });
+      return this.$store.getters.weightsInSearchedPeriod.every(
+        item => item === null
+      );
     }
   }
 };
