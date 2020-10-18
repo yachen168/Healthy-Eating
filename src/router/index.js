@@ -307,7 +307,14 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "weight-chart" */ "@/views/charts/WeightChart.vue"
-              )
+              ),
+            beforeEnter: async (to, from, next) => {
+              await store.dispatch(
+                "fetchAllWeights",
+                store.getters.userProfile.id
+              );
+              next();
+            }
           }
         ]
       }

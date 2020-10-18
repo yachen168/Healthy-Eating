@@ -1,23 +1,39 @@
 <template>
-  <div class="container">
+  <div class="chart-container">
+    <DateController
+      :datePeriodOfChart="$store.getters.datePeriodOfChart"
+      @toPreviosWeek="
+        $store.commit('previousWeek');
+        fillData();
+      "
+      @toNextWeek="
+        $store.commit('nextWeek');
+        fillData();
+      "
+    ></DateController>
     <div class="chart">
-      <Chart :height="400" :chart-data="chartdata" :options="options" />
-      <span class="y-scalelabel y-scalelabel-0">體重(公斤)</span>
+      <Chart :height="310" :chart-data="chartdata" :options="options" />
+      <span class="y-scalelabel">體重(公斤)</span>
     </div>
+    <Message v-if="isShowNoDataMessage" />
   </div>
 </template>
 
 <script>
+import DateController from "@/components/charts/DateController";
 import Chart from "@/components/charts/Chart";
+import Message from "@/components/charts/Message";
 
 export default {
   components: {
-    Chart
+    DateController,
+    Chart,
+    Message
   },
   data() {
     return {
       chartdata: {
-        labels: ["日", "一", "二", "三", "四", "五", "六"],
+        labels: this.$store.getters.labelDatesOfChart,
         datasets: [
           {
             type: "line",
@@ -25,13 +41,12 @@ export default {
             pointRadius: 5,
             pointHoverRadius: 8,
             label: "體重",
-            yAxisID: "y-axis-0",
             backgroundColor: "transparent",
             pointBackgroundColor: "#407D60",
             pointBorderColor: "#407D60",
             borderColor: "#407D60",
             borderWidth: 1,
-            data: [50.2, 50.8, 51.6, 51, 51.4, 51, 50.6]
+            data: this.$store.getters.weightsInSearchedPeriod
           }
         ]
       },
@@ -44,67 +59,83 @@ export default {
         scales: {
           xAxes: [
             {
-              stacked: true,
               ticks: {
                 fontColor: "black"
               },
               gridLines: {
-                color: "#ccc"
+                color: "#ccc",
+                zeroLineColor: "black"
               }
             }
           ],
           yAxes: [
             {
-              stacked: true,
-              position: "left",
-              id: "y-axis-0",
               ticks: {
-                max: 40,
-                min: 0,
                 fontColor: "black",
-                padding: 8,
-                callback: function(value, index, values) {
-                  return `${value} 份`;
-                }
+                padding: 6,
+                min: 40
               },
               gridLines: {
-                color: "#ccc",
                 zeroLineColor: "#ccc"
-              }
-            },
-            {
-              id: "y-axis-0",
-              ticks: {
-                max: 55,
-                min: 45,
-                fontColor: "black",
-                padding: 8
               }
             }
           ]
         }
       }
     };
+  },
+  methods: {
+    async fillData() {
+      await this.$store.dispatch(
+        "fetchAllWeights",
+        this.$store.getters.userProfile.id
+      );
+      this.chartdata = {
+        labels: this.$store.getters.labelDatesOfChart,
+        datasets: [
+          {
+            type: "line",
+            pointStyle: "rectRot",
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            label: "體重",
+            backgroundColor: "transparent",
+            pointBackgroundColor: "#407D60",
+            pointBorderColor: "#407D60",
+            borderColor: "#407D60",
+            borderWidth: 1,
+            data: this.$store.getters.weightsInSearchedPeriod
+          }
+        ]
+      };
+    }
+  },
+  computed: {
+    isShowNoDataMessage() {
+      return this.$store.getters.weightsInSearchedPeriod.every(item => {
+        return item === null;
+      });
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
+.chart-container {
   position: relative;
 }
 
 .chart {
   position: relative;
   max-width: 800px;
-  padding: 25px 10px 10px;
+  padding: 45px 10px 5px;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 0 auto;
   border-radius: 6px;
   .y-scalelabel {
     position: absolute;
     font-size: 12px;
-    top: 12px;
+    top: 31px;
     left: 48px;
   }
 }
