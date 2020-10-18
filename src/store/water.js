@@ -1,13 +1,16 @@
 import API from "../api/service";
+import dayjs from "dayjs";
 export default {
   state: {
     sumWaterIntake: [],
+    allRecordingsOfWaterIntake: [],
     idOfWaterIntake: [],
     sumWaterIntakeOneDay: 0,
     initSumWaterIntakeOneDay: 0
   },
   mutations: {
     sumWaterIntake(state, sumWaterIntake) {
+      console.log(sumWaterIntake);
       state.sumWaterIntake = sumWaterIntake;
     },
     initSumWaterIntakeOneDay(state) {
@@ -17,12 +20,13 @@ export default {
         state.sumWaterIntakeOneDay = 0;
       }
     },
+    allRecordingsOfWaterIntake(state, allRecordingsOfWaterIntake) {
+      state.allRecordingsOfWaterIntake = allRecordingsOfWaterIntake;
+    },
     idOfWaterIntake(state, { data, date }) {
-      console.log("id:");
       state.idOfWaterIntake = data.find(
         item => item.created_at.split(" ")[0] === date
       ).id;
-      console.log(state.idOfWaterIntake);
     },
     updateSumWaterIntakeOneDay(state, num) {
       state.sumWaterIntakeOneDay += num;
@@ -41,6 +45,8 @@ export default {
     async fetchUserAllRecordingsOfWaterIntake({ commit }, { user_id, date }) {
       try {
         const response = await API.get(`/water/${user_id}`);
+
+        commit("allRecordingsOfWaterIntake", response.data.data);
         commit("idOfWaterIntake", { data: response.data.data, date });
       } catch (error) {
         console.log(error.response);
@@ -54,8 +60,6 @@ export default {
       }
     },
     async updateWaterIntake({}, { water_id, data }) {
-      console.log(water_id);
-      console.log(data);
       try {
         await API.post(`/userWater/${water_id}`, data);
       } catch (error) {
@@ -75,6 +79,28 @@ export default {
     },
     datesHaveBeenRecorded_water(state) {
       return state.sumWaterIntake.map(item => new Date(item.created_at));
+    },
+    waterIntakeInSearchedPeriod(state, getters, rootState, rootGetters) {
+      if (state.sumWaterIntake.length === 0) {
+        return new Array(7).fill(null).map(() => 0);
+      } else {
+        const datesInSearchedPeriod = rootGetters.datesInSearchedPeriod;
+        const datesHaveBeenRecorded = state.sumWaterIntake.reduce(
+          (obj, currentValue) => {
+            obj[currentValue.day] = currentValue.sum;
+            return obj;
+          },
+          {}
+        );
+
+        return datesInSearchedPeriod.map(item => {
+          if (item in datesHaveBeenRecorded) {
+            return datesHaveBeenRecorded[item];
+          } else {
+            return null;
+          }
+        });
+      }
     }
   }
 };

@@ -125,6 +125,7 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
+
           // 待重構
           await store.dispatch("fetchDietaryRecording", {
             user_id: store.getters.userProfile.id,
@@ -285,7 +286,20 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "water-intake-chart" */ "@/views/charts/WaterIntakeChart.vue"
-              )
+              ),
+            beforeEnter: async (to, from, next) => {
+              await store.dispatch("fetchSumWaterIntake", {
+                remember_token: localStorage.getItem("token"),
+                user_id: store.getters.userProfile.id,
+                start_date: store.getters.datePeriodOfChart.startDate
+                  .split("/")
+                  .join("-"),
+                end_date: store.getters.datePeriodOfChart.endDate
+                  .split("/")
+                  .join("-")
+              });
+              next();
+            }
           },
           {
             path: "weight",
