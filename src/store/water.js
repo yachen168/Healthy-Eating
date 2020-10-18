@@ -77,7 +77,7 @@ export default {
       return state.idOfWaterIntake;
     },
     datesHaveBeenRecorded_water(state) {
-      return state.sumWaterIntake.map(item => new Date(item.created_at));
+      return state.sumWaterIntake.map(item => new Date(item.day));
     },
     waterIntakeInSearchedPeriod(state, getters, rootState, rootGetters) {
       if (state.sumWaterIntake.length === 0) {
