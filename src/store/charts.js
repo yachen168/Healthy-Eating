@@ -34,13 +34,8 @@ export default {
     }
   },
   actions: {
-    async fetchWaterIntakeInSearchedPeriod({ dispatch, getters }) {
-      await dispatch("fetchSumWaterIntake", {
-        remember_token: localStorage.getItem("token"),
-        user_id: getters.userProfile.id,
-        start_date: getters.datePeriodOfChart.startDate.split("/").join("-"),
-        end_date: getters.datePeriodOfChart.endDate.split("/").join("-")
-      });
+    async fetchWaterIntakeInSearchedPeriod({ dispatch }, data) {
+      await dispatch("fetchSumWaterIntake", data);
     }
   },
   getters: {
