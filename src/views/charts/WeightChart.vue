@@ -64,7 +64,8 @@ export default {
               },
               gridLines: {
                 color: "#ccc",
-                zeroLineColor: "black"
+                zeroLineColor: "black",
+                offsetGridLines: false
               }
             }
           ],
