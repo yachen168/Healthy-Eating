@@ -33,10 +33,33 @@ export default {
       );
     }
   },
-  actions: {},
+  actions: {
+    async fetchWaterIntakeInSearchedPeriod({ dispatch, getters }) {
+      await dispatch("fetchSumWaterIntake", {
+        remember_token: localStorage.getItem("token"),
+        user_id: getters.userProfile.id,
+        start_date: getters.datePeriodOfChart.startDate.split("/").join("-"),
+        end_date: getters.datePeriodOfChart.endDate.split("/").join("-")
+      });
+    }
+  },
   getters: {
     datePeriodOfChart(state) {
       return state.datePeriodOfChart;
+    },
+    labelDatesOfChart(state) {
+      return new Array(7).fill(null).map((item, index) => {
+        return dayjs(state.datePeriodOfChart.startDate)
+          .add(index, "days")
+          .date();
+      });
+    },
+    datesInSearchedPeriod(state) {
+      return new Array(7).fill(null).map((item, index) => {
+        return dayjs(state.datePeriodOfChart.startDate)
+          .add(index, "days")
+          .format("YYYY-MM-DD");
+      });
     }
   }
 };
