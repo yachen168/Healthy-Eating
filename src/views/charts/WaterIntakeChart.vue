@@ -2,7 +2,7 @@
   <div class="chart-container">
     <DateController
       :datePeriodOfChart="$store.getters.datePeriodOfChart"
-      @toPreviosWeek="
+      @toPreviousWeek="
         $store.commit('previousWeek');
         fillData();
       "
