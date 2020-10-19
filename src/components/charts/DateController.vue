@@ -1,6 +1,6 @@
 <template>
   <div class="date-controller">
-    <PreviousIcon class="icon" @click="$emit('toPreviosWeek')" />
+    <PreviousIcon class="icon" @click="$emit('toPreviousWeek')" />
     <span class="period"
       >{{ datePeriodOfChart.startDate }}~{{ datePeriodOfChart.endDate }}</span
     >
