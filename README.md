@@ -1,26 +1,19 @@
-# healthy-eating
-this is git 
+# 呷呼健康(healthy-eating)
 
+## 說明
+## 使用技術
+- Sass
+- Vue CLI
+- Vue Router
+- Vuex
+- BootstrapVue
+- Vue.js Datepicker
+- Axios
+- dayjs
+- VeeValidate
+- Chart.js、vue-chartjs
+- vue-svg-loader
+- vue-cropper
 
-## Project setup
-```
-npm install
-```
+## Demo
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
