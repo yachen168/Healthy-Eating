@@ -74,7 +74,10 @@ export default {
               ticks: {
                 fontColor: "black",
                 padding: 6,
-                min: 40
+                max:
+                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 2,
+                min: 42,
+                stepSize: 1
               },
               gridLines: {
                 zeroLineColor: "#ccc"
@@ -87,10 +90,6 @@ export default {
   },
   methods: {
     async fillData() {
-      await this.$store.dispatch(
-        "fetchAllWeights",
-        this.$store.getters.userProfile.id
-      );
       this.chartdata = {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
