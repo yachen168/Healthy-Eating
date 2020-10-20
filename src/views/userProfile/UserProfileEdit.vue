@@ -105,7 +105,6 @@
         <label for="height" class="label-title">身高</label>
         <ValidationProvider
           :rules="{
-            required: true,
             regex: /^[1-9]{1}\d{0,2}(\.\d)?$/
           }"
           v-slot="{ errors }"
