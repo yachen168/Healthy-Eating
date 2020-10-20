@@ -96,11 +96,21 @@ export default {
         {}
       );
 
-      return datesInSearchedPeriod.map(item => {
+      /* 圖表顯示首次紀錄體重日~今天體重變化，未紀錄則回朔到最近的一次紀錄，至多回朔到首次紀錄體重日 */
+      let nearestWeight =
+        getters.allWeights[getters.allWeights.length - 1].weight;
+
+      return datesInSearchedPeriod.map((item, index) => {
         if (item in datesHaveBeenRecorded) {
+          nearestWeight = datesHaveBeenRecorded[item];
           return datesHaveBeenRecorded[item];
-        } else {
+        } else if (
+          dayjs(item).isBefore(getters.allWeights[0].created_at) ||
+          dayjs(item).isAfter(dayjs())
+        ) {
           return null;
+        } else {
+          return nearestWeight;
         }
       });
     }
