@@ -34,43 +34,42 @@ export default {
     return {
       chartdata: {
         labels: this.$store.getters.labelDatesOfChart,
-        /* ====== 等待後端修改 API 資料====== */
         datasets: [
           {
             type: "bar",
             label: "全穀雜糧類",
             backgroundColor: "#CBA368",
-            data: [1, 2, 4, 5, 2, 2, 2]
+            data: this.$store.getters.dietaryDeficiency.grains
           },
           {
             type: "bar",
             label: "豆魚蛋肉類",
             backgroundColor: "#E97979",
-            data: [0, 0, 1, 2, 4, 5, 0]
+            data: this.$store.getters.dietaryDeficiency.proteins
           },
           {
             type: "bar",
             label: "奶品類       ",
             backgroundColor: "#FFC52F",
-            data: [5, 0, 2, 2, 2, 3, 0]
+            data: this.$store.getters.dietaryDeficiency.dairy
           },
           {
             type: "bar",
             label: "蔬菜類",
             backgroundColor: "#98D59B",
-            data: [5, 1, 0, 3, 0, 2, 1]
+            data: this.$store.getters.dietaryDeficiency.vegetables
           },
           {
             type: "bar",
             label: "水果類       ",
             backgroundColor: "#A171B3",
-            data: [3, 0, 1, 4, 1, 1, 0]
+            data: this.$store.getters.dietaryDeficiency.fruits
           },
           {
             type: "bar",
             label: "油脂及堅果種子類",
             backgroundColor: "#83A7DD",
-            data: [2, 4, 2, 3, 4, 0, 1]
+            data: this.$store.getters.dietaryDeficiency.nuts
           }
         ]
       },
@@ -84,7 +83,7 @@ export default {
             usePointStyle: true,
             boxWidth: 22,
             fontSize: 14,
-            padding: 24,
+            padding: 22,
             fontColor: "#383838"
           }
         },
@@ -104,8 +103,8 @@ export default {
           yAxes: [
             {
               stacked: true,
-              position: "left",
               ticks: {
+                stepSize: 8,
                 max: 40,
                 min: 0,
                 fontColor: "black",
@@ -120,6 +119,62 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    async fillData() {
+      console.log(123);
+      await this.$store.dispatch("fetchDietaryDeficiency", {
+        user_id: this.$store.getters.userProfile.id,
+        start_date: this.$store.getters.datePeriodOfChart.startDate
+          .split("/")
+          .join("-"),
+        end_date: this.$store.getters.datePeriodOfChart.endDate
+          .split("/")
+          .join("-")
+      });
+
+      this.chartdata = {
+        labels: this.$store.getters.labelDatesOfChart,
+        datasets: [
+          {
+            type: "bar",
+            label: "全穀雜糧類",
+            backgroundColor: "#CBA368",
+            data: this.$store.getters.dietaryDeficiency.grains
+          },
+          {
+            type: "bar",
+            label: "豆魚蛋肉類",
+            backgroundColor: "#E97979",
+            data: this.$store.getters.dietaryDeficiency.proteins
+          },
+          {
+            type: "bar",
+            label: "奶品類       ",
+            backgroundColor: "#FFC52F",
+            data: this.$store.getters.dietaryDeficiency.dairy
+          },
+          {
+            type: "bar",
+            label: "蔬菜類",
+            backgroundColor: "#98D59B",
+            data: this.$store.getters.dietaryDeficiency.vegetables
+          },
+          {
+            type: "bar",
+            label: "水果類       ",
+            backgroundColor: "#A171B3",
+            data: this.$store.getters.dietaryDeficiency.fruits
+          },
+          {
+            type: "bar",
+            label: "油脂及堅果種子類",
+            backgroundColor: "#83A7DD",
+            data: this.$store.getters.dietaryDeficiency.nuts
+          }
+        ]
+      };
+    }
   }
 };
 </script>
