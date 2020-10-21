@@ -11,6 +11,7 @@ export default {
       state.dietaryRecordingState = dietaryRecordingState;
     },
     dietaryDeficiency(state, dietaryDeficiency) {
+      console.log(dietaryDeficiency);
       state.dietaryDeficiency = dietaryDeficiency;
     },
     initHistoryOfAMealRecording(state, dietType) {
@@ -98,7 +99,6 @@ export default {
       };
     },
     historyOfAMealRecordingID(state) {
-      console.log(state.historyOfAMealRecording);
       return state.historyOfAMealRecording.id
         ? state.historyOfAMealRecording.id
         : "";
@@ -107,9 +107,30 @@ export default {
       return state.historyOfAMealRecording;
     },
     datesHaveBeenRecorded_diet(state) {
-      return state.dietaryRecordingState.map(
-        item => new Date(item.updated_at) // 等待後端修正
+      return state.dietaryRecordingState.map(item => new Date(item.created_at));
+    },
+    dietaryDeficiency(state, getters, rootState, rootGetters) {
+      const standardOfDiet = { ...rootGetters.userProfile.diet_standard };
+      delete standardOfDiet.water;
+
+      const datasInSearchedPeriod = rootGetters.datesInSearchedPeriod.map(
+        date => {
+          const deficiencyItem = state.dietaryDeficiency.find(
+            item => item.date === date
+          );
+          return (
+            deficiencyItem || {
+              date,
+              deficiency: standardOfDiet
+            }
+          );
+        }
       );
+
+      return Object.keys(standardOfDiet).reduce((obj, key) => {
+        obj[key] = datasInSearchedPeriod.map(item => item.deficiency[key]);
+        return obj;
+      }, {});
     }
   }
 };
