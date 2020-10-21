@@ -1,4 +1,5 @@
 import API from "../api/service";
+import dayjs from "dayjs";
 
 export default {
   state: {
@@ -117,15 +118,31 @@ export default {
 
       const datasInSearchedPeriod = rootGetters.datesInSearchedPeriod.map(
         date => {
-          const deficiencyItem = state.dietaryDeficiency.find(
-            item => item.date === date
-          );
-          return (
-            deficiencyItem || {
-              date,
-              deficiency: standardOfDiet
-            }
-          );
+          if (
+            dayjs(date).isBefore(getters.userProfile.created_at) ||
+            dayjs(date).isAfter(dayjs())
+          ) {
+            return {
+              deficiency: {
+                fruits: null,
+                vegetables: null,
+                grains: null,
+                nuts: null,
+                proteins: null,
+                dairy: null
+              }
+            };
+          } else {
+            const deficiencyItem = state.dietaryDeficiency.find(
+              item => item.date === date
+            );
+            return (
+              deficiencyItem || {
+                date,
+                deficiency: standardOfDiet
+              }
+            );
+          }
         }
       );
 

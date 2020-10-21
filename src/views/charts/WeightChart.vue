@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      isShowNoDataMessage: false,
       chartdata: {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
@@ -89,7 +90,18 @@ export default {
     };
   },
   methods: {
+    checkIsShowNoDataMessage() {
+      this.isShowNoDataMessage = this.$store.getters.weightsInSearchedPeriod.every(
+        item => item === null
+      );
+    },
     async fillData() {
+      console.log(123);
+      await this.$store.dispatch(
+        "fetchAllWeights",
+        this.$store.getters.userProfile.id
+      );
+
       this.chartdata = {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
@@ -108,13 +120,8 @@ export default {
           }
         ]
       };
-    }
-  },
-  computed: {
-    isShowNoDataMessage() {
-      return this.$store.getters.weightsInSearchedPeriod.every(
-        item => item === null
-      );
+
+      this.checkIsShowNoDataMessage();
     }
   }
 };

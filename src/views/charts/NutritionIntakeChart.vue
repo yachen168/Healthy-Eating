@@ -15,7 +15,7 @@
       <Chart :height="465" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">未攝取營養(份)</span>
     </div>
-    <Message v-if="false" />
+    <Message v-if="isShowMessage" />
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      isShowMessage: false,
       chartdata: {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
@@ -121,8 +122,12 @@ export default {
     };
   },
   methods: {
+    checkIsShowMessage() {
+      this.isShowMessage = !Object.values(
+        this.$store.getters.dietaryDeficiency
+      ).find(item => item.find(item => item !== null));
+    },
     async fillData() {
-      console.log(123);
       await this.$store.dispatch("fetchDietaryDeficiency", {
         user_id: this.$store.getters.userProfile.id,
         start_date: this.$store.getters.datePeriodOfChart.startDate
@@ -174,6 +179,7 @@ export default {
           }
         ]
       };
+      this.checkIsShowMessage();
     }
   }
 };
