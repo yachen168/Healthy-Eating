@@ -145,7 +145,10 @@ export default {
           user_id: user_id
         });
       }
-      this.$router.push({ name: "RecordingStates" });
+      this.$router.push({
+        name: "RecordingStates",
+        query: { date: this.$route.query.date }
+      });
     }
   },
   computed: {
