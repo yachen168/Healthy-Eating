@@ -11,13 +11,15 @@ export default {
       state.dietaryRecordingState = dietaryRecordingState;
     },
     dietaryDeficiency(state, dietaryDeficiency) {
-      console.log(dietaryDeficiency);
       state.dietaryDeficiency = dietaryDeficiency;
     },
-    initHistoryOfAMealRecording(state, dietType) {
-      const historyOfAMealRecording = state.dietaryRecordingState.find(
-        item => item.diet_type === dietType
-      );
+    initHistoryOfAMealRecording(state, { dietType, searchedDate }) {
+      const historyOfAMealRecording = state.dietaryRecordingState.find(item => {
+        return (
+          item.diet_type === dietType &&
+          item.created_at.split(" ")[0] === searchedDate
+        );
+      });
 
       if (historyOfAMealRecording) {
         delete historyOfAMealRecording.water;

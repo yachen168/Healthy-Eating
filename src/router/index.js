@@ -162,11 +162,12 @@ const routes = [
           const searchedDate = to.query.date ? to.query.date : today;
           await store.dispatch("fetchDietaryRecording", {
             user_id: store.getters.userProfile.id,
-            kind: 0,
-            start_date: searchedDate,
-            end_date: searchedDate
+            kind: 0
           });
-          await store.commit("initHistoryOfAMealRecording", to.params.dietType);
+          await store.commit("initHistoryOfAMealRecording", {
+            dietType: to.params.dietType,
+            searchedDate: searchedDate
+          });
           await store.dispatch("fetchDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
@@ -282,7 +283,19 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "nutrition-intake-chart" */ "@/views/charts/NutritionIntakeChart.vue"
-              )
+              ),
+            beforeEnter: async (to, from, next) => {
+              await store.dispatch("fetchDietaryDeficiency", {
+                user_id: store.getters.userProfile.id,
+                start_date: store.getters.datePeriodOfChart.startDate
+                  .split("/")
+                  .join("-"),
+                end_date: store.getters.datePeriodOfChart.endDate
+                  .split("/")
+                  .join("-")
+              });
+              next();
+            }
           },
           {
             path: "water-intake",
