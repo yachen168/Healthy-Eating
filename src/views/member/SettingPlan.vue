@@ -86,7 +86,8 @@ export default {
         "grains",
         "nuts",
         "proteins",
-        "vegetables"
+        "vegetables",
+        "water"
       ];
       this.isConfirmButtonPass = keys.every(key => this.plan[0][key] === 0);
     },
