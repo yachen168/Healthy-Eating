@@ -84,7 +84,7 @@ export default {
     },
     async confirmSettingPlan() {
       await this.$store.dispatch("addNewDiet", this.plan[0]);
-      $router.push({ name: "RecordingStates" });
+      this.$router.push({ name: "RecordingStates" });
     }
   }
 };
