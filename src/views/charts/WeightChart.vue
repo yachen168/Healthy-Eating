@@ -47,6 +47,7 @@ export default {
             pointBorderColor: "#407D60",
             borderColor: "#407D60",
             borderWidth: 1,
+            lineTension: 0,
             data: this.$store.getters.weightsInSearchedPeriod
           }
         ]
@@ -96,7 +97,6 @@ export default {
       );
     },
     async fillData() {
-      console.log(123);
       await this.$store.dispatch(
         "fetchAllWeights",
         this.$store.getters.userProfile.id
