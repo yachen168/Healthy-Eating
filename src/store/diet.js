@@ -118,8 +118,9 @@ export default {
 
       const datasInSearchedPeriod = rootGetters.datesInSearchedPeriod.map(
         date => {
+          const createdDate = getters.userProfile.created_at.split(" ")[0];
           if (
-            dayjs(date).isBefore(getters.userProfile.created_at) ||
+            dayjs(date).isBefore(createdDate) ||
             dayjs(date).isAfter(dayjs())
           ) {
             return {
