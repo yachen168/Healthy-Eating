@@ -80,7 +80,15 @@ export default {
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
-      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+      const keys = [
+        "dairy",
+        "fruits",
+        "grains",
+        "nuts",
+        "proteins",
+        "vegetables"
+      ];
+      this.isConfirmButtonPass = keys.every(key => this.plan[0][key] === 0);
     },
     async confirmSettingPlan() {
       await this.$store.dispatch("addNewDiet", this.plan[0]);

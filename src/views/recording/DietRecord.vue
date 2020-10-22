@@ -120,7 +120,9 @@ export default {
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
-      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+      this.isConfirmButtonPass = Object.values(
+        this.$store.getters.historyOfAMealRecording
+      ).every(item => item === 0);
     },
     async confirmUpdate() {
       const diet_type = this.diets[this.$route.params.dietType].symbol;
