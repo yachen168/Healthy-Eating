@@ -77,8 +77,12 @@ export default {
                 fontColor: "black",
                 padding: 6,
                 max:
-                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 2,
-                min: 42,
+                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 1,
+                min: Math.min(
+                  this.$store.getters.weightsInSearchedPeriod.filter(
+                    item => item
+                  ) - 3
+                ),
                 stepSize: 1
               },
               gridLines: {

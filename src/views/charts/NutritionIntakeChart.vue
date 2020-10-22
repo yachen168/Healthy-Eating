@@ -106,7 +106,8 @@ export default {
               stacked: true,
               ticks: {
                 stepSize: 8,
-                max: 40,
+                max:
+                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 15,
                 min: 0,
                 fontColor: "black",
                 padding: 6

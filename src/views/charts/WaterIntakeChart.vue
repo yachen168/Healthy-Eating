@@ -67,6 +67,9 @@ export default {
               ticks: {
                 fontColor: "black",
                 padding: 6,
+                max:
+                  Math.max(...this.$store.getters.waterIntakeInSearchedPeriod) +
+                  1,
                 min: 0
               },
               gridLines: {
