@@ -105,6 +105,42 @@ export default {
           }
         ]
       };
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                fontColor: "black"
+              },
+              gridLines: {
+                color: "#ccc",
+                zeroLineColor: "black",
+                offsetGridLines: false
+              }
+            }
+          ],
+          yAxes: [
+            {
+              ticks: {
+                fontColor: "black",
+                padding: 6,
+                max:
+                  Math.max(...this.$store.getters.waterIntakeInSearchedPeriod) +
+                  1,
+                min: 0
+              },
+              gridLines: {
+                zeroLineColor: "#ccc"
+              }
+            }
+          ]
+        }
+      };
     }
   }
 };

@@ -106,8 +106,7 @@ export default {
               stacked: true,
               ticks: {
                 stepSize: 8,
-                max:
-                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 15,
+                max: this.$store.getters.yAxisMax_nutrition,
                 min: 0,
                 fontColor: "black",
                 padding: 6
@@ -180,6 +179,7 @@ export default {
           }
         ]
       };
+
       this.checkIsShowMessage();
     }
   }

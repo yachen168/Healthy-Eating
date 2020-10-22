@@ -76,13 +76,7 @@ export default {
               ticks: {
                 fontColor: "black",
                 padding: 6,
-                max:
-                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 1,
-                min: Math.min(
-                  this.$store.getters.weightsInSearchedPeriod.filter(
-                    item => item
-                  ) - 3
-                ),
+                min: this.$store.getters.yAxisMin_weight,
                 stepSize: 1
               },
               gridLines: {
@@ -125,6 +119,42 @@ export default {
           }
         ]
       };
+
+      // this.options = {
+      //   responsive: true,
+      //   maintainAspectRatio: false,
+      //   legend: {
+      //     display: false
+      //   },
+      //   scales: {
+      //     xAxes: [
+      //       {
+      //         ticks: {
+      //           fontColor: "black"
+      //         },
+      //         gridLines: {
+      //           color: "#ccc",
+      //           zeroLineColor: "black",
+      //           offsetGridLines: false
+      //         }
+      //       }
+      //     ],
+      //     yAxes: [
+      //       {
+      //         ticks: {
+      //           fontColor: "black",
+      //           padding: 6,
+      //           max: this.$store.getters.yAxisMax_weight,
+      //           min: this.$store.getters.yAxisMin_weight,
+      //           stepSize: 1
+      //         },
+      //         gridLines: {
+      //           zeroLineColor: "#ccc"
+      //         }
+      //       }
+      //     ]
+      // }
+      // };
 
       this.checkIsShowNoDataMessage();
     }

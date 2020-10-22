@@ -55,6 +55,24 @@ export default {
           .add(index, "days")
           .format("YYYY-MM-DD");
       });
+    },
+    yAxisMax_nutrition(state, getters, rootState, rootGetters) {
+      const standardOfDiet = { ...rootGetters.userProfile.diet_standard };
+      delete standardOfDiet.water;
+
+      const nutrition =
+        Object.values(standardOfDiet).reduce((acc, currentValue) => {
+          acc += currentValue;
+          return acc;
+        }, 0) + 15;
+
+      return nutrition;
+    },
+    yAxisMax_weight(state, getters, rootState, rootGetters) {
+      return (
+        Math.max(...rootGetters.weightsInSearchedPeriod.filter(item => item)) +
+        2
+      );
     }
   }
 };
