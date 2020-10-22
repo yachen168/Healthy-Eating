@@ -110,7 +110,16 @@ const routes = [
         /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
       ),
     beforeEnter: async (to, from, next) => {
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = to.query.date ? to.query.date : today;
+
       await store.dispatch("fetchUserProfile");
+      await store.dispatch("fetchDietaryRecording", {
+        user_id: store.getters.userProfile.id,
+        kind: 0,
+        start_date: searchedDate,
+        end_date: searchedDate
+      });
       next();
     },
     children: [
@@ -127,12 +136,6 @@ const routes = [
           const searchedDate = to.query.date ? to.query.date : today;
 
           // 待重構
-          await store.dispatch("fetchDietaryRecording", {
-            user_id: store.getters.userProfile.id,
-            kind: 0,
-            start_date: searchedDate,
-            end_date: searchedDate
-          });
           await store.dispatch("fetchDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
@@ -160,18 +163,9 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.query.date ? to.query.date : today;
-          await store.dispatch("fetchDietaryRecording", {
-            user_id: store.getters.userProfile.id,
-            kind: 0
-          });
           await store.commit("initHistoryOfAMealRecording", {
             dietType: to.params.dietType,
             searchedDate: searchedDate
-          });
-          await store.dispatch("fetchDietaryDeficiency", {
-            user_id: store.getters.userProfile.id,
-            start_date: searchedDate,
-            end_date: searchedDate
           });
           next();
         }
