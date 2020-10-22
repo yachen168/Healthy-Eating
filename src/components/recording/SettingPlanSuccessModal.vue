@@ -17,7 +17,7 @@
       <BaseButton
         title="開始記錄"
         buttonStyle="primary"
-        @click="$router.push({ name: 'RecordingStates' })"
+        @click="$emit('confirmSettingPlan')"
       ></BaseButton>
     </footer>
   </div>

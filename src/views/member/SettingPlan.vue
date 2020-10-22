@@ -15,7 +15,7 @@
         title="設定完成"
         buttonStyle="primary"
         :disabledState="isConfirmButtonPass"
-        @click="confirmSettingPlan"
+        @click="isSettingSuccessModalShow = true"
       ></BaseButton>
     </main>
     <footer>
@@ -25,6 +25,7 @@
     <SettingPlanSuccessModal
       v-if="isSettingSuccessModalShow"
       @closeSettingSuccessModal="isSettingSuccessModalShow = false"
+      @confirmSettingPlan="confirmSettingPlan"
     />
   </div>
 </template>
@@ -81,9 +82,9 @@ export default {
     checkConfirmButtonPass(items) {
       this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
     },
-    confirmSettingPlan() {
-      this.$store.dispatch("addNewDiet", this.plan[0]);
-      this.isSettingSuccessModalShow = true;
+    async confirmSettingPlan() {
+      await this.$store.dispatch("addNewDiet", this.plan[0]);
+      $router.push({ name: "RecordingStates" });
     }
   }
 };
