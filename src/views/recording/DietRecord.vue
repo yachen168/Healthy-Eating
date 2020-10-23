@@ -61,6 +61,7 @@ import RecordingTable from "@/components/recording/RecordingTable";
 import ConversionTable from "@/components/recording/ConversionTable";
 import nutritionalInformation from "@/NutritionalConversion.js";
 import utilities from "@/utilities/utilities";
+import dayjs from "dayjs";
 
 export default {
   components: {
@@ -129,6 +130,11 @@ export default {
       const diet_id = this.$store.getters.historyOfAMealRecordingID;
       const user_id = this.$store.getters.userProfile.id;
 
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = this.$route.query.date
+        ? this.$route.query.date
+        : today;
+
       // 先前有紀錄則編輯該筆歷史資料，無紀錄過則直接新增
       if (diet_id) {
         await this.$store.dispatch("updateDiet", {
@@ -139,12 +145,25 @@ export default {
             diet_type: diet_type
           }
         });
+
+        await this.$store.dispatch("fetchDietaryRecording", {
+          user_id: this.$store.getters.userProfile.id,
+          kind: 0,
+          start_date: searchedDate,
+          end_date: searchedDate
+        });
       } else {
         await this.$store.dispatch("addNewDiet", {
           ...this.$store.getters.historyOfAMealRecording,
           diet_type: diet_type,
           kind: 0,
           user_id: user_id
+        });
+        await this.$store.dispatch("fetchDietaryRecording", {
+          user_id: this.$store.getters.userProfile.id,
+          kind: 0,
+          start_date: searchedDate,
+          end_date: searchedDate
         });
       }
       this.$router.push({
