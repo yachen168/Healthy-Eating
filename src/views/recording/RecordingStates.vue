@@ -57,7 +57,7 @@
               />
             </p>
             <span slot="card-footer" class="description">{{
-              sectionTitle
+              sectionTitle_weight
             }}</span>
           </RecordingCard>
         </b-col>
@@ -65,7 +65,7 @@
       <hr class="divid" />
       <!-- ====== 營養總攝取量 ====== -->
       <b-row class="sum-nutrition" no-gutters>
-        <h2>{{ sectionTitle }}營養總攝取量</h2>
+        <h2>{{ sectionTitle_nutrition }}營養總攝取量</h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
           <RecordingCard :hasBodyIcon="true">
             <img
@@ -192,12 +192,19 @@ export default {
         ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
         : `今天 ${dayjs().format("YYYY/MM/DD")}`;
     },
-    sectionTitle() {
+    sectionTitle_weight() {
       const today = dayjs().format("YYYY-MM-DD");
       const searchedDate = this.$route.query.date || today;
       return searchedDate === today
         ? "今天的體重"
         : `${dayjs(searchedDate).format("YYYY/MM/DD")} 的體重`;
+    },
+    sectionTitle_nutrition() {
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = this.$route.query.date || today;
+      return searchedDate === today
+        ? "今天"
+        : `${dayjs(searchedDate).format("YYYY/MM/DD")}`;
     },
     canBeModified() {
       return !utilities.isSearchedDateExpired(this.$route.query.date);
