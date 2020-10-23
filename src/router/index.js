@@ -136,6 +136,13 @@ const routes = [
           const searchedDate = to.query.date ? to.query.date : today;
 
           // 待重構
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0,
+            start_date: searchedDate,
+            end_date: searchedDate
+          });
+
           await store.dispatch("fetchDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
