@@ -218,10 +218,6 @@ const routes = [
             /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchDietaryRecording", {
-            user_id: store.getters.userProfile.id,
-            kind: 0
-          });
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id

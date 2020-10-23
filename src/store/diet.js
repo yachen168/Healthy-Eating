@@ -14,6 +14,9 @@ export default {
     dietaryDeficiency(state, dietaryDeficiency) {
       state.dietaryDeficiency = dietaryDeficiency;
     },
+    resetDietaryDeficiency(state) {
+      state.dietaryDeficiency = [];
+    },
     initHistoryOfAMealRecording(state, { dietType, searchedDate }) {
       const historyOfAMealRecording = state.dietaryRecordingState.find(item => {
         return (
@@ -54,6 +57,7 @@ export default {
         const response = await API.post("/diet/day", data);
         commit("dietaryDeficiency", response.data.data);
       } catch (error) {
+        commit("resetDietaryDeficiency");
         console.log(error.response);
       }
     },
