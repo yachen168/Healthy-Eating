@@ -52,12 +52,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="male"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -65,12 +60,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="female"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -78,12 +68,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="others"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
           </b-modal>
@@ -195,6 +180,7 @@ import ArrowDownIcon from "@/assets/images/mdi_arrow_down.svg?inline";
 import CameraIcon from "@/assets/images/ic_camera.svg?inline";
 import dayjs from "dayjs";
 import Crop from "@/components/common/Crop";
+
 export default {
   components: {
     BaseButton,
@@ -256,6 +242,13 @@ export default {
         this.$store.dispatch("uploadAvatar", formData);
       });
       this.isShow = false;
+    },
+    selectGender($event) {
+      this.$store.commit("userProfile", {
+        ...this.$store.getters.userProfile,
+        gender: $event
+      });
+      this.$bvModal.hide("modal-gender");
     }
   }
 };
