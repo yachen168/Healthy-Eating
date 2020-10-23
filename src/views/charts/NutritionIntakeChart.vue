@@ -141,8 +141,11 @@ export default {
       }
     };
   },
+  created() {
+    this.checkIsShowNoDataMessage();
+  },
   methods: {
-    checkIsShowMessage() {
+    checkIsShowNoDataMessage() {
       this.isShowMessage = !Object.values(
         this.$store.getters.dietaryDeficiency
       ).find(item => item.find(item => item !== null));
@@ -206,7 +209,7 @@ export default {
         ]
       };
       this.isShowBarData = this.resetIsShowBarData;
-      this.checkIsShowMessage();
+      this.checkIsShowNoDataMessage();
     },
     filterData(key) {
       this.isShowBarData = {

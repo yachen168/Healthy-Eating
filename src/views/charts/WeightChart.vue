@@ -30,6 +30,9 @@ export default {
     Chart,
     Message
   },
+  created() {
+    this.checkIsShowNoDataMessage();
+  },
   data() {
     return {
       isShowNoDataMessage: false,
