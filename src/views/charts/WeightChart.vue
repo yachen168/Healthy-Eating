@@ -14,8 +14,8 @@
     <div class="chart">
       <Chart :height="310" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">體重(公斤)</span>
+      <Message v-if="isShowNoDataMessage" />
     </div>
-    <Message v-if="isShowNoDataMessage" />
   </div>
 </template>
 
@@ -75,8 +75,8 @@ export default {
             {
               ticks: {
                 fontColor: "black",
-                padding: 6,
-                min: this.$store.getters.yAxisMin_weight,
+                suggestedMax: this.$store.getters.yAxisMax_weight,
+                suggestedMin: this.$store.getters.yAxisMin_weight,
                 stepSize: 1
               },
               gridLines: {
@@ -120,42 +120,6 @@ export default {
         ]
       };
 
-      // this.options = {
-      //   responsive: true,
-      //   maintainAspectRatio: false,
-      //   legend: {
-      //     display: false
-      //   },
-      //   scales: {
-      //     xAxes: [
-      //       {
-      //         ticks: {
-      //           fontColor: "black"
-      //         },
-      //         gridLines: {
-      //           color: "#ccc",
-      //           zeroLineColor: "black",
-      //           offsetGridLines: false
-      //         }
-      //       }
-      //     ],
-      //     yAxes: [
-      //       {
-      //         ticks: {
-      //           fontColor: "black",
-      //           padding: 6,
-      //           max: this.$store.getters.yAxisMax_weight,
-      //           min: this.$store.getters.yAxisMin_weight,
-      //           stepSize: 1
-      //         },
-      //         gridLines: {
-      //           zeroLineColor: "#ccc"
-      //         }
-      //       }
-      //     ]
-      // }
-      // };
-
       this.checkIsShowNoDataMessage();
     }
   }
@@ -180,5 +144,14 @@ export default {
     top: 31px;
     left: 48px;
   }
+}
+
+::v-deep .message {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  bottom: 0;
+  left: 25px;
+  margin: auto;
 }
 </style>

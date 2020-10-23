@@ -69,10 +69,25 @@ export default {
       return nutrition;
     },
     yAxisMax_weight(state, getters, rootState, rootGetters) {
-      return (
-        Math.max(...rootGetters.weightsInSearchedPeriod.filter(item => item)) +
-        2
+      const validData = rootGetters.weightsInSearchedPeriod.filter(
+        item => item
       );
+
+      return validData.length ? Math.max(...validData) + 1 : 50;
+    },
+    yAxisMin_weight(state, getters, rootState, rootGetters) {
+      const validData = rootGetters.weightsInSearchedPeriod.filter(
+        item => item
+      );
+
+      return validData.length ? Math.min(...validData) - 3 : 40;
+    },
+    yAxisMax_water(state, getters, rootState, rootGetters) {
+      const validData = rootGetters.waterIntakeInSearchedPeriod.filter(
+        item => item
+      );
+
+      return validData.length ? Math.max(...validData) + 1 : 50;
     }
   }
 };

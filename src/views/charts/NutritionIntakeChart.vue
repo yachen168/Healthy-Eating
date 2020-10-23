@@ -14,6 +14,7 @@
     <div class="chart">
       <Chart :height="310" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">未攝取營養(份)</span>
+      <Message v-if="isShowMessage" />
     </div>
     <section class="labels">
       <div
@@ -28,7 +29,6 @@
         />
       </div>
     </section>
-    <Message v-if="isShowMessage" />
   </div>
 </template>
 
@@ -75,7 +75,7 @@ export default {
           },
           {
             type: "bar",
-            label: "奶品類       ",
+            label: "奶品類",
             key: "dairy",
             backgroundColor: "#FFC52F",
             data: this.$store.getters.dietaryDeficiency.dairy
@@ -89,7 +89,7 @@ export default {
           },
           {
             type: "bar",
-            label: "水果類       ",
+            label: "水果類",
             key: "fruits",
             backgroundColor: "#A171B3",
             data: this.$store.getters.dietaryDeficiency.fruits
@@ -129,8 +129,7 @@ export default {
                 stepSize: 8,
                 max: this.$store.getters.yAxisMax_nutrition,
                 min: 0,
-                fontColor: "black",
-                padding: 6
+                fontColor: "black"
               },
               gridLines: {
                 color: "#ccc",
@@ -319,5 +318,14 @@ export default {
     flex: 0 0 50%;
     padding: 6px 5px;
   }
+}
+
+::v-deep .message {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  bottom: 0;
+  left: 43px;
+  margin: auto;
 }
 </style>

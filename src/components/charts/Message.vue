@@ -10,17 +10,9 @@ export default {};
 
 <style lang="scss" scoped>
 .message {
-  position: absolute;
-  width: 190px;
+  width: 150px;
   height: 30px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
   p {
-    margin-top: 35px;
-    margin-left: 30px;
     line-height: 30px;
     padding: 0 12px;
     color: #fff;

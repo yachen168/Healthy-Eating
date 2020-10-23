@@ -14,8 +14,8 @@
     <div class="chart">
       <Chart :height="310" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">飲水量 (公升)</span>
+      <Message v-if="!$store.getters.sumWaterIntake.length" />
     </div>
-    <Message v-if="!$store.getters.sumWaterIntake.length" />
   </div>
 </template>
 
@@ -66,10 +66,7 @@ export default {
             {
               ticks: {
                 fontColor: "black",
-                padding: 6,
-                max:
-                  Math.max(...this.$store.getters.waterIntakeInSearchedPeriod) +
-                  1,
+                suggestedMax: this.$store.getters.yAxisMax_water,
                 min: 0
               },
               gridLines: {
@@ -105,42 +102,6 @@ export default {
           }
         ]
       };
-      this.options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              ticks: {
-                fontColor: "black"
-              },
-              gridLines: {
-                color: "#ccc",
-                zeroLineColor: "black",
-                offsetGridLines: false
-              }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                fontColor: "black",
-                padding: 6,
-                max:
-                  Math.max(...this.$store.getters.waterIntakeInSearchedPeriod) +
-                  1,
-                min: 0
-              },
-              gridLines: {
-                zeroLineColor: "#ccc"
-              }
-            }
-          ]
-        }
-      };
     }
   }
 };
@@ -164,5 +125,14 @@ export default {
     top: 31px;
     left: 48px;
   }
+}
+
+::v-deep .message {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  bottom: 0;
+  left: 36px;
+  margin: auto;
 }
 </style>
