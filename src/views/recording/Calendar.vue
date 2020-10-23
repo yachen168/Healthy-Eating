@@ -17,11 +17,19 @@ export default {
     Calendar
   },
   methods: {
-    toRecordingStatePage($event) {
-      const date = dayjs($event).format("YYYY-MM-DD");
+    async toRecordingStatePage($event) {
+      const searchedDate = dayjs($event).format("YYYY-MM-DD");
+
+      await this.$store.dispatch("fetchDietaryRecording", {
+        user_id: this.$store.getters.userProfile.id,
+        kind: 0,
+        start_date: searchedDate,
+        end_date: searchedDate
+      });
+
       this.$router.push({
         name: "RecordingStates",
-        query: { date: date }
+        query: { date: searchedDate }
       });
     }
   },
