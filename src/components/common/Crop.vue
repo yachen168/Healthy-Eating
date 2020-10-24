@@ -1,5 +1,6 @@
 <template>
   <div class="crop">
+    <div class="nav"></div>
     <p class="title">上傳編輯圖片</p>
     <VueCropper
       autoCrop
@@ -77,6 +78,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav {
+  width: 100%;
+  height: 50px;
+  background-color: #407d60;
+}
+
 .crop {
   width: 100%;
   height: 360px;

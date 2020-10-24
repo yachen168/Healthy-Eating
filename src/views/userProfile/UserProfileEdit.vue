@@ -256,12 +256,12 @@ export default {
 
 <style lang="scss" scoped>
 .crop-area {
-  position: absolute;
-  top: 64px;
+  position: fixed;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  margin-top: 31px;
+  z-index: 10;
   background-color: #f5f5f5;
 }
 main {
