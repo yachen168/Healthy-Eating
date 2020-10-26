@@ -21,7 +21,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         />
@@ -39,7 +39,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         />
@@ -150,7 +150,7 @@ export default {
       }
       this.$router.push({
         name: "RecordingStates",
-        query: { date: this.$route.query.date }
+        params: { date: this.$route.params.date }
       });
     }
   },
@@ -161,7 +161,7 @@ export default {
         : "";
     },
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };

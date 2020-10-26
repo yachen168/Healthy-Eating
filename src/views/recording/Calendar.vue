@@ -29,7 +29,7 @@ export default {
 
       this.$router.push({
         name: "RecordingStates",
-        query: { date: searchedDate }
+        params: { date: searchedDate }
       });
     }
   },

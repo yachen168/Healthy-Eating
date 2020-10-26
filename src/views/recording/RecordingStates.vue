@@ -168,12 +168,12 @@ export default {
         this.$router.push({
           name: "DietRecord",
           params: { dietType: type },
-          query: { date: this.$route.query.date }
+          params: { date: this.$route.params.date }
         });
       } else {
         this.$router.push({
           name: "WaterRecord",
-          query: { date: this.$route.query.date }
+          params: { date: this.$route.params.date }
         });
       }
     },
@@ -181,33 +181,33 @@ export default {
       if (this.canBeModified) {
         this.$router.push({
           name: "WeightRecord",
-          query: { date: this.$route.query.date }
+          params: { date: this.$route.params.date }
         });
       }
     }
   },
   computed: {
     pageTitle() {
-      return this.$route.query.date
-        ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
+      return this.$route.params.date
+        ? dayjs(this.$route.params.date).format("YYYY/MM/DD")
         : `今天 ${dayjs().format("YYYY/MM/DD")}`;
     },
     sectionTitle_weight() {
       const today = dayjs().format("YYYY-MM-DD");
-      const searchedDate = this.$route.query.date || today;
+      const searchedDate = this.$route.params.date || today;
       return searchedDate === today
         ? "今天的體重"
         : `${dayjs(searchedDate).format("YYYY/MM/DD")} 的體重`;
     },
     sectionTitle_nutrition() {
       const today = dayjs().format("YYYY-MM-DD");
-      const searchedDate = this.$route.query.date || today;
+      const searchedDate = this.$route.params.date || today;
       return searchedDate === today
         ? "今天"
         : `${dayjs(searchedDate).format("YYYY/MM/DD")}`;
     },
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };

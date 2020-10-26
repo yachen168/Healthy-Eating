@@ -111,7 +111,7 @@ const routes = [
       ),
     beforeEnter: async (to, from, next) => {
       const today = dayjs().format("YYYY-MM-DD");
-      const searchedDate = to.query.date ? to.query.date : today;
+      const searchedDate = to.params.date ? to.params.date : today;
 
       await store.dispatch("fetchUserProfile");
       await store.dispatch("fetchDietaryRecording", {
@@ -124,7 +124,7 @@ const routes = [
     },
     children: [
       {
-        path: "states",
+        path: "states/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "RecordingStates",
         props: true,
         component: () =>
@@ -133,7 +133,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
 
           // 待重構
           await store.dispatch("fetchDietaryRecording", {
@@ -142,7 +142,6 @@ const routes = [
             start_date: searchedDate,
             end_date: searchedDate
           });
-
           await store.dispatch("fetchDietaryDeficiency", {
             user_id: store.getters.userProfile.id,
             start_date: searchedDate,
@@ -161,7 +160,7 @@ const routes = [
         }
       },
       {
-        path: "diet-record/:dietType",
+        path: "diet-record/:dietType/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "DietRecord",
         component: () =>
           import(
@@ -169,7 +168,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
           await store.commit("initHistoryOfAMealRecording", {
             dietType: to.params.dietType,
             searchedDate: searchedDate
@@ -186,7 +185,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
           const userId = store.getters.userProfile.id;
 
           await store.dispatch("fetchAllWeights", userId);
@@ -195,7 +194,7 @@ const routes = [
         }
       },
       {
-        path: "water-record",
+        path: "water-record/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "WaterRecord",
         component: () =>
           import(
@@ -203,7 +202,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.query.date : today;
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id,
