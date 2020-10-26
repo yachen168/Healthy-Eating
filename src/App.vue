@@ -11,11 +11,6 @@
 <script>
 import LoadingPage from "@/components/common/LoadingPage";
 export default {
-  data() {
-    return {
-      isShow: false
-    };
-  },
   components: {
     LoadingPage
   }
