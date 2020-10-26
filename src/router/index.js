@@ -355,11 +355,16 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  store.commit("isLoading", true);
   if (!localStorage.getItem("token") && to.meta.requiredAuth) {
     next({ name: "Login" });
     return;
   }
   next();
+});
+
+router.afterEach((to, from) => {
+  store.commit("isLoading", false);
 });
 
 export default router;

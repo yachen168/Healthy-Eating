@@ -3,7 +3,7 @@
     <div class="containter">
       <router-view />
     </div>
-    <div class="loading-area">
+    <div class="loading-area" v-show="$store.getters.getLoadingState">
       <LoadingPage></LoadingPage>
     </div>
   </div>
@@ -11,6 +11,11 @@
 <script>
 import LoadingPage from "@/components/common/LoadingPage";
 export default {
+  data() {
+    return {
+      isShow: false
+    };
+  },
   components: {
     LoadingPage
   }
