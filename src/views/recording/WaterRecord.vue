@@ -78,7 +78,10 @@ export default {
           water: this.$store.getters.sumWaterIntakeOneDay
         });
       }
-      this.$router.push({ name: "RecordingStates" });
+      this.$router.push({
+        name: "RecordingStates",
+        params: { date: this.$route.params.date }
+      });
     }
   },
   computed: {

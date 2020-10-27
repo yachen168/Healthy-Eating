@@ -213,7 +213,6 @@ const routes = [
             user_id: store.getters.userProfile.id,
             date: searchedDate
           });
-          store.commit("initSumWaterIntakeOneDay");
           next();
         }
       },
