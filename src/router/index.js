@@ -202,7 +202,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.params.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id,
@@ -213,6 +213,7 @@ const routes = [
             user_id: store.getters.userProfile.id,
             date: searchedDate
           });
+          store.commit("initSumWaterIntakeOneDay");
           next();
         }
       },

@@ -167,8 +167,7 @@ export default {
       if (type !== "water") {
         this.$router.push({
           name: "DietRecord",
-          params: { dietType: type },
-          params: { date: this.$route.params.date }
+          params: { dietType: type, date: this.$route.params.date }
         });
       } else {
         this.$router.push({
