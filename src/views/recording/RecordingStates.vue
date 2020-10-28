@@ -3,7 +3,7 @@
     <main>
       <BaseTitle :title="pageTitle">
         <h2 class="sub-title" v-if="!canBeModified">
-          僅供瀏覽，無法修改非 2 日內記錄
+          僅供瀏覽，無法修改今日的記錄
         </h2></BaseTitle
       >
       <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->

@@ -228,6 +228,10 @@ const routes = [
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id
           });
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0
+          });
           next();
         }
       },
