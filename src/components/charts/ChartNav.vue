@@ -20,6 +20,7 @@ import mealIcon from "@/assets/images/tab_ic_meal.svg?inline";
 import waterIcon from "@/assets/images/tab_ic_water.svg?inline";
 import weightIcon from "@/assets/images/tab_ic_weight.svg?inline";
 export default {
+  name: "ChartNav",
   components: {
     mealIcon,
     waterIcon,

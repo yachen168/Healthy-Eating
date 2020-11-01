@@ -16,6 +16,7 @@
 import Datepicker from "vuejs-datepicker";
 
 export default {
+  name: "Calendar",
   components: {
     Datepicker
   },

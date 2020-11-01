@@ -5,7 +5,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "ChartMessage"
+};
 </script>
 
 <style lang="scss" scoped>

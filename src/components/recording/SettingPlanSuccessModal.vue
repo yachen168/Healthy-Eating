@@ -28,6 +28,7 @@ import Navbar from "@/components/common/Navbar";
 import BaseButton from "@/components/common/BaseButton";
 import SettingSuccessIcon from "@/assets/images/img_settingsuccess.svg?inline";
 export default {
+  name: "SettingPlanSuccessModal",
   components: {
     Navbar,
     BaseButton,

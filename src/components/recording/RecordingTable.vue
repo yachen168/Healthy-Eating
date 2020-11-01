@@ -49,6 +49,7 @@ import AddIcon from "@/assets/images/button_add_abled.svg?inline";
 import InfoIcon from "@/assets/images/ic_info.svg?inline";
 
 export default {
+  name: "RecordingTable",
   components: {
     MinusIcon,
     AddIcon,

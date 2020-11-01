@@ -41,6 +41,7 @@
 import MaleIcon from "@/assets/images/ic_male.svg?inline";
 import FemaleIcon from "@/assets/images/ic_female.svg?inline";
 export default {
+  name: "UserProfileTable",
   props: {
     items: {
       type: Array,

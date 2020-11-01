@@ -14,6 +14,7 @@
 <script>
 import BrandIcon from "@/assets/images/img_logo.svg?inline";
 export default {
+  name: "Navbar",
   components: {
     BrandIcon
   }

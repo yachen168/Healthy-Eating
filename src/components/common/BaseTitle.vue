@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: "BaseTitle",
   props: {
     title: {
       type: String,
