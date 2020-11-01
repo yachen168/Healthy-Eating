@@ -84,6 +84,9 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           await store.dispatch("fetchUserProfile");
           next();
+        },
+        meta: {
+          requiredAuth: true
         }
       },
       {
@@ -92,11 +95,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "password-success" */ "@/views/member/PasswordSuccess"
-          ),
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchUserProfile");
-          next();
-        }
+          )
       }
     ]
   },
@@ -109,6 +108,9 @@ const routes = [
       import(
         /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
       ),
+    meta: {
+      requiredAuth: true
+    },
     beforeEnter: async (to, from, next) => {
       const today = dayjs().format("YYYY-MM-DD");
       const searchedDate = to.params.date ? to.params.date : today;
@@ -254,11 +256,6 @@ const routes = [
           import(
             /* webpackChunkName: "user-profile-edit" */ "@/views/userProfile/UserProfileEdit.vue"
           )
-        // beforeEnter: async (to, from, next) => {
-        //   await store.dispatch("fetchUserProfile");
-        //   next();
-        //   // console.log(to);
-        // }
       },
       {
         path: "modify-password",
