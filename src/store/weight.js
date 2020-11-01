@@ -110,7 +110,16 @@ export default {
         ) {
           return null;
         } else {
-          return nearestWeight;
+          const reverseAllWeights = state.allWeights.reduce(
+            (accumulator, currentValue) => [currentValue, ...accumulator],
+            []
+          );
+
+          const objFoundedWeight = reverseAllWeights.find(record => {
+            return dayjs(record.created_at.split(" ")[0]).isSameOrBefore(item);
+          });
+
+          return objFoundedWeight.weight;
         }
       });
     }
