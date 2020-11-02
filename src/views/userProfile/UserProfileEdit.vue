@@ -164,12 +164,16 @@
       </ValidationObserver>
     </form>
     <div class="crop-area" v-if="isShow">
-      <Crop
-        ref="cropUpdate"
-        :imgURL="imgData"
-        @updateAvatar="updateAvatar"
-        @cancelCrop="isShow = false"
-      ></Crop>
+      <div class="crop-nav"></div>
+      <div class="crop-body">
+        <Crop
+          ref="cropUpdate"
+          :imgURL="imgData"
+          @updateAvatar="updateAvatar"
+          @cancelCrop="isShow = false"
+        >
+        </Crop>
+      </div>
     </div>
   </main>
 </template>
@@ -255,12 +259,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.crop-nav {
+  height: 64px;
+  background-color: #407d60;
+}
+.crop-body {
+  max-width: 360px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
 .crop-area {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  margin: auto;
   z-index: 10;
   background-color: #f5f5f5;
 }
