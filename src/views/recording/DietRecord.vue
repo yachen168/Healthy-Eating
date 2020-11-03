@@ -21,7 +21,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         />
@@ -39,7 +39,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         />
@@ -61,6 +61,7 @@ import RecordingTable from "@/components/recording/RecordingTable";
 import ConversionTable from "@/components/recording/ConversionTable";
 import nutritionalInformation from "@/NutritionalConversion.js";
 import utilities from "@/utilities/utilities";
+import dayjs from "dayjs";
 
 export default {
   components: {
@@ -120,7 +121,9 @@ export default {
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
-      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+      this.isConfirmButtonPass = Object.values(
+        this.$store.getters.historyOfAMealRecording
+      ).every(item => item === 0);
     },
     async confirmUpdate() {
       const diet_type = this.diets[this.$route.params.dietType].symbol;
@@ -145,7 +148,10 @@ export default {
           user_id: user_id
         });
       }
-      this.$router.push({ name: "RecordingStates" });
+      this.$router.push({
+        name: "RecordingStates",
+        params: { date: this.$route.params.date }
+      });
     }
   },
   computed: {
@@ -155,7 +161,7 @@ export default {
         : "";
     },
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };

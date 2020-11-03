@@ -14,6 +14,20 @@ import Password from "./editPassword";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    isLoading: true
+  },
+  mutations: {
+    isLoading(state, loadingState) {
+      state.isLoading = loadingState;
+    }
+  },
+  actions: {},
+  getters: {
+    getLoadingState(state) {
+      return state.isLoading;
+    }
+  },
   modules: {
     Authorization,
     UserProfile,

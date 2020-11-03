@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: "ConversionTable",
   props: {
     items: {
       type: Array,

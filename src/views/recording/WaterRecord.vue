@@ -20,7 +20,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         ></BaseButton>
@@ -38,7 +38,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         ></BaseButton>
@@ -78,12 +78,15 @@ export default {
           water: this.$store.getters.sumWaterIntakeOneDay
         });
       }
-      this.$router.push({ name: "RecordingStates" });
+      this.$router.push({
+        name: "RecordingStates",
+        params: { date: this.$route.params.date }
+      });
     }
   },
   computed: {
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };

@@ -15,7 +15,7 @@
         title="設定完成"
         buttonStyle="primary"
         :disabledState="isConfirmButtonPass"
-        @click="confirmSettingPlan"
+        @click="isSettingSuccessModalShow = true"
       ></BaseButton>
     </main>
     <footer>
@@ -79,11 +79,20 @@ export default {
       this.checkConfirmButtonPass(e.data.item);
     },
     checkConfirmButtonPass(items) {
-      this.isConfirmButtonPass = !Object.values(items).some(item => item !== 0);
+      const keys = [
+        "dairy",
+        "fruits",
+        "grains",
+        "nuts",
+        "proteins",
+        "vegetables",
+        "water"
+      ];
+      this.isConfirmButtonPass = keys.every(key => this.plan[0][key] === 0);
     },
-    confirmSettingPlan() {
-      this.$store.dispatch("addNewDiet", this.plan[0]);
-      this.isSettingSuccessModalShow = true;
+    async confirmSettingPlan() {
+      await this.$store.dispatch("addNewDiet", this.plan[0]);
+      this.$router.push({ name: "RecordingStates" });
     }
   }
 };

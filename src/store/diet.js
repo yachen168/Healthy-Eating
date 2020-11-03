@@ -1,4 +1,5 @@
 import API from "../api/service";
+import dayjs from "dayjs";
 
 export default {
   state: {
@@ -11,13 +12,18 @@ export default {
       state.dietaryRecordingState = dietaryRecordingState;
     },
     dietaryDeficiency(state, dietaryDeficiency) {
-      console.log(dietaryDeficiency);
       state.dietaryDeficiency = dietaryDeficiency;
     },
-    initHistoryOfAMealRecording(state, dietType) {
-      const historyOfAMealRecording = state.dietaryRecordingState.find(
-        item => item.diet_type === dietType
-      );
+    resetDietaryDeficiency(state) {
+      state.dietaryDeficiency = [];
+    },
+    initHistoryOfAMealRecording(state, { dietType, searchedDate }) {
+      const historyOfAMealRecording = state.dietaryRecordingState.find(item => {
+        return (
+          item.diet_type === dietType &&
+          item.created_at.split(" ")[0] === searchedDate
+        );
+      });
 
       if (historyOfAMealRecording) {
         delete historyOfAMealRecording.water;
@@ -51,6 +57,7 @@ export default {
         const response = await API.post("/diet/day", data);
         commit("dietaryDeficiency", response.data.data);
       } catch (error) {
+        commit("resetDietaryDeficiency");
         console.log(error.response);
       }
     },
@@ -115,15 +122,32 @@ export default {
 
       const datasInSearchedPeriod = rootGetters.datesInSearchedPeriod.map(
         date => {
-          const deficiencyItem = state.dietaryDeficiency.find(
-            item => item.date === date
-          );
-          return (
-            deficiencyItem || {
-              date,
-              deficiency: standardOfDiet
-            }
-          );
+          const createdDate = getters.userProfile.created_at.split(" ")[0];
+          if (
+            dayjs(date).isBefore(createdDate) ||
+            dayjs(date).isAfter(dayjs())
+          ) {
+            return {
+              deficiency: {
+                fruits: null,
+                vegetables: null,
+                grains: null,
+                nuts: null,
+                proteins: null,
+                dairy: null
+              }
+            };
+          } else {
+            const deficiencyItem = state.dietaryDeficiency.find(
+              item => item.date === date
+            );
+            return (
+              deficiencyItem || {
+                date,
+                deficiency: standardOfDiet
+              }
+            );
+          }
         }
       );
 

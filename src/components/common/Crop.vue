@@ -3,17 +3,18 @@
     <p class="title">上傳編輯圖片</p>
     <VueCropper
       autoCrop
-      :outputSize="option.size"
-      :outputType="option.type"
+      :outputSize="1"
+      :outputType="'png'"
       :img="blob"
-      :autoCropWidth="option.autoCropWidth"
-      :autoCropHeight="option.autoCropHeight"
-      :fixedBox="option.fixedBox"
-      :high="option.high"
-      :info="option.info"
-      :mode="option.mode"
-      :maxImgSize="option.maxImgSize"
-      :canMoveBox="option.canMoveBox"
+      :autoCropWidth="260"
+      :autoCropHeight="260"
+      :fixedBox="true"
+      :high="true"
+      :info="false"
+      :mode="'100%'"
+      :maxImgSize="360"
+      :canMoveBox="false"
+      :fixed="false"
       ref="cropper"
     ></VueCropper>
     <div class="upload-avatar-footer">
@@ -46,19 +47,6 @@ export default {
   },
   data() {
     return {
-      option: {
-        size: 1,
-        type: "png",
-        img: this.blob,
-        autoCropWidth: 260,
-        autoCropHeight: 260,
-        high: true,
-        info: false,
-        maxImgSize: 360,
-        fixedBox: true,
-        mode: "100%",
-        canMoveBox: false
-      },
       blob: ""
     };
   },
@@ -78,7 +66,6 @@ export default {
 
 <style lang="scss" scoped>
 .crop {
-  width: 100%;
   height: 360px;
 }
 

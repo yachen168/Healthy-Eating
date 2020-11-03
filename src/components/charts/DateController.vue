@@ -13,6 +13,7 @@ import PreviousIcon from "@/assets/images/ic_prev.svg?inline";
 import NextIcon from "@/assets/images/ic_next.svg?inline";
 
 export default {
+  name: "DateController",
   components: {
     PreviousIcon,
     NextIcon

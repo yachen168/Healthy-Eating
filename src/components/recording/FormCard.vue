@@ -25,6 +25,7 @@ import MinusIcon from "@/assets/images/button_sub_abled.svg?inline";
 import AddIcon from "@/assets/images/button_add_abled.svg?inline";
 
 export default {
+  name: "FormCard",
   components: {
     MinusIcon,
     AddIcon

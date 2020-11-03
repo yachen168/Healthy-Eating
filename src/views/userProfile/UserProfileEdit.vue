@@ -52,12 +52,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="male"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -65,12 +60,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="female"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
             <div class="radio-wrapper">
@@ -78,12 +68,7 @@
               <b-form-radio
                 v-model="$store.getters.userProfile.gender"
                 value="others"
-                @change="
-                  $store.commit('userProfile', {
-                    ...$store.getters.userProfile,
-                    gender: $event
-                  })
-                "
+                @change="selectGender"
               ></b-form-radio>
             </div>
           </b-modal>
@@ -179,12 +164,16 @@
       </ValidationObserver>
     </form>
     <div class="crop-area" v-if="isShow">
-      <Crop
-        ref="cropUpdate"
-        :imgURL="imgData"
-        @updateAvatar="updateAvatar"
-        @cancelCrop="isShow = false"
-      ></Crop>
+      <div class="crop-nav"></div>
+      <div class="crop-body">
+        <Crop
+          ref="cropUpdate"
+          :imgURL="imgData"
+          @updateAvatar="updateAvatar"
+          @cancelCrop="isShow = false"
+        >
+        </Crop>
+      </div>
     </div>
   </main>
 </template>
@@ -256,19 +245,40 @@ export default {
         this.$store.dispatch("uploadAvatar", formData);
       });
       this.isShow = false;
+    },
+    selectGender($event) {
+      this.$store.commit("userProfile", {
+        ...this.$store.getters.userProfile,
+        gender: $event
+      });
+      this.$bvModal.hide("modal-gender");
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.crop-area {
-  position: absolute;
-  top: 64px;
+.crop-nav {
+  height: 64px;
+  background-color: #407d60;
+}
+.crop-body {
+  max-width: 360px;
+  position: fixed;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  margin-top: 31px;
+  margin: auto;
+}
+.crop-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 10;
   background-color: #f5f5f5;
 }
 main {

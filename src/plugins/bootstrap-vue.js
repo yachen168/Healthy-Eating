@@ -12,7 +12,8 @@ import {
   ModalPlugin,
   BFormFile,
   InputGroupPlugin,
-  FormRadioPlugin
+  FormRadioPlugin,
+  SpinnerPlugin
 } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -29,4 +30,5 @@ Vue.use(BootstrapVueIcons);
 Vue.use(AlertPlugin);
 Vue.use(InputGroupPlugin);
 Vue.use(FormRadioPlugin);
+Vue.use(SpinnerPlugin);
 Vue.component("b-form-file", BFormFile);

@@ -84,6 +84,9 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           await store.dispatch("fetchUserProfile");
           next();
+        },
+        meta: {
+          requiredAuth: true
         }
       },
       {
@@ -92,11 +95,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "password-success" */ "@/views/member/PasswordSuccess"
-          ),
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchUserProfile");
-          next();
-        }
+          )
       }
     ]
   },
@@ -109,13 +108,25 @@ const routes = [
       import(
         /* webpackChunkName: "recording-entry" */ "@/views/recording/Entry.vue"
       ),
+    meta: {
+      requiredAuth: true
+    },
     beforeEnter: async (to, from, next) => {
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = to.params.date ? to.params.date : today;
+
       await store.dispatch("fetchUserProfile");
+      await store.dispatch("fetchDietaryRecording", {
+        user_id: store.getters.userProfile.id,
+        kind: 0,
+        start_date: searchedDate,
+        end_date: searchedDate
+      });
       next();
     },
     children: [
       {
-        path: "states",
+        path: "states/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "RecordingStates",
         props: true,
         component: () =>
@@ -124,7 +135,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
 
           // 待重構
           await store.dispatch("fetchDietaryRecording", {
@@ -151,7 +162,7 @@ const routes = [
         }
       },
       {
-        path: "diet-record/:dietType",
+        path: "diet-record/:dietType/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "DietRecord",
         component: () =>
           import(
@@ -159,18 +170,10 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
-          await store.dispatch("fetchDietaryRecording", {
-            user_id: store.getters.userProfile.id,
-            kind: 0,
-            start_date: searchedDate,
-            end_date: searchedDate
-          });
-          await store.commit("initHistoryOfAMealRecording", to.params.dietType);
-          await store.dispatch("fetchDietaryDeficiency", {
-            user_id: store.getters.userProfile.id,
-            start_date: searchedDate,
-            end_date: searchedDate
+          const searchedDate = to.params.date ? to.params.date : today;
+          await store.commit("initHistoryOfAMealRecording", {
+            dietType: to.params.dietType,
+            searchedDate: searchedDate
           });
           next();
         }
@@ -184,7 +187,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
           const userId = store.getters.userProfile.id;
 
           await store.dispatch("fetchAllWeights", userId);
@@ -193,7 +196,7 @@ const routes = [
         }
       },
       {
-        path: "water-record",
+        path: "water-record/:date(\\d{4}-\\d{2}-\\d{2})?",
         name: "WaterRecord",
         component: () =>
           import(
@@ -201,7 +204,7 @@ const routes = [
           ),
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
-          const searchedDate = to.query.date ? to.query.date : today;
+          const searchedDate = to.params.date ? to.params.date : today;
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id,
@@ -223,13 +226,13 @@ const routes = [
             /* webpackChunkName: "calender" */ "@/views/recording/Calendar.vue"
           ),
         beforeEnter: async (to, from, next) => {
-          await store.dispatch("fetchDietaryRecording", {
-            user_id: store.getters.userProfile.id,
-            kind: 0
-          });
           await store.dispatch("fetchSumWaterIntake", {
             remember_token: localStorage.getItem("token"),
             user_id: store.getters.userProfile.id
+          });
+          await store.dispatch("fetchDietaryRecording", {
+            user_id: store.getters.userProfile.id,
+            kind: 0
           });
           next();
         }
@@ -253,11 +256,6 @@ const routes = [
           import(
             /* webpackChunkName: "user-profile-edit" */ "@/views/userProfile/UserProfileEdit.vue"
           )
-        // beforeEnter: async (to, from, next) => {
-        //   await store.dispatch("fetchUserProfile");
-        //   next();
-        //   // console.log(to);
-        // }
       },
       {
         path: "modify-password",
@@ -282,7 +280,19 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "nutrition-intake-chart" */ "@/views/charts/NutritionIntakeChart.vue"
-              )
+              ),
+            beforeEnter: async (to, from, next) => {
+              await store.dispatch("fetchDietaryDeficiency", {
+                user_id: store.getters.userProfile.id,
+                start_date: store.getters.datePeriodOfChart.startDate
+                  .split("/")
+                  .join("-"),
+                end_date: store.getters.datePeriodOfChart.endDate
+                  .split("/")
+                  .join("-")
+              });
+              next();
+            }
           },
           {
             path: "water-intake",
@@ -345,11 +355,16 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  store.commit("isLoading", true);
   if (!localStorage.getItem("token") && to.meta.requiredAuth) {
     next({ name: "Login" });
     return;
   }
   next();
+});
+
+router.afterEach((to, from) => {
+  store.commit("isLoading", false);
 });
 
 export default router;

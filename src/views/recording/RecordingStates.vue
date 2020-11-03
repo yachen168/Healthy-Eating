@@ -3,7 +3,7 @@
     <main>
       <BaseTitle :title="pageTitle">
         <h2 class="sub-title" v-if="!canBeModified">
-          僅供瀏覽，無法修改非 2 日內記錄
+          今天以外的記錄僅供瀏覽無法新增或修改
         </h2></BaseTitle
       >
       <!-- ==== 飲水量、早、中、點心、晚餐、宵夜 紀錄狀態 ==== -->
@@ -57,7 +57,7 @@
               />
             </p>
             <span slot="card-footer" class="description">{{
-              sectionTitle
+              sectionTitle_weight
             }}</span>
           </RecordingCard>
         </b-col>
@@ -65,7 +65,7 @@
       <hr class="divid" />
       <!-- ====== 營養總攝取量 ====== -->
       <b-row class="sum-nutrition" no-gutters>
-        <h2>{{ sectionTitle }}營養總攝取量</h2>
+        <h2>{{ sectionTitle_nutrition }}營養總攝取量</h2>
         <b-col cols="4" v-for="nutrition in nutritions" :key="nutrition.type">
           <RecordingCard :hasBodyIcon="true">
             <img
@@ -167,13 +167,12 @@ export default {
       if (type !== "water") {
         this.$router.push({
           name: "DietRecord",
-          params: { dietType: type },
-          query: { date: this.$route.query.date }
+          params: { dietType: type, date: this.$route.params.date }
         });
       } else {
         this.$router.push({
           name: "WaterRecord",
-          query: { date: this.$route.query.date }
+          params: { date: this.$route.params.date }
         });
       }
     },
@@ -181,26 +180,33 @@ export default {
       if (this.canBeModified) {
         this.$router.push({
           name: "WeightRecord",
-          query: { date: this.$route.query.date }
+          params: { date: this.$route.params.date }
         });
       }
     }
   },
   computed: {
     pageTitle() {
-      return this.$route.query.date
-        ? dayjs(this.$route.query.date).format("YYYY/MM/DD")
+      return this.$route.params.date
+        ? dayjs(this.$route.params.date).format("YYYY/MM/DD")
         : `今天 ${dayjs().format("YYYY/MM/DD")}`;
     },
-    sectionTitle() {
+    sectionTitle_weight() {
       const today = dayjs().format("YYYY-MM-DD");
-      const searchedDate = this.$route.query.date || today;
+      const searchedDate = this.$route.params.date || today;
       return searchedDate === today
         ? "今天的體重"
         : `${dayjs(searchedDate).format("YYYY/MM/DD")} 的體重`;
     },
+    sectionTitle_nutrition() {
+      const today = dayjs().format("YYYY-MM-DD");
+      const searchedDate = this.$route.params.date || today;
+      return searchedDate === today
+        ? "今天"
+        : `${dayjs(searchedDate).format("YYYY/MM/DD")}`;
+    },
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };

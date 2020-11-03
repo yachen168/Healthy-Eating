@@ -4,7 +4,7 @@
       @click="
         $router.history.current.name !== 'RecordingStates' ||
         ($router.history.current.name === 'RecordingStates' &&
-          $route.query.date !== today)
+          $route.params.date !== today)
           ? $router.push({ name: 'RecordingStates' })
           : ''
       "

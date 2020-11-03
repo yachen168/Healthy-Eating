@@ -17,7 +17,7 @@
       <BaseButton
         title="開始記錄"
         buttonStyle="primary"
-        @click="$router.push({ name: 'RecordingStates' })"
+        @click="$emit('confirmSettingPlan')"
       ></BaseButton>
     </footer>
   </div>
@@ -28,6 +28,7 @@ import Navbar from "@/components/common/Navbar";
 import BaseButton from "@/components/common/BaseButton";
 import SettingSuccessIcon from "@/assets/images/img_settingsuccess.svg?inline";
 export default {
+  name: "SettingPlanSuccessModal",
   components: {
     Navbar,
     BaseButton,
@@ -41,7 +42,11 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
+  max-width: 576px;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   background-color: #f5f5f5;
   padding: 0 30px 42px;
 }

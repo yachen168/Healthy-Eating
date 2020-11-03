@@ -38,6 +38,7 @@ import PasswordIcon from "@/assets/images/ic_changepassword.svg?inline";
 import LogoutIcon from "@/assets/images/ic_logout.svg?inline";
 
 export default {
+  name: "Sidebar",
   components: {
     PasswordIcon,
     LogoutIcon

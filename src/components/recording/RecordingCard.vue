@@ -9,6 +9,7 @@
 <script>
 import AddIcon from "@/assets/images/button_add_abled_light.svg?inline";
 export default {
+  name: "RecordingCard",
   components: {
     AddIcon
   },

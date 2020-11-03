@@ -14,8 +14,8 @@
     <div class="chart">
       <Chart :height="310" :chart-data="chartdata" :options="options" />
       <span class="y-scalelabel">體重(公斤)</span>
+      <Message v-if="isShowNoDataMessage" />
     </div>
-    <Message v-if="isShowNoDataMessage" />
   </div>
 </template>
 
@@ -30,8 +30,12 @@ export default {
     Chart,
     Message
   },
+  created() {
+    this.checkIsShowNoDataMessage();
+  },
   data() {
     return {
+      isShowNoDataMessage: false,
       chartdata: {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
@@ -46,6 +50,7 @@ export default {
             pointBorderColor: "#407D60",
             borderColor: "#407D60",
             borderWidth: 1,
+            lineTension: 0,
             data: this.$store.getters.weightsInSearchedPeriod
           }
         ]
@@ -73,10 +78,8 @@ export default {
             {
               ticks: {
                 fontColor: "black",
-                padding: 6,
-                max:
-                  Math.max(...this.$store.getters.weightsInSearchedPeriod) + 2,
-                min: 42,
+                suggestedMax: this.$store.getters.yAxisMax_weight,
+                suggestedMin: this.$store.getters.yAxisMin_weight,
                 stepSize: 1
               },
               gridLines: {
@@ -89,7 +92,17 @@ export default {
     };
   },
   methods: {
+    checkIsShowNoDataMessage() {
+      this.isShowNoDataMessage = this.$store.getters.weightsInSearchedPeriod.every(
+        item => item === null
+      );
+    },
     async fillData() {
+      await this.$store.dispatch(
+        "fetchAllWeights",
+        this.$store.getters.userProfile.id
+      );
+
       this.chartdata = {
         labels: this.$store.getters.labelDatesOfChart,
         datasets: [
@@ -104,17 +117,13 @@ export default {
             pointBorderColor: "#407D60",
             borderColor: "#407D60",
             borderWidth: 1,
+            lineTension: 0,
             data: this.$store.getters.weightsInSearchedPeriod
           }
         ]
       };
-    }
-  },
-  computed: {
-    isShowNoDataMessage() {
-      return this.$store.getters.weightsInSearchedPeriod.every(
-        item => item === null
-      );
+
+      this.checkIsShowNoDataMessage();
     }
   }
 };
@@ -138,5 +147,14 @@ export default {
     top: 31px;
     left: 48px;
   }
+}
+
+::v-deep .message {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  bottom: 0;
+  left: 25px;
+  margin: auto;
 }
 </style>

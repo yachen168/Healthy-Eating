@@ -17,7 +17,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         ></BaseButton>
@@ -35,7 +35,7 @@
           @click="
             $router.push({
               name: 'RecordingStates',
-              query: { date: $route.query.date }
+              params: { date: $route.params.date }
             })
           "
         ></BaseButton>
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     canBeModified() {
-      return !utilities.isSearchedDateExpired(this.$route.query.date);
+      return !utilities.isSearchedDateExpired(this.$route.params.date);
     }
   }
 };
