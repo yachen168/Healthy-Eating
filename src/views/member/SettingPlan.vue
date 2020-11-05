@@ -25,6 +25,7 @@
     <SettingPlanSuccessModal
       v-if="isSettingSuccessModalShow"
       @closeSettingSuccessModal="isSettingSuccessModalShow = false"
+      @confirmSettingPlan="confirmSettingPlan"
     />
   </div>
 </template>
