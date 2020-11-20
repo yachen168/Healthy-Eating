@@ -156,8 +156,8 @@ const routes = [
             end_date: searchedDate
           });
           await store.dispatch("fetchAllWeights", store.getters.userProfile.id);
-          await store.commit("weightOfSpecificDate", searchedDate);
-          await store.commit("isWeightOfSpecificDateRecorded", searchedDate);
+          store.commit("weightOfSpecificDate", searchedDate);
+          store.commit("isWeightOfSpecificDateRecorded", searchedDate);
           next();
         }
       },
@@ -171,7 +171,7 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           const today = dayjs().format("YYYY-MM-DD");
           const searchedDate = to.params.date ? to.params.date : today;
-          await store.commit("initHistoryOfAMealRecording", {
+          store.commit("initHistoryOfAMealRecording", {
             dietType: to.params.dietType,
             searchedDate: searchedDate
           });
@@ -191,7 +191,7 @@ const routes = [
           const userId = store.getters.userProfile.id;
 
           await store.dispatch("fetchAllWeights", userId);
-          await store.commit("weightOfSpecificDate", searchedDate);
+          store.commit("weightOfSpecificDate", searchedDate);
           next();
         }
       },
