@@ -7,7 +7,7 @@ export default {
       try {
         API.post("/logout", data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     }
   },

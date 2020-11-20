@@ -51,7 +51,7 @@ export default {
         const response = await API.get(`/userBio/${userId}`);
         commit("allWeights", response.data.data);
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     },
     async setUserWeight({}, data) {
@@ -65,7 +65,7 @@ export default {
       try {
         await API.post(`/bioProfile/${weightId}`, data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     }
   },

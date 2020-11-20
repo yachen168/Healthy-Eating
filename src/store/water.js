@@ -38,7 +38,7 @@ export default {
         commit("sumWaterIntake", response.data.data);
         commit("initSumWaterIntakeOneDay");
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     },
     async fetchUserAllRecordingsOfWaterIntake({ commit }, { user_id, date }) {
@@ -48,21 +48,21 @@ export default {
         commit("allRecordingsOfWaterIntake", response.data.data);
         commit("idOfWaterIntake", { data: response.data.data, date });
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     },
     async addNewWaterIntake({}, data) {
       try {
         await API.post("/userWater", data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     },
     async updateWaterIntake({}, { water_id, data }) {
       try {
         await API.post(`/userWater/${water_id}`, data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     }
   },

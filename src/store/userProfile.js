@@ -16,7 +16,7 @@ export default {
         });
         commit("userProfile", response.data.data);
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     },
     async uploadAvatar({ dispatch }, data) {
@@ -29,7 +29,7 @@ export default {
         });
         dispatch("fetchUserProfile");
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     },
     async updateUserProfile({ dispatch }, data) {
@@ -37,7 +37,7 @@ export default {
         await API.post("/profile", data);
         dispatch("fetchUserProfile");
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     }
   },

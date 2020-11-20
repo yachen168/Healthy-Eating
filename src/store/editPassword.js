@@ -8,25 +8,21 @@ export default {
   },
   mutations: {
     updateInfoOfForgetPassword(state, infoOfForgetPassword) {
-      console.log(infoOfForgetPassword);
       state.infoOfForgetPassword = infoOfForgetPassword;
     }
   },
   actions: {
     //   post Api 07
     async resetPassword({}, data) {
-      console.log(data);
       try {
-        const response = await API.post("/forget", data);
-        console.log(response.data);
+        await API.post("/forget", data);
       } catch (error) {
         return error.response;
       }
     },
     async modifyPassword({}, data) {
       try {
-        const response = await API.post("/reset", data);
-        console.log(response.data);
+        await API.post("/reset", data);
       } catch (error) {
         return error.response;
       }

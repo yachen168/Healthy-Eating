@@ -49,7 +49,7 @@ export default {
         const response = await API.post("/diet", data);
         commit("dietaryRecordingState", response.data.data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     },
     async fetchDietaryDeficiency({ commit }, data) {
@@ -58,21 +58,21 @@ export default {
         commit("dietaryDeficiency", response.data.data);
       } catch (error) {
         commit("resetDietaryDeficiency");
-        console.log(error.response);
+        return error.response;
       }
     },
     async addNewDiet({}, data) {
       try {
         await API.post("/userDiet", data);
       } catch (error) {
-        console.log(error.response);
+        return error.response;
       }
     },
     async updateDiet({}, { diet_id, data }) {
       try {
         await API.post(`/userDiet/${diet_id}`, data);
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     }
   },
