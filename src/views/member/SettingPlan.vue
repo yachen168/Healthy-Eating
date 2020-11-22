@@ -27,6 +27,12 @@
       @closeSettingSuccessModal="isSettingSuccessModalShow = false"
       @confirmSettingPlan="confirmSettingPlan"
     />
+    <b-modal id="modal-scrollable" scrollable hide-footer>
+      <div slot="modal-title">
+        {{ dataOfConversionTable.label }} 1 份<br />換算表
+      </div>
+      <ConversionTable :items="nutritionalInformation" />
+    </b-modal>
   </div>
 </template>
 
@@ -34,17 +40,21 @@
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseButton from "@/components/common/BaseButton";
 import RecordingTable from "@/components/recording/RecordingTable";
+import ConversionTable from "@/components/recording/ConversionTable";
 import SettingPlanSuccessModal from "@/components/recording/SettingPlanSuccessModal";
+import nutritionalInformation from "@/NutritionalConversion.js";
 
 export default {
   components: {
     BaseTitle,
     BaseButton,
     RecordingTable,
+    ConversionTable,
     SettingPlanSuccessModal
   },
   data() {
     return {
+      dataOfConversionTable: {},
       isSettingSuccessModalShow: false,
       isConfirmButtonPass: true,
       fields: [
@@ -95,6 +105,13 @@ export default {
       await this.$store.dispatch("addNewDiet", this.plan[0]);
       this.$router.push({ name: "RecordingStates" });
     }
+  },
+  computed: {
+    nutritionalInformation() {
+      return this.dataOfConversionTable.key
+        ? nutritionalInformation[this.dataOfConversionTable.key].items
+        : "";
+    }
   }
 };
 </script>
@@ -142,4 +159,37 @@ footer {
     width: 60%;
   }
 }
+
+::v-deep .modal-dialog {
+  position: absolute;
+  width: 82%;
+  max-width: 473px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 514px;
+  .modal-header {
+    border-bottom: none;
+  }
+  .modal-title {
+    font-size: 24px;
+    color: #407d60;
+    font-weight: 700;
+  }
+  .modal-body {
+    padding: 0 10px;
+  }
+  .b-table-sticky-header,
+  .table-responsive {
+    margin-bottom: 0;
+  }
+  .modal-header .close {
+    padding: 0;
+    margin: 4px 0 0;
+  }
+}
 </style>
+
+<style></style>
